@@ -1,0 +1,990 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="css,Sass," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+
+
+
+
+
+
+<meta name="description" content="一. 什么是CSS预处理器CSS的优点
+
+使结构和表现分离
+一个文件可以在多处引用
+
+CSS的缺点
+
+嵌套
+复用代码段
+模块化开发的不灵活
+不具备逻辑能力和抽象能力
+
+由于css是一门纯静态的语言，并且有上述这些缺点，因此出现了css预处理器。
+1. 什么是css预处理器
+css预处理器可以看成是css的一门方言，用更精简的语法表达更多。
+css预处理器并不是css的替代品，它只是让css变得更加">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CSS的预处理器">
+<meta property="og:url" content="http://panpanfish.com/2016/06/29/2016-06-29-CSS预处理器/index.html">
+<meta property="og:site_name" content="筱鱼兒">
+<meta property="og:description" content="一. 什么是CSS预处理器CSS的优点
+
+使结构和表现分离
+一个文件可以在多处引用
+
+CSS的缺点
+
+嵌套
+复用代码段
+模块化开发的不灵活
+不具备逻辑能力和抽象能力
+
+由于css是一门纯静态的语言，并且有上述这些缺点，因此出现了css预处理器。
+1. 什么是css预处理器
+css预处理器可以看成是css的一门方言，用更精简的语法表达更多。
+css预处理器并不是css的替代品，它只是让css变得更加">
+<meta property="og:image" content="http://panpanfish.com/uploads/post/20160629/sass-install.jpg">
+<meta property="og:updated_time" content="2016-07-02T03:29:22.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CSS的预处理器">
+<meta name="twitter:description" content="一. 什么是CSS预处理器CSS的优点
+
+使结构和表现分离
+一个文件可以在多处引用
+
+CSS的缺点
+
+嵌套
+复用代码段
+模块化开发的不灵活
+不具备逻辑能力和抽象能力
+
+由于css是一门纯静态的语言，并且有上述这些缺点，因此出现了css预处理器。
+1. 什么是css预处理器
+css预处理器可以看成是css的一门方言，用更精简的语法表达更多。
+css预处理器并不是css的替代品，它只是让css变得更加">
+<meta name="twitter:image" content="http://panpanfish.com/uploads/post/20160629/sass-install.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+
+  <title> CSS的预处理器 | 筱鱼兒 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?e18d9ee1b355055e9a39ffec741beb44";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="my-headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="my-site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">筱鱼兒</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">温柔于己，温柔于人</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+          
+            <li class="menu-item menu-item-home">
+              <a href="/" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+                
+                首页
+              </a>
+            </li>
+          
+      
+        
+          
+            <li class="menu-item menu-item-categories">
+              <a href="/categories" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+                
+                分类
+              </a>
+            </li>
+          
+      
+        
+          
+            <li class="menu-item menu-item-archives">
+              <a href="/archives" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+                
+                归档
+              </a>
+            </li>
+          
+      
+        
+          
+            <li class="menu-item menu-item-tags">
+              <a href="/tags" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+                
+                标签
+              </a>
+            </li>
+          
+      
+        
+          
+            <li class="menu-item menu-item-demo">
+              <a href="/categories/Demo/" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-code"></i> <br />
+                
+                demo
+              </a>
+            </li>
+          
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                CSS的预处理器
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-06-29T00:00:00+08:00" content="2016-06-29">
+              2016-06-29
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/CSS/" itemprop="url" rel="index">
+                    <span itemprop="name">CSS</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/06/29/2016-06-29-CSS预处理器/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/29/2016-06-29-CSS预处理器/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="一-什么是CSS预处理器"><a href="#一-什么是CSS预处理器" class="headerlink" title="一. 什么是CSS预处理器"></a>一. 什么是CSS预处理器</h3><p><strong>CSS的优点</strong></p>
+<ul>
+<li>使结构和表现分离</li>
+<li>一个文件可以在多处引用</li>
+</ul>
+<p><strong>CSS的缺点</strong></p>
+<ul>
+<li>嵌套</li>
+<li>复用代码段</li>
+<li>模块化开发的不灵活</li>
+<li>不具备逻辑能力和抽象能力</li>
+</ul>
+<p>由于css是一门纯静态的语言，并且有上述这些缺点，因此出现了css预处理器。</p>
+<h4 id="1-什么是css预处理器"><a href="#1-什么是css预处理器" class="headerlink" title="1. 什么是css预处理器"></a>1. 什么是css预处理器</h4><blockquote>
+<p>css预处理器可以看成是css的一门方言，用更精简的语法表达更多。</p>
+<p>css预处理器并不是css的替代品，它只是让css变得更加高效、可维护。</p>
+<p>使用css预处理器编写代码之后也会生成css代码，部署到线上的是生成的css文件，而不是预处理器文件（Sass/Less/stylus）。</p>
+<p>因此，使用css预处理器主要是为了提高<strong>开发效率</strong>。</p>
+</blockquote>
+<font color="red">注意：永远不要去修改生成后的css</font>
+
+
+<h4 id="2-使用css预处理器的优点"><a href="#2-使用css预处理器的优点" class="headerlink" title="2. 使用css预处理器的优点"></a>2. 使用css预处理器的优点</h4><ul>
+<li>提高开发效率</li>
+<li>易维护，更方便的定制</li>
+<li>让css看起来更像是一门编程语言</li>
+</ul>
+<h3 id="二-几种css预处理器（Sass-Less-stylus）"><a href="#二-几种css预处理器（Sass-Less-stylus）" class="headerlink" title="二. 几种css预处理器（Sass/Less/stylus）"></a>二. 几种css预处理器（Sass/Less/stylus）</h3><p>Sass：2006年提出<br>Less：2009年提出<br>stylus：2010年</p>
+<h3 id="三-安装Sass"><a href="#三-安装Sass" class="headerlink" title="三. 安装Sass"></a>三. 安装Sass</h3><p>Sass的官网（中文）：<a href="http://www.sasschina.com/" target="_blank" rel="external">http://www.sasschina.com/</a></p>
+<font color="red">第一步，安装ruby</font>
+
+<p>由于之前我的博客是基于jekyll的，jekyll时基于ruby，所以我已经安装过ruby了。</p>
+<font color="red">第二步，安装Sass</font>
+
+<pre><code>打开cmd
+输入gem install sass
+</code></pre><p>发现提示了一个错误：</p>
+<p><img src="/uploads/post/20160629/sass-install.jpg" alt="模拟文件报表排版"></p>
+<p>然后我就在网上找原因，后来发现了其他的安装方法</p>
+<p><a href="http://www.w3cplus.com/sassguide/install.html" title="安装sass" target="_blank" rel="external">http://www.w3cplus.com/sassguide/install.html</a></p>
+<p>我采用的是<strong>第三种</strong>安装方法</p>
+<pre><code>首先，在RubyGems.org上下载sass，然后保存在自己的电脑里
+[https://rubygems.org/gems/sass](https://rubygems.org/gems/sass)
+
+然后，在cmd中输入`gem install 保存sass的路径`
+
+最后，输入`sass -v`来验证是否安装成功
+</code></pre><h3 id="四-Sass的语法"><a href="#四-Sass的语法" class="headerlink" title="四. Sass的语法"></a>四. Sass的语法</h3><h4 id="1-Sass的两种后缀名文件"><a href="#1-Sass的两种后缀名文件" class="headerlink" title="1. Sass的两种后缀名文件"></a>1. Sass的两种后缀名文件</h4><ul>
+<li>sass：语法严格，不使用大括号和分号。</li>
+<li>scss：使用大括号和分号，<strong>建议使用scss为后缀名</strong>。</li>
+</ul>
+<h4 id="2-导入sass文件"><a href="#2-导入sass文件" class="headerlink" title="2. 导入sass文件"></a>2. 导入sass文件</h4><p>在一个sass文件中可以通过<code>@import</code>导入另外一个写好的文件</p>
+<p><strong>@import可以导入的文件类型</strong></p>
+<pre><code>.css文件：不能忽略后缀名
+.sass/.scss文件：可以忽略后缀名、前缀_
+</code></pre><h4 id="3-注释"><a href="#3-注释" class="headerlink" title="3. 注释"></a>3. 注释</h4><pre><code>标准的css注释：/*.......*/
+sass的静默注释：//........
+</code></pre><p>静默注释在生成的css文件中不会出现。</p>
+<h4 id="4-变量"><a href="#4-变量" class="headerlink" title="4. 变量"></a>4. 变量</h4><p><strong>(1)普通变量</strong></p>
+<pre><code>使用$val：attr;来进行声明
+在全局的范围内使用
+
+eg:
+$highlight-color: #eee;
+</code></pre><p><strong>(2)默认变量!default</strong></p>
+<pre><code>$highlight-color: #eee ！default;
+sass的默认变量一般是用来设置默认值，然后根据需求来覆盖的，覆盖的方式也很简单，只需要在默认变量之前重新声明下变量即可
+</code></pre><p><strong>(3)特殊变量</strong></p>
+<p>一般情况下，我们定义的变量都为属性值；如果变量作为属性，需要用一种特殊的方式使用<code>#{$variables}</code>。</p>
+<pre><code>eg:
+//定义
+$borderDirection: top; 
+
+//使用
+.border-#{$borderDirection}{
+      border-#{$borderDirection}:1px solid #ccc;
+}
+</code></pre><p><strong>(4)多值变量</strong></p>
+<pre><code>多值变量分为list类型和map类型
+list类型有点像js中的数组，但是下标从1开始
+map类型有点像js中的对象，但是是用()包裹起来
+</code></pre><p><strong>list类型</strong></p>
+<pre><code>定义: 
+$px: 5px 10px 15px 20px;//一维数组
+$px: (5px 10px) (15px 20px);//二维数组
+
+取值： nth($px,2);//取到的是10px
+</code></pre><p><strong>map类型</strong></p>
+<pre><code>定义：
+$heading: (h1: 2em, h2: 1.5em, h3: 1.2em);
+
+取值：map-get($heading, $h1);//取到的是2em
+</code></pre><p><strong>(5)变量的作用域</strong></p>
+<pre><code>和一般编程语言一样，sass中声明的变量也有作用域
+在规则块以外声明的变量，相当于全局变量，可以在任意地方使用；
+在css规则块里面声明的变量，相当于局部变量，只能在{...}里面使用。
+
+eg:
+$nav-color: red;//相当于全局变量
+nav {
+    $width: 20px;
+    width: $width;//可以使用，不会有错误
+    color: $nav-color;//可以使用
+}
+
+div {
+    width: $width;//不能使用，会有错误
+}
+</code></pre><p><strong>(6)变量的赋值</strong></p>
+<pre><code>可以给一个变量赋值
+$nav-color: red;
+
+也可以用另外一个变量赋值给一个变量
+$color: red;
+$nav-color: color;
+</code></pre><h4 id="5-嵌套css"><a href="#5-嵌套css" class="headerlink" title="5. 嵌套css"></a>5. 嵌套css</h4><p>像俄罗斯套娃一样，在一个规则块里面嵌套规则块。</p>
+<p><strong>(1)选择器的嵌套</strong></p>
+<pre><code>eg:
+//css
+#content aside {background: #eee;}
+#content article h1 {color: red;}
+#content article p {color: black;}
+
+//sass,用嵌套的规则来写    
+#content {
+    article {
+        h1 {color: red;}
+        p {color: black;}
+    }
+
+    aside {background: #eee;}
+}
+</code></pre><p><strong>在使用选择器的嵌套时，会用到以下两个属性：</strong></p>
+<p><strong>父选择器&amp;</strong></p>
+<pre><code>在使用嵌套规则时，`&amp;`代表的是上一层的选择器。
+
+eg:
+
+#content {
+    article {
+        h1 {color: red;}
+        &amp; p {color: black;}//这里的&amp;代表article
+    }
+
+    aside {background: #eee;}
+}
+
+由于sass是将嵌套规则的选择器用空格拼接起来，所以当遇到伪类时，使用嵌套规则就会有错误，这时就要使用父选择器&amp;
+article a {
+    color: red;
+    &amp;:hover: black;
+}
+</code></pre><p><strong>跳出上一层选择器</strong></p>
+<pre><code>@at-root：跳出上一层选择器
+@at-root (without: all)：跳出所有的选择器
+@at-root (without: rule)：跳出常规的css选择器
+@at-root (without: media)：跳出@media
+</code></pre><p><strong>(2)属性的嵌套</strong></p>
+<pre><code>eg:
+//css
+nav {
+  border-style: solid;
+  border-width: 1px;
+  border-color: #ccc;
+}
+
+//sass 属性嵌套
+nav {
+  border: {
+  style: solid;
+  width: 1px;
+  color: #ccc;
+  }
+}
+</code></pre><h4 id="6-混合器"><a href="#6-混合器" class="headerlink" title="6. 混合器"></a>6. 混合器</h4><p>实现大段样式的重用</p>
+<p><strong>@mixin：</strong>定义混合器<br><strong>@include：</strong>引用混合器</p>
+<p><strong>@mixin里面可以是css的属性，也可以是css规则</strong></p>
+<pre><code>@mixin no-bullets {
+  list-style: none;
+  li {
+    list-style-image: none;
+    list-style-type: none;
+    margin-left: 0px;
+  }
+}
+</code></pre><p><strong>给混合器传参，参数是变量<code>$val</code></strong></p>
+<pre><code>//定义混合器
+@mixin link-colors($normal, $hover, $visited) {
+  color: $normal;
+  &amp;:hover { color: $hover; }
+  &amp;:visited { color: $visited; }
+}
+
+//引用混合器
+a {
+  @include link-colors(blue, red, green);
+}
+</code></pre><h4 id="7-继承"><a href="#7-继承" class="headerlink" title="7. 继承"></a>7. 继承</h4><p><strong>选择器继承@extend：</strong>让选择器继承另一个选择器的所有样式，并联合声明</p>
+<pre><code>//sass
+h1 {
+  border: 4px solid #ff9aa9;
+}
+.speaker {
+  @extend h1;
+  border-width: 2px;
+}
+
+//css
+h1,.speaker {
+  border: 4px solid #ff9aa9;
+}
+.speaker {
+  border-width: 2px;
+}
+</code></pre><p><strong>占位选择器%：</strong>不继承的话，css里面不会出现，所以可以用其定义一些基础的样式文件，然后根据需要调用产生相应的css。</p>
+<pre><code>//sass
+%h1 {
+  border: 4px solid #ff9aa9;
+}
+%h2 {
+  border: 4px solid #ff9aa9;
+}
+.speaker {
+  @extend h1;
+  border-width: 2px;
+}
+
+//css
+h1,.speaker {
+  border: 4px solid #ff9aa9;
+}
+.speaker {
+  border-width: 2px;
+}
+</code></pre><h4 id="8-函数"><a href="#8-函数" class="headerlink" title="8. 函数"></a>8. 函数</h4><p>自定义函数@function</p>
+<h4 id="9-运算"><a href="#9-运算" class="headerlink" title="9. 运算"></a>9. 运算</h4><p>可以对数值型，如：数字、颜色、变量等，进行加减乘除四则运算，</p>
+<font color="red">注意:运算符前后留一个空格。</font>
+
+<h4 id="11-条件判断及循环"><a href="#11-条件判断及循环" class="headerlink" title="11. 条件判断及循环"></a>11. 条件判断及循环</h4><pre><code>@if
+@else
+if(条件，条件为真，条件为假)
+@for循环
+@each循环
+</code></pre><h3 id="五-Sass转化为css"><a href="#五-Sass转化为css" class="headerlink" title="五. Sass转化为css"></a>五. Sass转化为css</h3><pre><code>打开cmd
+进入到保存sass或者scss文件的文件夹中
+在cmd中输入`sass --watch 文件名.scss:文件名.css`
+</code></pre>
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/css/" rel="tag"># css</a>
+          
+            <a href="/tags/Sass/" rel="tag"># Sass</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/06/28/2016-06-28-面向过程or面向对象编程/" rel="next" title="面向过程or面向对象编程">
+                <i class="fa fa-chevron-left"></i> 面向过程or面向对象编程
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/06/30/2016-06-30-折腾sublime插件/" rel="prev" title="使用sublime配置react环境">
+                使用sublime配置react环境 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/06/29/2016-06-29-CSS预处理器/"
+           data-title="CSS的预处理器" data-url="http://panpanfish.com/2016/06/29/2016-06-29-CSS预处理器/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/icon.jpg"
+               alt="Yu Pan" />
+          <p class="site-author-name" itemprop="name">Yu Pan</p>
+          <p class="site-description motion-element" itemprop="description">在学习中不断进步</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">142</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">38</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/panpan040828" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一-什么是CSS预处理器"><span class="nav-number">1.</span> <span class="nav-text">一. 什么是CSS预处理器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-什么是css预处理器"><span class="nav-number">1.1.</span> <span class="nav-text">1. 什么是css预处理器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-使用css预处理器的优点"><span class="nav-number">1.2.</span> <span class="nav-text">2. 使用css预处理器的优点</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二-几种css预处理器（Sass-Less-stylus）"><span class="nav-number">2.</span> <span class="nav-text">二. 几种css预处理器（Sass/Less/stylus）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三-安装Sass"><span class="nav-number">3.</span> <span class="nav-text">三. 安装Sass</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四-Sass的语法"><span class="nav-number">4.</span> <span class="nav-text">四. Sass的语法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-Sass的两种后缀名文件"><span class="nav-number">4.1.</span> <span class="nav-text">1. Sass的两种后缀名文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-导入sass文件"><span class="nav-number">4.2.</span> <span class="nav-text">2. 导入sass文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-注释"><span class="nav-number">4.3.</span> <span class="nav-text">3. 注释</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-变量"><span class="nav-number">4.4.</span> <span class="nav-text">4. 变量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-嵌套css"><span class="nav-number">4.5.</span> <span class="nav-text">5. 嵌套css</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-混合器"><span class="nav-number">4.6.</span> <span class="nav-text">6. 混合器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-继承"><span class="nav-number">4.7.</span> <span class="nav-text">7. 继承</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8-函数"><span class="nav-number">4.8.</span> <span class="nav-text">8. 函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#9-运算"><span class="nav-number">4.9.</span> <span class="nav-text">9. 运算</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#11-条件判断及循环"><span class="nav-number">4.10.</span> <span class="nav-text">11. 条件判断及循环</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#五-Sass转化为css"><span class="nav-number">5.</span> <span class="nav-text">五. Sass转化为css</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yu Pan</span>
+</div>
+
+<!--
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+-->
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"panpanfish"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  
+
+
+</body>
+</html>

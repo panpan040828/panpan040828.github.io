@@ -1,0 +1,766 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="javaScript," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+
+
+
+
+
+
+<meta name="description" content="一. 微型调查问卷平台微型调查问卷平台需要实现的功能如下：
+1. 问卷管理列表
+有一个头部可以显示logo，不需要实现登录等操作
+问卷管理列表页面默认为首页
+有一个表格用于展示所有已创建的问卷
+列表中包括列有：问卷名称，问卷状态（未发布，发布中，已结束），和操作区域（编辑、删除、查看数据）
+问卷状态为未发布时，可以做的操作为编辑、删除、查看问卷
+问卷状态为发布中和已结束时，可以做的操作为查看数据、">
+<meta property="og:type" content="article">
+<meta property="og:title" content="微型调查问卷平台">
+<meta property="og:url" content="http://panpanfish.com/2016/07/13/2016-07-13-微型调查问卷平台/index.html">
+<meta property="og:site_name" content="筱鱼兒">
+<meta property="og:description" content="一. 微型调查问卷平台微型调查问卷平台需要实现的功能如下：
+1. 问卷管理列表
+有一个头部可以显示logo，不需要实现登录等操作
+问卷管理列表页面默认为首页
+有一个表格用于展示所有已创建的问卷
+列表中包括列有：问卷名称，问卷状态（未发布，发布中，已结束），和操作区域（编辑、删除、查看数据）
+问卷状态为未发布时，可以做的操作为编辑、删除、查看问卷
+问卷状态为发布中和已结束时，可以做的操作为查看数据、">
+<meta property="og:updated_time" content="2016-08-23T03:34:30.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="微型调查问卷平台">
+<meta name="twitter:description" content="一. 微型调查问卷平台微型调查问卷平台需要实现的功能如下：
+1. 问卷管理列表
+有一个头部可以显示logo，不需要实现登录等操作
+问卷管理列表页面默认为首页
+有一个表格用于展示所有已创建的问卷
+列表中包括列有：问卷名称，问卷状态（未发布，发布中，已结束），和操作区域（编辑、删除、查看数据）
+问卷状态为未发布时，可以做的操作为编辑、删除、查看问卷
+问卷状态为发布中和已结束时，可以做的操作为查看数据、">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+
+  <title> 微型调查问卷平台 | 筱鱼兒 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?e18d9ee1b355055e9a39ffec741beb44";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="my-headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="my-site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">筱鱼兒</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">温柔于己，温柔于人</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+          
+            <li class="menu-item menu-item-home">
+              <a href="/" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+                
+                首页
+              </a>
+            </li>
+          
+      
+        
+          
+            <li class="menu-item menu-item-categories">
+              <a href="/categories" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+                
+                分类
+              </a>
+            </li>
+          
+      
+        
+          
+            <li class="menu-item menu-item-archives">
+              <a href="/archives" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+                
+                归档
+              </a>
+            </li>
+          
+      
+        
+          
+            <li class="menu-item menu-item-tags">
+              <a href="/tags" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+                
+                标签
+              </a>
+            </li>
+          
+      
+        
+          
+            <li class="menu-item menu-item-demo">
+              <a href="/categories/Demo/" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-code"></i> <br />
+                
+                demo
+              </a>
+            </li>
+          
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                微型调查问卷平台
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-13T00:00:00+08:00" content="2016-07-13">
+              2016-07-13
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Demo/" itemprop="url" rel="index">
+                    <span itemprop="name">Demo</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/07/13/2016-07-13-微型调查问卷平台/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/13/2016-07-13-微型调查问卷平台/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="一-微型调查问卷平台"><a href="#一-微型调查问卷平台" class="headerlink" title="一. 微型调查问卷平台"></a>一. 微型调查问卷平台</h3><p><strong>微型调查问卷平台需要实现的功能如下：</strong></p>
+<h4 id="1-问卷管理列表"><a href="#1-问卷管理列表" class="headerlink" title="1. 问卷管理列表"></a>1. 问卷管理列表</h4><ul>
+<li>有一个头部可以显示logo，不需要实现登录等操作</li>
+<li>问卷管理列表页面默认为首页</li>
+<li>有一个表格用于展示所有已创建的问卷</li>
+<li>列表中包括列有：问卷名称，问卷状态（未发布，发布中，已结束），和操作区域（编辑、删除、查看数据）</li>
+<li>问卷状态为未发布时，可以做的操作为编辑、删除、查看问卷</li>
+<li>问卷状态为发布中和已结束时，可以做的操作为查看数据、查看问卷</li>
+<li>表格最左侧有批量选择（多选）的checkbox，多选后，可以进行批量删除功能，checkbox样式用默认即可，不需要按照设计图的样式</li>
+<li>当一个问卷都没有的时候，表格不展现，页面显示大大的新建问卷按钮</li>
+</ul>
+<h4 id="2-问卷新建及编辑"><a href="#2-问卷新建及编辑" class="headerlink" title="2. 问卷新建及编辑"></a>2. 问卷新建及编辑</h4><ul>
+<li>点击问卷管理列表中的新建按钮后，进入到问卷新建页面</li>
+<li>点击问卷列表中某个问卷行的编辑按钮后，进入到问卷的编辑页面</li>
+<li>新建页面和编辑页面基本相同</li>
+<li>问卷有一个标题字段，点击后可以进入编辑状态</li>
+<li>可以针对问卷中的问题进行增删改操作，每个问卷最少一个问题，最多十个问题</li>
+<li>问题类型包括：单选题、多选题、单行文本题</li>
+<li>可以对所有问题进行位置改变（上移、下移），复用，删除的操作</li>
+<li>最上面的问题没有上移操作，最下面的问题没有下移操作</li>
+<li>点击复用时，在被复用的问题紧接着的下方新增一个和被复用完全一样的问题（包括选项）</li>
+<li>对于单选题和多选题，可以对问题的选项进行增、删、改、排序操作</li>
+<li>文本题可以设定是必填还是非必填的问题</li>
+<li>有一个问卷调查填写截止时间，使用一个日历组件来进行时间的选择，日期选择不能早于当前日期</li>
+<li>保存问卷可以进行问卷的保存</li>
+<li>发布问卷可以使得问卷状态变为发布中的状态</li>
+<li>当点击发布时，如果截止日期早于当前日期，则需要提示修改截止日期</li>
+</ul>
+<p>Demo地址：<a href="http://panpanfish.com/myDemo/questionNaire/index.html" title="微型调查问卷平台">http://panpanfish.com/myDemo/questionNaire/index.html</a></p>
+<p>代码地址：<a href="https://github.com/panpan040828/myDemo/blob/gh-pages/questionNaire/" title="微型调查问卷平台" target="_blank" rel="external">https://github.com/panpan040828/myDemo/blob/gh-pages/questionNaire/index.html</a></p>
+<h4 id="3-删除问卷"><a href="#3-删除问卷" class="headerlink" title="3. 删除问卷"></a>3. 删除问卷</h4><p>在问卷管理列表中点击某个问卷的删除按钮后，弹出一个弹出层，让用户二次确认是否删除该问卷，如果用户点击是，则删除掉该问卷</p>
+<h4 id="4-查看问卷"><a href="#4-查看问卷" class="headerlink" title="4. 查看问卷"></a>4. 查看问卷</h4><ul>
+<li>在问卷管理列表中点击查看问卷的按钮后，在新窗口中打开该问卷的页面，该页面是可供用户进行问卷填写的页面，在问卷未发布状态和已结束状态时，问卷提交是无效的。</li>
+<li>该页面在移动端需要进行良好的兼容支持</li>
+</ul>
+<h4 id="5-查看数据"><a href="#5-查看数据" class="headerlink" title="5.查看数据"></a>5.查看数据</h4><ul>
+<li>在问卷管理列表中点击查看数据按钮后，进入到一个数据报告页面，用图表形式呈现各个单选题和多选题的选择情况</li>
+<li>如设计稿中呈现，每一个问题在右侧用某种图表来呈现答题情况，自行选择合适的图表，设计稿中仅为示意，图表样式不需要和设计稿一致。推荐单选题使用饼状图，多选题使用条形图</li>
+<li>文本题用一个百分比图展现有效回答占比即可</li>
+<li>返回按钮点击后返回列表页面</li>
+<li>在项目中尝试模块化的方法及工具</li>
+<li>在项目中尝试CSS预处理工具</li>
+<li>在项目中尝试项目构建、打包工具</li>
+</ul>
+<h3 id="二-调查问卷平台的组成部分"><a href="#二-调查问卷平台的组成部分" class="headerlink" title="二. 调查问卷平台的组成部分"></a>二. 调查问卷平台的组成部分</h3><p>问卷列表<br>浮出层</p>
+<h3 id="三-做的过程中遇到的问题"><a href="#三-做的过程中遇到的问题" class="headerlink" title="三. 做的过程中遇到的问题"></a>三. 做的过程中遇到的问题</h3><h3 id="1-问卷列表页"><a href="#1-问卷列表页" class="headerlink" title="1. 问卷列表页"></a>1. 问卷列表页</h3><h4 id="a-两个模块之间如何通信"><a href="#a-两个模块之间如何通信" class="headerlink" title="a. 两个模块之间如何通信"></a>a. 两个模块之间如何通信</h4><p>eg:</p>
+<p>问卷管理列表页点击删除按钮会出现弹出窗，点击弹出窗上的确定按钮，需要删除问卷列表模块的对应的列表。</p>
+<p><strong>这里用到了浮出层模块和问卷列表模块之间的通信，这里是使用回调函数来实现的。</strong></p>
+<figure class="highlight haxe"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line">在问卷列表模块：</span><br><span class="line"></span><br><span class="line"><span class="comment">//删除按钮绑定事件</span></span><br><span class="line">G.Eve.addEvent(button[<span class="number">1</span>],<span class="string">"click"</span>,<span class="function"><span class="keyword">function</span><span class="params">(event)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">var</span> e = window.event || event;</span><br><span class="line">		<span class="keyword">var</span> target = e.target || e.srcElement;</span><br><span class="line">		<span class="keyword">var</span> floatLayer = <span class="keyword">new</span> FloatLayer(&#123;		</span><br><span class="line">				root: G.Dom.$(<span class="string">"floatDiv"</span>),</span><br><span class="line">				isMove: <span class="literal">true</span>,</span><br><span class="line">				isZoom: <span class="literal">true</span>,</span><br><span class="line">				floatContent: &#123;</span><br><span class="line">					title: <span class="string">"提示"</span>,</span><br><span class="line">					content: <span class="string">"确定要删除第"</span> + (_i + <span class="number">1</span>) + <span class="string">"份问卷吗？"</span></span><br><span class="line">						&#125;,</span><br><span class="line">					_handler: <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">					that.deleteItem(target);</span><br><span class="line">				&#125;					</span><br><span class="line">		 &#125;);</span><br><span class="line">		<span class="comment">//初始化，生成浮出层				</span></span><br><span class="line">		floatLayer.show();</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">//传入浮出层模块的回调函数deleteItem()</span></span><br><span class="line">deleteItem: <span class="function"><span class="keyword">function</span><span class="params">(target)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">this</span>.listBody.removeChild(target.parentNode.parentNode);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//浮出层模块的确定按钮添加事件</span></span><br><span class="line">GLOBAL.Eve.addEvent(that._alertDiv.btnSure,<span class="string">"click"</span>,<span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	that.hide();</span><br><span class="line"></span><br><span class="line">	<span class="comment">//如果给浮出层模块设定了回调函数，即config._handler不为空，那么久执行传进来的回调函数</span></span><br><span class="line">	<span class="keyword">if</span>(that._handler) &#123;</span><br><span class="line">		that._handler();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;);</span><br><span class="line">```			</span><br><span class="line"></span><br><span class="line"><span class="meta">#### b. 复选框checkbox选中状态</span></span><br><span class="line"></span><br><span class="line">对于复选框被选中，在**HTML**中有三种方法：</span><br><span class="line"></span><br><span class="line">    &lt;input id=<span class="string">"btn"</span> type=<span class="string">"checkbox"</span> checked=<span class="string">"checked"</span> /&gt;</span><br><span class="line">    </span><br><span class="line">    &lt;input id=<span class="string">"btn"</span> type=<span class="string">"checkbox"</span> checked=<span class="string">"true"</span> /&gt;</span><br><span class="line">    </span><br><span class="line">    &lt;input id=<span class="string">"btn"</span> type=<span class="string">"checkbox"</span> checked /&gt;</span><br><span class="line"></span><br><span class="line">但是在**js**中，只有一种方法是有效的：</span><br><span class="line"></span><br><span class="line">	<span class="keyword">var</span> btn = document.getElementById(<span class="string">"btn"</span>);</span><br><span class="line">	<span class="comment">//无论在HTML中使用什么方式，让复选框被选中，在这里只会输出true而不是checked</span></span><br><span class="line">	console.log(btn.checked);</span><br><span class="line"></span><br><span class="line"><span class="meta">#### c. 解决IE下不兼容html5标签的方法</span></span><br><span class="line"></span><br><span class="line">在这里主要是IE不兼容&lt;main&gt;标签引起了排版的错乱。</span><br><span class="line"></span><br><span class="line">在css中加上</span><br></pre></td></tr></table></figure>
+<p>main, article, aside, dialog, footer, header, section, footer, nav, figure, menu{ display:block }<br>```</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/javaScript/" rel="tag"># javaScript</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/07/06/2016-07-06-微型调查问卷平台组件——弹出层/" rel="next" title="微型调查问卷平台组件——弹出层">
+                <i class="fa fa-chevron-left"></i> 微型调查问卷平台组件——弹出层
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/07/15/2016-07-15-动态改变div的高度/" rel="prev" title="动态改变div的高度">
+                动态改变div的高度 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/07/13/2016-07-13-微型调查问卷平台/"
+           data-title="微型调查问卷平台" data-url="http://panpanfish.com/2016/07/13/2016-07-13-微型调查问卷平台/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/icon.jpg"
+               alt="Yu Pan" />
+          <p class="site-author-name" itemprop="name">Yu Pan</p>
+          <p class="site-description motion-element" itemprop="description">在学习中不断进步</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">142</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">38</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/panpan040828" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一-微型调查问卷平台"><span class="nav-number">1.</span> <span class="nav-text">一. 微型调查问卷平台</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-问卷管理列表"><span class="nav-number">1.1.</span> <span class="nav-text">1. 问卷管理列表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-问卷新建及编辑"><span class="nav-number">1.2.</span> <span class="nav-text">2. 问卷新建及编辑</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-删除问卷"><span class="nav-number">1.3.</span> <span class="nav-text">3. 删除问卷</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-查看问卷"><span class="nav-number">1.4.</span> <span class="nav-text">4. 查看问卷</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-查看数据"><span class="nav-number">1.5.</span> <span class="nav-text">5.查看数据</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二-调查问卷平台的组成部分"><span class="nav-number">2.</span> <span class="nav-text">二. 调查问卷平台的组成部分</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三-做的过程中遇到的问题"><span class="nav-number">3.</span> <span class="nav-text">三. 做的过程中遇到的问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-问卷列表页"><span class="nav-number">4.</span> <span class="nav-text">1. 问卷列表页</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#a-两个模块之间如何通信"><span class="nav-number">4.1.</span> <span class="nav-text">a. 两个模块之间如何通信</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yu Pan</span>
+</div>
+
+<!--
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+-->
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"panpanfish"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  
+
+
+</body>
+</html>

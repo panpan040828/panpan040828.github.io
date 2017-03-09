@@ -1,0 +1,809 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="css,HTML,读书笔记," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+
+
+
+
+
+
+<meta name="description" content="web标准：结构（HTML）、样式（CSS）、行为（javascript）分离
+代码注释：要养成添加注释的好习惯，能增加代码的可读性。
+公共组件和私有组件的维护：提高代码的重用性。公共组件：接口保持弹性，且高度模块化。
+如何组织公有组件：
+两种方法：集中和分散。
+将所有的公共组件打包好，一次性载入：jQuery将公共组件划分成一个个小的模块，按需加载:YUI
+一. 高质量的HTML1. 注意标签的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="编写高质量代码————HTML、CSS">
+<meta property="og:url" content="http://panpanfish.com/2016/06/18/2016-06-18-编写高质量代码——HTML、CSS/index.html">
+<meta property="og:site_name" content="筱鱼兒">
+<meta property="og:description" content="web标准：结构（HTML）、样式（CSS）、行为（javascript）分离
+代码注释：要养成添加注释的好习惯，能增加代码的可读性。
+公共组件和私有组件的维护：提高代码的重用性。公共组件：接口保持弹性，且高度模块化。
+如何组织公有组件：
+两种方法：集中和分散。
+将所有的公共组件打包好，一次性载入：jQuery将公共组件划分成一个个小的模块，按需加载:YUI
+一. 高质量的HTML1. 注意标签的">
+<meta property="og:updated_time" content="2016-07-03T13:48:16.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="编写高质量代码————HTML、CSS">
+<meta name="twitter:description" content="web标准：结构（HTML）、样式（CSS）、行为（javascript）分离
+代码注释：要养成添加注释的好习惯，能增加代码的可读性。
+公共组件和私有组件的维护：提高代码的重用性。公共组件：接口保持弹性，且高度模块化。
+如何组织公有组件：
+两种方法：集中和分散。
+将所有的公共组件打包好，一次性载入：jQuery将公共组件划分成一个个小的模块，按需加载:YUI
+一. 高质量的HTML1. 注意标签的">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+
+  <title> 编写高质量代码————HTML、CSS | 筱鱼兒 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?e18d9ee1b355055e9a39ffec741beb44";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="my-headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="my-site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">筱鱼兒</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">温柔于己，温柔于人</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+          
+            <li class="menu-item menu-item-home">
+              <a href="/" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+                
+                首页
+              </a>
+            </li>
+          
+      
+        
+          
+            <li class="menu-item menu-item-categories">
+              <a href="/categories" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+                
+                分类
+              </a>
+            </li>
+          
+      
+        
+          
+            <li class="menu-item menu-item-archives">
+              <a href="/archives" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+                
+                归档
+              </a>
+            </li>
+          
+      
+        
+          
+            <li class="menu-item menu-item-tags">
+              <a href="/tags" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+                
+                标签
+              </a>
+            </li>
+          
+      
+        
+          
+            <li class="menu-item menu-item-demo">
+              <a href="/categories/Demo/" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-code"></i> <br />
+                
+                demo
+              </a>
+            </li>
+          
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                编写高质量代码————HTML、CSS
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-06-18T00:00:00+08:00" content="2016-06-18">
+              2016-06-18
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/前端笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">前端笔记</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/06/18/2016-06-18-编写高质量代码——HTML、CSS/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/18/2016-06-18-编写高质量代码——HTML、CSS/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>web标准：结构（HTML）、样式（CSS）、行为（javascript）分离</p>
+<p>代码注释：要养成添加注释的好习惯，能增加代码的可读性。</p>
+<p>公共组件和私有组件的维护：提高代码的重用性。<br>公共组件：接口保持弹性，且高度模块化。</p>
+<p>如何组织公有组件：</p>
+<p>两种方法：集中和分散。</p>
+<p>将所有的公共组件打包好，一次性载入：jQuery<br>将公共组件划分成一个个小的模块，按需加载:YUI</p>
+<h3 id="一-高质量的HTML"><a href="#一-高质量的HTML" class="headerlink" title="一. 高质量的HTML"></a>一. 高质量的HTML</h3><h4 id="1-注意标签的语义性"><a href="#1-注意标签的语义性" class="headerlink" title="1. 注意标签的语义性"></a>1. 注意标签的语义性</h4><p>使用语义化的标签，在去掉网页的样式之后，网页依然有很好的结构和可读性。</p>
+<p>(1) 标题和内容</p>
+<pre><code>&lt;h1&gt;&lt;/h1&gt;
+</code></pre><p>(2) 表单<code>&lt;form&gt;</code></p>
+<ul>
+<li>表单域用<code>&lt;fieldset&gt;</code>标签包起来，<code>&lt;fieldset&gt;</code>的<code>border</code>设为<code>none</code></li>
+<li>用<code>&lt;legend&gt;</code>标签说明表单的用途，<code>&lt;legend&gt;</code>的<code>display</code>设为<code>none</code></li>
+<li>每一个<code>&lt;input&gt;</code>的说明文字需要用<code>&lt;label&gt;</code>标签，<code>&lt;label&gt;</code>的<code>for</code>属性设置为<code>&lt;input&gt;的id值</code></li>
+</ul>
+<p>eg:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;form&gt;</span><br><span class="line">	<span class="xml"><span class="tag">&lt;<span class="name">fieldset</span> <span class="attr">border</span>=<span class="string">"none"</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">legend</span> <span class="attr">display</span>=<span class="string">"none"</span>&gt;</span>登录表单<span class="tag">&lt;/<span class="name">legend</span>&gt;</span></span><br><span class="line"></span><br><span class="line">		<span class="tag">&lt;<span class="name">p</span>&gt;</span><span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"name"</span>&gt;</span>姓名:<span class="tag">&lt;/<span class="name">label</span>&gt;</span><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">id</span>=<span class="string">"name"</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"></span><br><span class="line">		<span class="tag">&lt;<span class="name">p</span>&gt;</span><span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"name"</span>&gt;</span>密码：<span class="tag">&lt;/<span class="name">label</span>&gt;</span><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"password"</span> <span class="attr">id</span>=<span class="string">"name"</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">fieldset</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+<p>(3) 表格<code>&lt;table&gt;</code></p>
+<ul>
+<li><code>&lt;table&gt;</code></li>
+<li><code>&lt;thead&gt;</code></li>
+<li><code>&lt;tbody&gt;</code></li>
+<li><code>&lt;tfoot&gt;</code></li>
+<li><code>&lt;tr&gt;</code></li>
+<li><code>&lt;td&gt;</code></li>
+<li><p><code>&lt;th&gt;</code></p>
+</li>
+<li><p>表格标题用<code>&lt;caption&gt;</code></p>
+</li>
+<li>表头用<code>&lt;thead&gt;</code>，表头里面的单元格用<code>&lt;th&gt;</code></li>
+<li>表格主题部分用<code>&lt;tbody&gt;</code>,每行用<code>&lt;tr&gt;</code>,每个单元格用<code>&lt;td&gt;</code></li>
+<li>表格尾部用<code>&lt;tfoot&gt;</code></li>
+</ul>
+<p>eg:</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&lt;table&gt;</span><br><span class="line">	&lt;caption&gt;几种实现页面的比较&lt;/caption&gt;</span><br><span class="line">	&lt;thead&gt;</span><br><span class="line">		&lt;th&gt;实现方式&lt;/th&gt;</span><br><span class="line">		&lt;th&gt;代码量&lt;/th&gt;</span><br><span class="line">		&lt;th&gt;兼容性&lt;/th&gt;</span><br><span class="line">	&lt;/thead&gt;</span><br><span class="line">	&lt;tbody&gt;</span><br><span class="line">		&lt;tr&gt;</span><br><span class="line">			&lt;th&gt;tabel布局&lt;/th&gt;</span><br><span class="line">			&lt;td&gt;多&lt;/td&gt;</span><br><span class="line">			&lt;td&gt;一般&lt;/td&gt;</span><br><span class="line">		&lt;/tr&gt;</span><br><span class="line">		&lt;tr&gt;</span><br><span class="line">			&lt;th&gt;CSS布局&lt;/th&gt;</span><br><span class="line">			&lt;td&gt;少&lt;/td&gt;</span><br><span class="line">			&lt;td&gt;好&lt;/td&gt;</span><br><span class="line">		&lt;/tr&gt;</span><br><span class="line">	&lt;/tbody&gt;</span><br><span class="line">&lt;/table&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="二-高质量的CSS"><a href="#二-高质量的CSS" class="headerlink" title="二. 高质量的CSS"></a>二. 高质量的CSS</h3><p>css的使用分为两个层面：使用css的API、如何组织css</p>
+<h4 id="1-组织css的方法"><a href="#1-组织css的方法" class="headerlink" title="1. 组织css的方法"></a>1. 组织css的方法</h4><p>将网页中的样式按照职能分为3大类：</p>
+<ul>
+<li>base.css</li>
+<li>common.css</li>
+<li>page.css</li>
+</ul>
+<p><strong>base.css</strong>会被所有页面引用，是页面样式所需要的最底层，与具体的UI无关。</p>
+<p><strong>common.css</strong>里面放的是大量重复的模块，以组件的形式提取出来。</p>
+<p><strong>page.css</strong>里面放的每个页面独有的样式，每个页面都会有自己的page.css（也可以将每个页面的page.css放在同一个css文件里，然后根据页面配上注释）</p>
+<p>举一个base.css的例子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">/css reset/</span><br><span class="line">body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, input, textarea, p, blockquote, th, td&#123;</span><br><span class="line">	margin: <span class="number">0</span>;</span><br><span class="line">	padding: <span class="number">0</span></span><br><span class="line">&#125;</span><br><span class="line">table &#123;</span><br><span class="line">	border-collapse: collapse;</span><br><span class="line">	border-spacing: <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line">fieldset, img &#123;border: <span class="number">0</span>;&#125;</span><br><span class="line">address, caption, cite, code, dfn, em, strong, th, <span class="keyword">var</span> &#123;</span><br><span class="line">	font-style: normal;</span><br><span class="line">	font-weight: normal;</span><br><span class="line">&#125;</span><br><span class="line">ol, ul &#123;list-style: none;&#125;</span><br><span class="line">caption, th &#123;text-align: left;&#125;</span><br><span class="line">h1, h2, h3, h4, h5, h6 &#123;font-size: <span class="number">100</span>%; font-weight: normal;&#125;</span><br><span class="line">q:before, q:after &#123;content: <span class="string">""</span>&#125;</span><br><span class="line">abbr, acronym &#123;border: <span class="number">0</span>&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*文字排版*/</span></span><br><span class="line">.f12 &#123;font-size: <span class="number">12</span>px;&#125;</span><br><span class="line">.f13 &#123;font-size: <span class="number">13</span>px;&#125;</span><br><span class="line">.f14 &#123;font-size: <span class="number">14</span>px;&#125;</span><br><span class="line">.f15 &#123;font-size: <span class="number">15</span>px;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*定位*/</span></span><br><span class="line">.tl &#123;text-align: left;&#125;</span><br><span class="line">.tc &#123;text-align: center;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*宽度高度*/</span></span><br><span class="line">.w &#123;width: <span class="number">100</span>%;&#125;</span><br><span class="line">.w10 &#123;width: <span class="number">10</span>px;&#125;</span><br><span class="line">.w100 &#123;width: <span class="number">100</span>px;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*边距*/</span></span><br><span class="line">.m10 &#123;margin: <span class="number">10</span>px;&#125;</span><br><span class="line">.mt10 &#123;margin-top: <span class="number">10</span>px;&#125;</span><br><span class="line">.mb10 &#123;margin-botton: <span class="number">10</span>px;&#125;</span><br><span class="line">.ml10 &#123;maegin-left: <span class="number">10</span>px;&#125;</span><br><span class="line">.mr10 &#123;margin-right: <span class="number">10</span>px;&#125;</span><br><span class="line">.p10 &#123;padding: <span class="number">10</span>px;&#125;</span><br><span class="line">.pt10 &#123;padding-top: <span class="number">10</span>px;&#125;</span><br><span class="line">.pb10 &#123;padding-bottom: <span class="number">10</span>px;&#125;</span><br><span class="line">.pl10 &#123;padding-left: <span class="number">10</span>px;&#125;</span><br><span class="line">.pr10 &#123;padding-right: <span class="number">10</span>px;&#125;</span><br></pre></td></tr></table></figure>
+<p>上面的代码没有给出全部的来，详细的见</p>
+<p>其中，base.css包括两个部分：<strong>css reset</strong>和<strong>通用原子类</strong>。</p>
+<p><strong>css reset</strong>部分是出自雅虎的前端框架YUI。用来覆盖掉浏览器的默认样式。</p>
+<p><strong>通用原子类</strong>包括文字、定位、长宽、边距。通用性，原子性（不可再分）。</p>
+<h4 id="2-模块化css"><a href="#2-模块化css" class="headerlink" title="2. 模块化css"></a>2. 模块化css</h4><p>借用面向对象的思想，将相同的组件的样式提取成一个模块。</p>
+<p>提取模块的思想：<strong>多用组合，少用继承</strong>。将一个复杂的类拆分成：容易产生变化的类和相对稳定的类。</p>
+<p>将模块中不稳定的类单独变成一个类，例如：margin-top值</p>
+<font color="red">注意：不要同时使用margin-top,margin-bottom;相邻模块的margin-top和margin-bottom可能会重合。</font>
+
+<h4 id="3-css的命名"><a href="#3-css的命名" class="headerlink" title="3. css的命名"></a>3. css的命名</h4><p>为了方便区分单词，可使用的两种命名方式</p>
+<ul>
+<li>驼峰命名法 firstWord</li>
+<li>划线命名法 first-word</li>
+</ul>
+<p>虽然说命名并没有什么特殊的规定，但是好的命名会使代码的可读性更高。</p>
+<p>推荐一种命名方式：</p>
+<p>使用驼峰命名法区分不同的单词，使用划线表示从属关系。</p>
+<p>举个栗子：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;ul class="timeList"&gt;</span><br><span class="line">	&lt;li&gt;1&lt;/li&gt;</span><br><span class="line">	&lt;li&gt;2&lt;/li&gt;</span><br><span class="line">	&lt;li class="timeList-lastItem"&gt;3&lt;/li&gt;</span><br><span class="line">&lt;/ul&gt;</span><br></pre></td></tr></table></figure>
+<p>若团队合作中两个人的css代码冲突了，可以使用加前缀的方式：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pan-timeList &#123;...&#125;</span><br><span class="line">pan-timeList-lastItem &#123;...&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="4-css选择器的权重"><a href="#4-css选择器的权重" class="headerlink" title="4. css选择器的权重"></a>4. css选择器的权重</h4><ul>
+<li>行内样式style:<strong>1000</strong></li>
+<li>ID选择器：<strong>100</strong></li>
+<li>类class/属性选择器/伪类(:hover/:focus等)：<strong>10</strong></li>
+<li>元素(标签)/伪元素：<strong>1</strong></li>
+</ul>
+<font color="red">注意：<strong>伪类</strong>指的是一种状态，例如hover，active；<strong>伪元素</strong>指的是文档的某个特定部分的表现。</font>
+
+<pre><code>权重的计算：
+
+body #content .data img:hover
+
+权重为：1 + 100 + 10 + 1 + 10 = 122
+
+不同的权重，权重高的有效；
+相同的权重，后定义的有效。
+</code></pre><h4 id="5-CSS-hack"><a href="#5-CSS-hack" class="headerlink" title="5. CSS hack"></a>5. CSS hack</h4><p><strong>(1)IE条件注释法</strong></p>
+<p>针对IE浏览器，下面这个css文件只会被IE浏览器下载。</p>
+<!-- [if IE]>
+<link type="text/css" rel="stylesheet" href="css.css">
+<![end if]-->
+<p><strong>(2)选择符前缀法</strong></p>
+<p><strong>(3)属性前缀法</strong></p>
+<p>a标签的4个伪类的顺序：lovehate<strong>(:link，visited，hover，active)</strong></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/css/" rel="tag"># css</a>
+          
+            <a href="/tags/HTML/" rel="tag"># HTML</a>
+          
+            <a href="/tags/读书笔记/" rel="tag"># 读书笔记</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/06/17/2016-06-17-研究登陆信息和登陆状态/" rel="next" title="研究登陆信息与登陆状态">
+                <i class="fa fa-chevron-left"></i> 研究登陆信息与登陆状态
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/06/20/2016-06-20-微型调查问卷平台组件——日历组件/" rel="prev" title="微型调查问卷平台组件——日历组件">
+                微型调查问卷平台组件——日历组件 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/06/18/2016-06-18-编写高质量代码——HTML、CSS/"
+           data-title="编写高质量代码————HTML、CSS" data-url="http://panpanfish.com/2016/06/18/2016-06-18-编写高质量代码——HTML、CSS/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/icon.jpg"
+               alt="Yu Pan" />
+          <p class="site-author-name" itemprop="name">Yu Pan</p>
+          <p class="site-description motion-element" itemprop="description">在学习中不断进步</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">142</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">38</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/panpan040828" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一-高质量的HTML"><span class="nav-number">1.</span> <span class="nav-text">一. 高质量的HTML</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-注意标签的语义性"><span class="nav-number">1.1.</span> <span class="nav-text">1. 注意标签的语义性</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二-高质量的CSS"><span class="nav-number">2.</span> <span class="nav-text">二. 高质量的CSS</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-组织css的方法"><span class="nav-number">2.1.</span> <span class="nav-text">1. 组织css的方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-模块化css"><span class="nav-number">2.2.</span> <span class="nav-text">2. 模块化css</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-css的命名"><span class="nav-number">2.3.</span> <span class="nav-text">3. css的命名</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-css选择器的权重"><span class="nav-number">2.4.</span> <span class="nav-text">4. css选择器的权重</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-CSS-hack"><span class="nav-number">2.5.</span> <span class="nav-text">5. CSS hack</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yu Pan</span>
+</div>
+
+<!--
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+-->
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"panpanfish"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  
+
+
+</body>
+</html>

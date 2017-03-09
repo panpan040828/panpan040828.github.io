@@ -1,0 +1,831 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="CSS," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+
+
+
+
+
+
+<meta name="description" content="之前用bootstrap里面的collapse（轮播）插件实现过轮播效果，但是一直只知其然而不知其所以然，于是今天就研究了一下怎么实现和bootstrap轮播插件一样的轮播效果。
+一. 轮播图的demo轮播图demo地址http://panpanfish.com/myDemo/collapse.html
+轮播图的代码地址https://github.com/panpan040828/myDemo/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="轮播小Demo">
+<meta property="og:url" content="http://panpanfish.com/2016/04/05/2016-04-06-实现轮播特效/index.html">
+<meta property="og:site_name" content="筱鱼兒">
+<meta property="og:description" content="之前用bootstrap里面的collapse（轮播）插件实现过轮播效果，但是一直只知其然而不知其所以然，于是今天就研究了一下怎么实现和bootstrap轮播插件一样的轮播效果。
+一. 轮播图的demo轮播图demo地址http://panpanfish.com/myDemo/collapse.html
+轮播图的代码地址https://github.com/panpan040828/myDemo/">
+<meta property="og:updated_time" content="2016-04-19T03:26:52.231Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="轮播小Demo">
+<meta name="twitter:description" content="之前用bootstrap里面的collapse（轮播）插件实现过轮播效果，但是一直只知其然而不知其所以然，于是今天就研究了一下怎么实现和bootstrap轮播插件一样的轮播效果。
+一. 轮播图的demo轮播图demo地址http://panpanfish.com/myDemo/collapse.html
+轮播图的代码地址https://github.com/panpan040828/myDemo/">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+
+  <title> 轮播小Demo | 筱鱼兒 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?e18d9ee1b355055e9a39ffec741beb44";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="my-headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="my-site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">筱鱼兒</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">温柔于己，温柔于人</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+          
+            <li class="menu-item menu-item-home">
+              <a href="/" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+                
+                首页
+              </a>
+            </li>
+          
+      
+        
+          
+            <li class="menu-item menu-item-categories">
+              <a href="/categories" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+                
+                分类
+              </a>
+            </li>
+          
+      
+        
+          
+            <li class="menu-item menu-item-archives">
+              <a href="/archives" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+                
+                归档
+              </a>
+            </li>
+          
+      
+        
+          
+            <li class="menu-item menu-item-tags">
+              <a href="/tags" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+                
+                标签
+              </a>
+            </li>
+          
+      
+        
+          
+            <li class="menu-item menu-item-demo">
+              <a href="/categories/Demo/" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-code"></i> <br />
+                
+                demo
+              </a>
+            </li>
+          
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                轮播小Demo
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-04-05T00:00:00+08:00" content="2016-04-05">
+              2016-04-05
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Demo/" itemprop="url" rel="index">
+                    <span itemprop="name">Demo</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/04/05/2016-04-06-实现轮播特效/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/05/2016-04-06-实现轮播特效/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>之前用bootstrap里面的collapse（轮播）插件实现过轮播效果，但是一直只知其然而不知其所以然，于是今天就研究了一下怎么实现和bootstrap轮播插件一样的轮播效果。</p>
+<h3 id="一-轮播图的demo"><a href="#一-轮播图的demo" class="headerlink" title="一. 轮播图的demo"></a>一. 轮播图的demo</h3><p>轮播图demo地址<br><a href="http://panpanfish.com/myDemo/collapse.html" title="轮播图效果">http://panpanfish.com/myDemo/collapse.html</a></p>
+<p>轮播图的代码地址<br><a href="https://github.com/panpan040828/myDemo/blob/master/collapse.html" title="轮播图的代码地址" target="_blank" rel="external">https://github.com/panpan040828/myDemo/blob/master/collapse.html</a></p>
+<h3 id="二-轮播图的原理"><a href="#二-轮播图的原理" class="headerlink" title="二. 轮播图的原理"></a>二. 轮播图的原理</h3><p>先上一段HTML代码</p>
+<pre><code>&lt;div class=&quot;container&quot; id=&quot;container&quot; &gt;
+    &lt;div class=&quot;img-list&quot; id=&quot;imgList&quot; style=&quot;left:-450px;&quot;&gt;            
+        &lt;img src=&quot;img/1.jpg&quot; /&gt;
+        &lt;img src=&quot;img/2.jpg&quot; /&gt;
+        &lt;img src=&quot;img/3.jpg&quot; /&gt;
+        &lt;img src=&quot;img/4.jpg&quot; /&gt;
+        &lt;img src=&quot;img/5.jpg&quot; /&gt;        
+    &lt;/div&gt;
+&lt;/div&gt;
+</code></pre><p>id为container的容器可以看成是轮播的框，给container设定一定的宽度，并且设置overflow:hidden;</p>
+<pre><code>.container{position:relative;
+    width:450px;
+    height:300px;
+    overflow:hidden;
+}
+</code></pre><p>id为imgList的div里面是需要轮播的图片（图片一排显示）</p>
+<pre><code>.img-list{position:absolute;
+    z-index:1;
+    width:3150px;/*很重要，让图片连续显示*/   
+}
+.img-list img {float:left;
+                width:450px;
+                height:300px;
+}
+</code></pre><p><strong>轮播的过程可以想象成，把imgList的div向左移动的过程，每次改变left值，可以实现在container里面显示不同的图片。</strong></p>
+<p><strong>小圆点标签控制图片播放</strong> 和 <strong>左右箭头控制图片播放</strong>，都是基于改变imgList的left值。</p>
+<p><strong>图片自动播放</strong>功能是采用定时器，定时触发右箭头点击事件</p>
+<h3 id="三-实现过程中用到的知识点"><a href="#三-实现过程中用到的知识点" class="headerlink" title="三. 实现过程中用到的知识点"></a>三. 实现过程中用到的知识点</h3><h4 id="1-DOM操作"><a href="#1-DOM操作" class="headerlink" title="1. DOM操作"></a>1. DOM操作</h4><pre><code>document.getElementById(&quot;container&quot;)；//由id获取dom节点
+
+document.getElementById(&quot;buttons&quot;).getElementsByTagName(&quot;span&quot;);//由标签名获取dom节点
+</code></pre><h4 id="2-定时器"><a href="#2-定时器" class="headerlink" title="2. 定时器"></a>2. 定时器</h4><p><strong>setTimeout</strong></p>
+<pre><code>setTimeout(code,time);  表示在时间time之后执行code里面的代码
+
+setTimeout只执行code一次，如果想多次调用，可以让code自身再次调用setTimeout(一种递归的思想)
+</code></pre><p>在这个例子中，让图片缓慢向左移动的函数go里面使用到了setTimeout</p>
+<p><strong>setInterval</strong></p>
+<pre><code>setInterval(code,interval); 表示每隔interval时间调用一次code
+
+setInterval会执行code无数次，直到取消了这个定时器为止
+</code></pre><p>在这个例子中，就是使用setInterval这个函数来制作图片自动播放这个功能。</p>
+<p><strong>clearTimeout</strong></p>
+<pre><code>clearTimeout(定时器的名称); 取消定时执行的事件操作
+</code></pre><p>eg：</p>
+<pre><code>function autoPlay(){
+        timer = setInterval(function(){
+            next.onclick();
+
+        },interval);
+    }
+
+    function stop(){
+        clearTimeout(timer);//取消timer，图片不再自动播放
+    }
+</code></pre><h3 id="3-实现图片可以向两边循环滚动"><a href="#3-实现图片可以向两边循环滚动" class="headerlink" title="3. 实现图片可以向两边循环滚动"></a>3. 实现图片可以向两边循环滚动</h3><p>在二的轮播图的原理中，我讲到轮播图可以看成是imgList向左移，或者向右移，那么假设一种情况，当移到最左边（第一张图片），或者最右边（第二张图片）时，如果还想循环播放图片，应该怎么办？</p>
+<p>这就是图片的无限循环播放问题</p>
+<p>这里的解决方案是：</p>
+<pre><code>&lt;div class=&quot;img-list&quot; id=&quot;imgList&quot; style=&quot;left:-450px;&quot;&gt;
+    &lt;img src=&quot;img/5.jpg&quot; /&gt;&lt;!-- left:0px;为了实现无限滚动 --&gt;
+    &lt;img src=&quot;img/1.jpg&quot; /&gt;&lt;!-- left:-450px; --&gt;
+    &lt;img src=&quot;img/2.jpg&quot; /&gt;&lt;!-- left:-900px; --&gt;
+    &lt;img src=&quot;img/3.jpg&quot; /&gt;&lt;!-- left:-1350px; --&gt;
+    &lt;img src=&quot;img/4.jpg&quot; /&gt;&lt;!-- left:-1800px; --&gt;
+    &lt;img src=&quot;img/5.jpg&quot; /&gt;&lt;!-- left:-2250px; --&gt;
+    &lt;img src=&quot;img/1.jpg&quot; /&gt;&lt;!--left:-2700px; 为了实现无限滚动 --&gt;
+&lt;/div&gt;
+</code></pre><ul>
+<li>在图片1的左边加一个图片5的副本，在图片5的右边加一个图片1的副本。</li>
+<li>我在上段代码中标出了，当left值为多少时，显示哪一张图片。</li>
+<li><p>检测left值，当检测到left值不在[-450px,-2250px]这个范围内时，执行调回操作。具体如下：</p>
+<p>  当left&gt;-450px时，使left=-2250px，跳回第5张<br>  当left&lt;-2250px时，时left=-450px，跳回第1张</p>
+</li>
+<li><p>增加两个图片副本主要是为了用户在视觉上没有发现。</p>
+</li>
+</ul>
+<h4 id="4-程序的一些优化"><a href="#4-程序的一些优化" class="headerlink" title="4. 程序的一些优化"></a>4. 程序的一些优化</h4><p>(1). 考虑到用户在当前图片页，仍然点击对应的标签的情况，可以设置return，跳出当前函数</p>
+<pre><code>for(var i = 0;i &lt; buttons.length;i++)
+{
+    buttons[i].onclick = function(){
+
+        /*优化工作，当当前页面是要显示的页面时，点击对应按钮，不执行下面的语句*/
+        if(this.className == &quot;buttonOn&quot;)
+        {
+            return;//return的意思是，当程序跑到这里时，就会退出当前函数
+        }
+
+        var myIndex = parseInt(this.getAttribute(&quot;index&quot;));
+        var offset = -450 * (myIndex - index);            
+        animate(offset);
+        index = myIndex;
+        showButtons();
+        //debugger;
+    }
+}
+</code></pre><p>(2). 图片的自动播放功能</p>
+<p>这里的图片自动播放功能使用的是js，让imgList的left的值在一定时间内增加或者减少到目标值。</p>
+<p>我想利用css3的一些新的属性来制作轮播的动画。</p>
+<p>css3动画属性：animation</p>
+<pre><code>.img-list{-webkit-animation: slide 8s linear infinite;
+-o-animation: slide 8s linear infinite;
+animation: slide 8s linear infinite;}
+slide是动画的名字
+infinite表示动画应该无限次播放
+
+ @-webkit-keyframes slide {
+0%,10% {
+    left: -450px;
+}
+ 20% ,30%{
+    left: -900px;
+}
+40%,50%{
+    left: -1350px;
+}
+60%,70% {
+    left: -1800px;
+}
+80%,100% {
+    left: -2250px;
+}
+
+}
+</code></pre><p>用animation来实现自动播放时，有一个问题就是，当播放到最后一张，如何平滑地滑到第一张。这个问题还有待思考。</p>
+<p>(3). 图片左右移动也可以使用css3的新属性</p>
+<pre><code>transform:translateX(450px);
+</code></pre><p>(4). 图片过渡效果也可以使用css3的新属性</p>
+<pre><code>transition:left 0.6s;
+</code></pre>
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/CSS/" rel="tag"># CSS</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/04/05/2016-04-19-万年历/" rel="next" title="万年历插件">
+                <i class="fa fa-chevron-left"></i> 万年历插件
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/04/22/2016-04-22-寻路算法/" rel="prev" title="寻路算法">
+                寻路算法 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/04/05/2016-04-06-实现轮播特效/"
+           data-title="轮播小Demo" data-url="http://panpanfish.com/2016/04/05/2016-04-06-实现轮播特效/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/icon.jpg"
+               alt="Yu Pan" />
+          <p class="site-author-name" itemprop="name">Yu Pan</p>
+          <p class="site-description motion-element" itemprop="description">在学习中不断进步</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">81</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/panpan040828" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一-轮播图的demo"><span class="nav-number">1.</span> <span class="nav-text">一. 轮播图的demo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二-轮播图的原理"><span class="nav-number">2.</span> <span class="nav-text">二. 轮播图的原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三-实现过程中用到的知识点"><span class="nav-number">3.</span> <span class="nav-text">三. 实现过程中用到的知识点</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-DOM操作"><span class="nav-number">3.1.</span> <span class="nav-text">1. DOM操作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-定时器"><span class="nav-number">3.2.</span> <span class="nav-text">2. 定时器</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-实现图片可以向两边循环滚动"><span class="nav-number">4.</span> <span class="nav-text">3. 实现图片可以向两边循环滚动</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#4-程序的一些优化"><span class="nav-number">4.1.</span> <span class="nav-text">4. 程序的一些优化</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yu Pan</span>
+</div>
+
+<!--
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+-->
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"panpanfish"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  
+
+
+</body>
+</html>

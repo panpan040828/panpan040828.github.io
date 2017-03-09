@@ -1,0 +1,788 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="HTTP," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+
+
+
+
+
+
+<meta name="description" content="一. 什么是koa.js?koa.js是一个基于nodejs的web框架，主要利用了ES6里面的generator的新特性。
+koa的作用：
+利用一个个中间件对HTTP请求进行处理。例如：生成缓存／指定代理／请求重定向等。
+总之，一个koa应用是一个对象，这个对象中包含一个中间件的数组，数组是由一系列Generator函数组成的。
+koa.js和express的对比
+Express是在ES6之前的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="学习koa.js">
+<meta property="og:url" content="http://panpanfish.com/2016/08/04/2016-08-04-学习koa.js/index.html">
+<meta property="og:site_name" content="筱鱼兒">
+<meta property="og:description" content="一. 什么是koa.js?koa.js是一个基于nodejs的web框架，主要利用了ES6里面的generator的新特性。
+koa的作用：
+利用一个个中间件对HTTP请求进行处理。例如：生成缓存／指定代理／请求重定向等。
+总之，一个koa应用是一个对象，这个对象中包含一个中间件的数组，数组是由一系列Generator函数组成的。
+koa.js和express的对比
+Express是在ES6之前的">
+<meta property="og:updated_time" content="2016-10-16T13:27:44.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="学习koa.js">
+<meta name="twitter:description" content="一. 什么是koa.js?koa.js是一个基于nodejs的web框架，主要利用了ES6里面的generator的新特性。
+koa的作用：
+利用一个个中间件对HTTP请求进行处理。例如：生成缓存／指定代理／请求重定向等。
+总之，一个koa应用是一个对象，这个对象中包含一个中间件的数组，数组是由一系列Generator函数组成的。
+koa.js和express的对比
+Express是在ES6之前的">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+
+  <title> 学习koa.js | 筱鱼兒 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?e18d9ee1b355055e9a39ffec741beb44";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="my-headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="my-site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">筱鱼兒</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">温柔于己，温柔于人</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+          
+            <li class="menu-item menu-item-home">
+              <a href="/" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+                
+                首页
+              </a>
+            </li>
+          
+      
+        
+          
+            <li class="menu-item menu-item-categories">
+              <a href="/categories" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+                
+                分类
+              </a>
+            </li>
+          
+      
+        
+          
+            <li class="menu-item menu-item-archives">
+              <a href="/archives" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+                
+                归档
+              </a>
+            </li>
+          
+      
+        
+          
+            <li class="menu-item menu-item-tags">
+              <a href="/tags" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+                
+                标签
+              </a>
+            </li>
+          
+      
+        
+          
+            <li class="menu-item menu-item-demo">
+              <a href="/categories/Demo/" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-code"></i> <br />
+                
+                demo
+              </a>
+            </li>
+          
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                学习koa.js
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-08-04T00:00:00+08:00" content="2016-08-04">
+              2016-08-04
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/前端笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">前端笔记</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/08/04/2016-08-04-学习koa.js/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/04/2016-08-04-学习koa.js/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="一-什么是koa-js"><a href="#一-什么是koa-js" class="headerlink" title="一. 什么是koa.js?"></a>一. 什么是koa.js?</h3><p>koa.js是一个基于nodejs的web框架，主要利用了ES6里面的generator的新特性。</p>
+<p><strong>koa的作用：</strong></p>
+<p>利用一个个<strong>中间件</strong>对HTTP请求进行处理。例如：生成缓存／指定代理／请求重定向等。</p>
+<p>总之，一个koa应用是一个对象，这个对象中包含一个中间件的数组，数组是由一系列Generator函数组成的。</p>
+<h4 id="koa-js和express的对比"><a href="#koa-js和express的对比" class="headerlink" title="koa.js和express的对比"></a>koa.js和express的对比</h4><ol>
+<li>Express是在ES6之前的，中间件的原理还是基于callback方式；<br>koa是基于ES6中的generator特性和co框架（co会把所有generator的返回封装成为Promise对象）</li>
+</ol>
+<p>express让请求逐个通过中间件，实现处理网络请求，是串联的；而koa加上了中间件的回溯，即先逐个通过中间件再反穿回来。</p>
+<ol>
+<li>Express自身封装来很多功能：比如路由，视图处理等等。<br>koa框架自身没有集成太多功能，大部分需要用户自己去require中间件去解决，这样使用起来反而更灵活。</li>
+</ol>
+<h3 id="二-koa实例的几种方法"><a href="#二-koa实例的几种方法" class="headerlink" title="二. koa实例的几种方法"></a>二. koa实例的几种方法</h3><p><code>var koa = require(&#39;koa&#39;);</code><br><code>var app = koa();</code></p>
+<ul>
+<li>app.use()：使用中间件</li>
+<li>app.listen()：监听某一个端口</li>
+<li>app.on()：可以用来监听事件，例如：app.on(‘error’, function)</li>
+<li>app.callback()</li>
+<li>app.keys = ：用来设置签名cookie密钥</li>
+</ul>
+<h3 id="三-koa的中间件"><a href="#三-koa的中间件" class="headerlink" title="三.  koa的中间件"></a>三.  koa的中间件</h3><h4 id="1-什么是中间件？"><a href="#1-什么是中间件？" class="headerlink" title="1. 什么是中间件？"></a>1. 什么是中间件？</h4><p><strong>koa的中间件：</strong></p>
+<p>koa的中间件是一个generator函数，这些函数是用来处理http请求。</p>
+<p>generator函数最大的特点是：函数可以在运行的时候跳出然后再跳回来。</p>
+<p>可以自己写中间件，也可以用已经封装好了的中间件。</p>
+<h4 id="2-如何使用中间件？"><a href="#2-如何使用中间件？" class="headerlink" title="2. 如何使用中间件？"></a>2. 如何使用中间件？</h4><p>使用<code>.use()</code>函数</p>
+<p><code>eg.</code> </p>
+<p><code>var koa = require(&#39;koa&#39;);</code></p>
+<p><code>var app = koa();</code></p>
+<p><code>app.use(function* (next) {</code></p>
+<p>​    <code>//函数内容</code></p>
+<p><code>});</code></p>
+<h4 id="3-中间件的执行顺序"><a href="#3-中间件的执行顺序" class="headerlink" title="3. 中间件的执行顺序"></a>3. 中间件的执行顺序</h4><p>中间件之间是级联式的结构。</p>
+<p>koa中间件的参数只有一个next，用于指向下一个中间件。</p>
+<p>使用<code>yield next</code>；执行下一个中间件，执行完毕之后，又返回该中间件继续执行。</p>
+<p>举例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> koa = <span class="built_in">require</span>(<span class="string">'koa'</span>);</span><br><span class="line"><span class="keyword">var</span> app = koa();</span><br><span class="line"></span><br><span class="line">app.use(<span class="function"><span class="keyword">function</span>* <span class="title">f1</span>(<span class="params">next</span>) </span>&#123;</span><br><span class="line">   	<span class="built_in">console</span>.log(<span class="string">'f1: pre next'</span>);</span><br><span class="line">   	<span class="keyword">yield</span> next;</span><br><span class="line">   	<span class="built_in">console</span>.log(<span class="string">'f1: post next'</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">app.use(<span class="function"><span class="keyword">function</span>* <span class="title">f2</span>(<span class="params">next</span>) </span>&#123;</span><br><span class="line">   	<span class="built_in">console</span>.log(<span class="string">'  f2: pre next'</span>);</span><br><span class="line">   	<span class="keyword">yield</span> next;</span><br><span class="line">   	<span class="built_in">console</span>.log(<span class="string">'  f2: post next'</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">app.use(<span class="function"><span class="keyword">function</span>* <span class="title">f3</span>(<span class="params">next</span>) </span>&#123;</span><br><span class="line">   	<span class="built_in">console</span>.log(<span class="string">'    f3: pre next'</span>);</span><br><span class="line">   	<span class="keyword">this</span>.body = <span class="string">'hello world'</span>;</span><br><span class="line">   	<span class="built_in">console</span>.log(<span class="string">'    f3: post next'</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">app.listen(<span class="number">4000</span>);</span><br><span class="line"></span><br><span class="line">控制台输出：</span><br><span class="line">f1: pre next</span><br><span class="line"> 		f2: pre next</span><br><span class="line">   		f3: pre next</span><br><span class="line">   		f3: post next</span><br><span class="line"> 		f2: post next</span><br><span class="line">f1: post next</span><br></pre></td></tr></table></figure>
+<h4 id="4-合并中间件"><a href="#4-合并中间件" class="headerlink" title="4. 合并中间件"></a>4. 合并中间件</h4><p>使用<code>.call(this,next)</code>将多个中间件进行合并。</p>
+<p><code>eg.</code></p>
+<p><code>function* a(next) {</code></p>
+<p>​    <code>yield next;</code></p>
+<p><code>}</code></p>
+<p><code>function* b(next) {</code></p>
+<p>​    <code>yield next;</code></p>
+<p><code>}</code></p>
+<p><code>function* AandB(next) {</code></p>
+<p>​    <code>yield a.call(this, b.call(this, next));</code></p>
+<p><code>}</code></p>
+<h3 id="四-koa中的context／请求／响应对象"><a href="#四-koa中的context／请求／响应对象" class="headerlink" title="四. koa中的context／请求／响应对象"></a>四. koa中的context／请求／响应对象</h3><h4 id="1-koa的context对象"><a href="#1-koa的context对象" class="headerlink" title="1. koa的context对象"></a>1. koa的context对象</h4><p>context对象可通过this标识符来引用。</p>
+<p><strong>context对象的全局属性：</strong></p>
+<p>ctx.request：Request对象</p>
+<p>ctx.response：Response对象</p>
+<p>ctx.req：指向Node的request对象</p>
+<p>ctx.res：指向Node的reponse对象（和reponse有啥区别）</p>
+<p>ctx.app：指向App对象</p>
+<p><strong>context对象的全局方法：</strong></p>
+<p>throw()：抛出错误</p>
+<p>assert(‘value’, 状态码, 提示信息)：</p>
+<h4 id="2-koa中的请求（request）对象"><a href="#2-koa中的请求（request）对象" class="headerlink" title="2. koa中的请求（request）对象"></a>2. koa中的请求（request）对象</h4><p>Koa Request 对象是对 node 的 Request 进一步抽象和封装</p>
+<h4 id="3-koa中的请求（response）对象"><a href="#3-koa中的请求（response）对象" class="headerlink" title="3. koa中的请求（response）对象"></a>3. koa中的请求（response）对象</h4><p>Koa Response 对象是对 node 的 Response 进一步抽象和封装</p>
+<h3 id="五-koa的使用——实现路由功能"><a href="#五-koa的使用——实现路由功能" class="headerlink" title="五 . koa的使用——实现路由功能"></a>五 . koa的使用——实现路由功能</h3><blockquote>
+<p>收到客户端的请求，服务器需要通过识别请求的方法（HTTP Method: GET, POST, PUT…）和请求的具体路径(path)来进行不同的处理。这部分功能就是路由（Route）需要做的事情，说白了就是请求的分发，分发到不同的回调方法去处理。</p>
+</blockquote>
+<h4 id="1-用this-path属性来判断用户请求的路径"><a href="#1-用this-path属性来判断用户请求的路径" class="headerlink" title="1. 用this.path属性来判断用户请求的路径"></a>1. 用this.path属性来判断用户请求的路径</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> koa = <span class="built_in">require</span>(<span class="string">'koa'</span>);</span><br><span class="line"><span class="keyword">var</span> app = koa();</span><br><span class="line"></span><br><span class="line">app.use(<span class="function"><span class="keyword">function</span>* (<span class="params">next</span>) </span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(<span class="keyword">this</span>.path == <span class="string">'/'</span>) &#123;</span><br><span class="line">		<span class="keyword">this</span>.body = <span class="string">'hello world'</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h4 id="2-koa-router中间件"><a href="#2-koa-router中间件" class="headerlink" title="2. koa-router中间件"></a>2. koa-router中间件</h4><p>如何使用koa-router中间件</p>
+<p>首先，安装koa-router</p>
+<p><code>npm install koa-router --save-dev</code></p>
+<p>使用中间件</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> koa = <span class="keyword">require</span>(<span class="string">'koa'</span>);</span><br><span class="line"><span class="keyword">var</span> Router = <span class="keyword">require</span>(<span class="string">'koa-router'</span>);</span><br><span class="line"><span class="keyword">var</span> app = koa();</span><br><span class="line"><span class="keyword">var</span> router = Router();</span><br><span class="line"></span><br><span class="line">router.get(<span class="string">'/'</span>, <span class="function"><span class="keyword">function</span>* <span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="comment">//请求‘/’这个路径的回调函数</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">app.<span class="keyword">use</span>(router.routes())；</span><br></pre></td></tr></table></figure>
+<p><strong>koa-router提供的方法有：</strong></p>
+<p><code>router.routes()</code>: 返回一个符合这个请求路径的中间件</p>
+<p><code>router.get()</code></p>
+<p><code>router.post()</code></p>
+<p><code>router.use()</code></p>
+<font color="red">今天使用koa的一个大坑！！！</font>
+
+<pre><code>通过页面发起ajax请求，在koa-router的post方法里面对请求进行处理，一直都获取不到post请求里面的data数据
+
+原因是：缺少一个对请求体进行解析的中间件！！！koa-bodyparser
+</code></pre><p>koa-router源码实现？？？</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/HTTP/" rel="tag"># HTTP</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/08/04/2016-08-04-charles的使用/" rel="next" title="charles的使用">
+                <i class="fa fa-chevron-left"></i> charles的使用
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/08/05/2016-08-05-对mvc的理解/" rel="prev" title="对mvc的理解">
+                对mvc的理解 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/08/04/2016-08-04-学习koa.js/"
+           data-title="学习koa.js" data-url="http://panpanfish.com/2016/08/04/2016-08-04-学习koa.js/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/icon.jpg"
+               alt="Yu Pan" />
+          <p class="site-author-name" itemprop="name">Yu Pan</p>
+          <p class="site-description motion-element" itemprop="description">在学习中不断进步</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">142</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">38</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/panpan040828" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一-什么是koa-js"><span class="nav-number">1.</span> <span class="nav-text">一. 什么是koa.js?</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#koa-js和express的对比"><span class="nav-number">1.1.</span> <span class="nav-text">koa.js和express的对比</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二-koa实例的几种方法"><span class="nav-number">2.</span> <span class="nav-text">二. koa实例的几种方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三-koa的中间件"><span class="nav-number">3.</span> <span class="nav-text">三.  koa的中间件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-什么是中间件？"><span class="nav-number">3.1.</span> <span class="nav-text">1. 什么是中间件？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-如何使用中间件？"><span class="nav-number">3.2.</span> <span class="nav-text">2. 如何使用中间件？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-中间件的执行顺序"><span class="nav-number">3.3.</span> <span class="nav-text">3. 中间件的执行顺序</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-合并中间件"><span class="nav-number">3.4.</span> <span class="nav-text">4. 合并中间件</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四-koa中的context／请求／响应对象"><span class="nav-number">4.</span> <span class="nav-text">四. koa中的context／请求／响应对象</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-koa的context对象"><span class="nav-number">4.1.</span> <span class="nav-text">1. koa的context对象</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-koa中的请求（request）对象"><span class="nav-number">4.2.</span> <span class="nav-text">2. koa中的请求（request）对象</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-koa中的请求（response）对象"><span class="nav-number">4.3.</span> <span class="nav-text">3. koa中的请求（response）对象</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#五-koa的使用——实现路由功能"><span class="nav-number">5.</span> <span class="nav-text">五 . koa的使用——实现路由功能</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-用this-path属性来判断用户请求的路径"><span class="nav-number">5.1.</span> <span class="nav-text">1. 用this.path属性来判断用户请求的路径</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-koa-router中间件"><span class="nav-number">5.2.</span> <span class="nav-text">2. koa-router中间件</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yu Pan</span>
+</div>
+
+<!--
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+-->
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"panpanfish"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  
+
+
+</body>
+</html>

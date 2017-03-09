@@ -1,0 +1,779 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="css,Sass," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+
+
+
+
+
+
+<meta name="description" content="由于很多的react不支持sublime text2，只支持sublime text3，于是又重新下载了sublime text3，并安装了相关的插件。
+一. 安装并破解sublime text3直接在网上下载的sublime text3需要注册码
+破解方法：
+help ——&amp;gt; Enter License
+然后输入从网上找来的破解码
+1234567891011Michael BarnesSi">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用sublime配置react环境">
+<meta property="og:url" content="http://panpanfish.com/2016/06/30/2016-06-30-折腾sublime插件/index.html">
+<meta property="og:site_name" content="筱鱼兒">
+<meta property="og:description" content="由于很多的react不支持sublime text2，只支持sublime text3，于是又重新下载了sublime text3，并安装了相关的插件。
+一. 安装并破解sublime text3直接在网上下载的sublime text3需要注册码
+破解方法：
+help ——&amp;gt; Enter License
+然后输入从网上找来的破解码
+1234567891011Michael BarnesSi">
+<meta property="og:updated_time" content="2016-09-05T08:27:36.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="使用sublime配置react环境">
+<meta name="twitter:description" content="由于很多的react不支持sublime text2，只支持sublime text3，于是又重新下载了sublime text3，并安装了相关的插件。
+一. 安装并破解sublime text3直接在网上下载的sublime text3需要注册码
+破解方法：
+help ——&amp;gt; Enter License
+然后输入从网上找来的破解码
+1234567891011Michael BarnesSi">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+
+  <title> 使用sublime配置react环境 | 筱鱼兒 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?e18d9ee1b355055e9a39ffec741beb44";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="my-headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="my-site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">筱鱼兒</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">温柔于己，温柔于人</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+          
+            <li class="menu-item menu-item-home">
+              <a href="/" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+                
+                首页
+              </a>
+            </li>
+          
+      
+        
+          
+            <li class="menu-item menu-item-categories">
+              <a href="/categories" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+                
+                分类
+              </a>
+            </li>
+          
+      
+        
+          
+            <li class="menu-item menu-item-archives">
+              <a href="/archives" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+                
+                归档
+              </a>
+            </li>
+          
+      
+        
+          
+            <li class="menu-item menu-item-tags">
+              <a href="/tags" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+                
+                标签
+              </a>
+            </li>
+          
+      
+        
+          
+            <li class="menu-item menu-item-demo">
+              <a href="/categories/Demo/" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-code"></i> <br />
+                
+                demo
+              </a>
+            </li>
+          
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                使用sublime配置react环境
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-06-30T00:00:00+08:00" content="2016-06-30">
+              2016-06-30
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/工具/" itemprop="url" rel="index">
+                    <span itemprop="name">工具</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/06/30/2016-06-30-折腾sublime插件/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/30/2016-06-30-折腾sublime插件/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>由于很多的react不支持sublime text2，只支持sublime text3，于是又重新下载了sublime text3，并安装了相关的插件。</p>
+<h3 id="一-安装并破解sublime-text3"><a href="#一-安装并破解sublime-text3" class="headerlink" title="一. 安装并破解sublime text3"></a>一. 安装并破解sublime text3</h3><p>直接在网上下载的sublime text3需要注册码</p>
+<p><strong>破解方法：</strong></p>
+<p>help ——&gt; Enter License</p>
+<p>然后输入从网上找来的破解码</p>
+<figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Michael Barnes</span><br><span class="line">Single User License</span><br><span class="line">EA7E-<span class="number">821385</span></span><br><span class="line"><span class="number">8A353C41</span> <span class="number">872</span>A0D5C DF9B2950 AFF6F667</span><br><span class="line">C458EA6D <span class="number">8</span>EA3C286 <span class="number">98D1D650</span> <span class="number">131</span>A97AB</span><br><span class="line">AA919AEC EF20E143 B<span class="number">361B1E7</span> <span class="number">4C8B7F04</span></span><br><span class="line">B085E65E <span class="number">2F5F5360</span> <span class="number">8489D422</span> FB8FC1AA</span><br><span class="line"><span class="number">93</span>F6323C FD7F7544 <span class="number">3F39C318</span> D95E6480</span><br><span class="line">FCCC7561 <span class="number">8A4A1741</span> <span class="number">68</span>FA4223 ADCEDE07</span><br><span class="line"><span class="number">200</span>C25BE DBBC4855 C4CFB774 C5EC138C</span><br><span class="line"><span class="number">0</span>FEC1CEF D9DCECEC D3A5DAD<span class="number">1 01316C36</span></span><br></pre></td></tr></table></figure>
+<h3 id="二-sublime安装插件"><a href="#二-sublime安装插件" class="headerlink" title="二. sublime安装插件"></a>二. sublime安装插件</h3><p><strong>Sublime安装插件有两种方式:</strong></p>
+<ul>
+<li>直接下载安装包解压缩到Packages目录</li>
+<li>通过Package Control组件来安装组件(更方便)</li>
+</ul>
+<p>一般使用第二种方法安装插件，方便快捷~~</p>
+<h4 id="1-安装package-control"><a href="#1-安装package-control" class="headerlink" title="1. 安装package control"></a>1. 安装package control</h4><p><strong>（1）打开控制台</strong></p>
+<p>view ——&gt; show console</p>
+<p><strong>（2）在控制台中输入</strong></p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import urllib.request,os,hashlib; h = <span class="string">'2915d1851351e5ee549c20394736b442'</span> + <span class="string">'8bc59f460fa1548d1514676163dafc88'</span>; pf = <span class="string">'Package Control.sublime-package'</span>; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); <span class="keyword">by</span> = urllib.request.urlopen( <span class="string">'http://packagecontrol.io/'</span> + pf.<span class="built_in">replace</span>(<span class="string">' '</span>, <span class="string">'%20'</span>)).<span class="built_in">read</span>(); dh = hashlib.sha256(<span class="keyword">by</span>).hexdigest(); print(<span class="string">'Error validating download (got %s instead of %s), please try manual install'</span> % (dh, h)) <span class="keyword">if</span> dh != h <span class="keyword">else</span> <span class="built_in">open</span>(os.path.join( ipp, pf), <span class="string">'wb'</span> ).<span class="built_in">write</span>(<span class="keyword">by</span>)</span><br></pre></td></tr></table></figure>
+<h4 id="2-使用package-control安装插件的一般方法"><a href="#2-使用package-control安装插件的一般方法" class="headerlink" title="2. 使用package control安装插件的一般方法"></a>2. 使用package control安装插件的一般方法</h4><p>同时按下：ctrl+shift+P</p>
+<p>然后选择：package:install</p>
+<p>在出来的输入框中输入需要安装的插件，例如：<code>emmet</code></p>
+<h3 id="三-使用sublime安装react相关插件"><a href="#三-使用sublime安装react相关插件" class="headerlink" title="三. 使用sublime安装react相关插件"></a>三. 使用sublime安装react相关插件</h3><h4 id="1-babel"><a href="#1-babel" class="headerlink" title="1. babel"></a>1. babel</h4><p><strong>功能：</strong>支持jsx语法高亮</p>
+<p><strong>安装：</strong>在package control中查找babel</p>
+<p><strong>将某一种的文件扩展名添加为使用ES6语法：</strong></p>
+<ul>
+<li>打开<code>.js</code>或者<code>.jsx</code>文件</li>
+<li>选择<code>view ——&gt; syntax ——&gt; Open all with current extension as... ——&gt; Babel ——&gt; JavaScript (Babel)</code></li>
+</ul>
+<h4 id="2-sublime-react"><a href="#2-sublime-react" class="headerlink" title="2. sublime-react"></a>2. sublime-react</h4><p><strong>功能：</strong>自动补全代码的react插件</p>
+<p><strong>安装：</strong>在package control中查找ReactJS</p>
+<p><strong>使用：</strong>输入简写的命令，按下<code>tab</code>键即可自动补全</p>
+<figure class="highlight nimrod"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">cdm→  componentDidMount: fn() &#123; ... &#125;</span><br><span class="line">cdup→  componentDidUpdate: fn(pp, ps) &#123; ... &#125;</span><br><span class="line">cs→  <span class="keyword">var</span> cx = <span class="type">React</span>.addons.classSet;</span><br><span class="line">cwm→  componentWillMount: fn() &#123; ... &#125;</span><br><span class="line">cwr→  componentWillReceiveProps: fn(np) &#123; ... &#125;</span><br><span class="line">cwu→  componentWillUpdate: fn(np, ns) &#123; ... &#125;</span><br><span class="line">cwun→  componentWillUnmount: fn() &#123; ... &#125;</span><br><span class="line">cx→  cx(&#123; ... &#125;)</span><br><span class="line">fdn→  <span class="type">React</span>.findDOMNode(...)</span><br><span class="line">fup→  forceUpdate(...)</span><br><span class="line">gdp→  getDefaultProps: fn() &#123; <span class="keyword">return</span> <span class="meta">&#123;...&#125;</span> &#125; </span><br><span class="line">gis→  getInitialState: fn() &#123; <span class="keyword">return</span> <span class="meta">&#123;...&#125;</span> &#125; </span><br><span class="line">ism→  isMounted()</span><br><span class="line">props→  this.props.</span><br><span class="line">pt→  propTypes &#123; ... &#125;</span><br><span class="line">rcc→  component skeleton</span><br><span class="line">refs→  this.refs.</span><br><span class="line">ren→  render: fn() &#123; <span class="keyword">return</span> ... &#125;</span><br><span class="line">scu→  shouldComponentUpdate: fn(np, ns) &#123; ... &#125;</span><br><span class="line">sst→  this.setState(&#123; ... &#125;)</span><br><span class="line">state→  this.state.</span><br></pre></td></tr></table></figure>
+<p>个人觉得使用这种代码自动补全的插件，虽然让我们开发变得更简便了，但是也有一些不好的方面。</p>
+<h4 id="3-Sass代码高亮sass"><a href="#3-Sass代码高亮sass" class="headerlink" title="3. Sass代码高亮sass"></a>3. Sass代码高亮sass</h4><p><strong>功能：</strong>使sass代码也有高亮显示</p>
+<p><strong>安装：</strong>在package control中查找sass</p>
+<h4 id="4-将Sass编译成css-——-sass-build"><a href="#4-将Sass编译成css-——-sass-build" class="headerlink" title="4. 将Sass编译成css —— sass build"></a>4. 将Sass编译成css —— sass build</h4><p><strong>功能：</strong>将Sass编译成css代码</p>
+<p><strong>安装：</strong>在package control中查找sass build</p>
+<p><strong>使用：</strong>ctrl + B进行编译</p>
+<h3 id="二-sublime插件之Sass自动编译成-css"><a href="#二-sublime插件之Sass自动编译成-css" class="headerlink" title="二. sublime插件之Sass自动编译成.css"></a>二. sublime插件之Sass自动编译成<code>.css</code></h3><p>sublime的插件安装方法大同小异，都是将下载好的安装包放在<code>.../Data/Packages</code>文件夹里。</p>
+<p>sass自动编译插件下载地址：</p>
+<p><a href="https://github.com/jaumefontal/SASS-Build-SublimeText2" target="_blank" rel="external">https://github.com/jaumefontal/SASS-Build-SublimeText2</a></p>
+<p><strong>插件使用方法：</strong></p>
+<p>首先，将编译系统调成SASS</p>
+<pre><code>点击 工具(T) ——&gt; 编译系统(U) ——&gt; SASS
+</code></pre><p>然后在.scss文件页面，使用<code>ctrl + B</code></p>
+<h3 id="三-sublime插件之sublimeLinter自动检测js语法错误"><a href="#三-sublime插件之sublimeLinter自动检测js语法错误" class="headerlink" title="三. sublime插件之sublimeLinter自动检测js语法错误"></a>三. sublime插件之<code>sublimeLinter</code>自动检测js语法错误</h3><p>js自动检测语法错误插件的下载地址：</p>
+<p><a href="https://github.com/SublimeLinter/SublimeLinter-for-ST2" target="_blank" rel="external">https://github.com/SublimeLinter/SublimeLinter-for-ST2</a></p>
+<p><strong>修改插件配置：</strong></p>
+<p>点击 首选项(N) ——&gt; 插件设置 ——&gt; sublimeLinter ——&gt; setting-User 打开配置文件</p>
+<font color="red">参数配置中的各个参数的意思：</font>
+
+<p><strong>运行模式</strong></p>
+<pre><code>&quot;sublimelinter&quot;: &quot;save-only&quot;
+
+SublimeLinter 的运行模式，总共有四种，含义分别如下：    
+- true 在用户输入时在后台进行即时校验；
+- false 只有在初始化的时候才进行校验；
+- &quot;load-save&quot; 当文件加载和保存的时候进行校验；
+- &quot;save-only&quot; 当文件被保存的时候进行校验；
+
+推荐设置为 “save-only”，这样只在编写完代码，保存的时候才校验，Sublime Text 运行会更加流畅。
+</code></pre><p>sublime text3破解码</p>
+<p>安装package control</p>
+<p>打开控制台view ——&gt; show console</p>
+<p>输入</p>
+<p>import urllib.request,os,hashlib; h = ‘2915d1851351e5ee549c20394736b442’ + ‘8bc59f460fa1548d1514676163dafc88’; pf = ‘Package Control.sublime-package’; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( ‘<a href="http://packagecontrol.io/" target="_blank" rel="external">http://packagecontrol.io/</a>‘ + pf.replace(‘ ‘, ‘%20’)).read(); dh = hashlib.sha256(by).hexdigest(); print(‘Error validating download (got %s instead of %s), please try manual install’ % (dh, h)) if dh != h else open(os.path.join( ipp, pf), ‘wb’ ).write(by)</p>
+<p>babel</p>
+<p><a href="https://github.com/babel/babel-sublime" target="_blank" rel="external">https://github.com/babel/babel-sublime</a></p>
+<p>sublime-React</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/css/" rel="tag"># css</a>
+          
+            <a href="/tags/Sass/" rel="tag"># Sass</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/06/29/2016-06-29-CSS预处理器/" rel="next" title="CSS的预处理器">
+                <i class="fa fa-chevron-left"></i> CSS的预处理器
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/07/01/2016-07-01-js模块化编程之requireJS/" rel="prev" title="js模块化编程之requireJS">
+                js模块化编程之requireJS <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/06/30/2016-06-30-折腾sublime插件/"
+           data-title="使用sublime配置react环境" data-url="http://panpanfish.com/2016/06/30/2016-06-30-折腾sublime插件/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/icon.jpg"
+               alt="Yu Pan" />
+          <p class="site-author-name" itemprop="name">Yu Pan</p>
+          <p class="site-description motion-element" itemprop="description">在学习中不断进步</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">142</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">38</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/panpan040828" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一-安装并破解sublime-text3"><span class="nav-number">1.</span> <span class="nav-text">一. 安装并破解sublime text3</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二-sublime安装插件"><span class="nav-number">2.</span> <span class="nav-text">二. sublime安装插件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-安装package-control"><span class="nav-number">2.1.</span> <span class="nav-text">1. 安装package control</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-使用package-control安装插件的一般方法"><span class="nav-number">2.2.</span> <span class="nav-text">2. 使用package control安装插件的一般方法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三-使用sublime安装react相关插件"><span class="nav-number">3.</span> <span class="nav-text">三. 使用sublime安装react相关插件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-babel"><span class="nav-number">3.1.</span> <span class="nav-text">1. babel</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-sublime-react"><span class="nav-number">3.2.</span> <span class="nav-text">2. sublime-react</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-Sass代码高亮sass"><span class="nav-number">3.3.</span> <span class="nav-text">3. Sass代码高亮sass</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-将Sass编译成css-——-sass-build"><span class="nav-number">3.4.</span> <span class="nav-text">4. 将Sass编译成css —— sass build</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二-sublime插件之Sass自动编译成-css"><span class="nav-number">4.</span> <span class="nav-text">二. sublime插件之Sass自动编译成.css</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三-sublime插件之sublimeLinter自动检测js语法错误"><span class="nav-number">5.</span> <span class="nav-text">三. sublime插件之sublimeLinter自动检测js语法错误</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yu Pan</span>
+</div>
+
+<!--
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+-->
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"panpanfish"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  
+
+
+</body>
+</html>

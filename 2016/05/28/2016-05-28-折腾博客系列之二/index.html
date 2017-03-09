@@ -1,0 +1,744 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="博客," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+
+
+
+
+
+
+<meta name="description" content="之前弄的那个博客是基于jekyll,现在换成的这个博客是基于hexo。两者都是比较常用的静态博客系统。之所以将jekyll换成hexo呢，是因为看到了基于hexo的next模板（也就是本博客现在使用的模板），当时看到的时候，确实非常喜欢，简洁明了，再加上觉得之前的博客自己弄的样式太小清新了，额。。。当然现在的也还是走的小清新风格，弄成这样主要是为了和原生的next模板那种冷峻的style产生一丢丢">
+<meta property="og:type" content="article">
+<meta property="og:title" content="折腾博客系列之二">
+<meta property="og:url" content="http://panpanfish.com/2016/05/28/2016-05-28-折腾博客系列之二/index.html">
+<meta property="og:site_name" content="筱鱼兒">
+<meta property="og:description" content="之前弄的那个博客是基于jekyll,现在换成的这个博客是基于hexo。两者都是比较常用的静态博客系统。之所以将jekyll换成hexo呢，是因为看到了基于hexo的next模板（也就是本博客现在使用的模板），当时看到的时候，确实非常喜欢，简洁明了，再加上觉得之前的博客自己弄的样式太小清新了，额。。。当然现在的也还是走的小清新风格，弄成这样主要是为了和原生的next模板那种冷峻的style产生一丢丢">
+<meta property="og:updated_time" content="2016-05-31T13:51:58.102Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="折腾博客系列之二">
+<meta name="twitter:description" content="之前弄的那个博客是基于jekyll,现在换成的这个博客是基于hexo。两者都是比较常用的静态博客系统。之所以将jekyll换成hexo呢，是因为看到了基于hexo的next模板（也就是本博客现在使用的模板），当时看到的时候，确实非常喜欢，简洁明了，再加上觉得之前的博客自己弄的样式太小清新了，额。。。当然现在的也还是走的小清新风格，弄成这样主要是为了和原生的next模板那种冷峻的style产生一丢丢">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+
+  <title> 折腾博客系列之二 | 筱鱼兒 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?e18d9ee1b355055e9a39ffec741beb44";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="my-headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="my-site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">筱鱼兒</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">温柔于己，温柔于人</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+          
+            <li class="menu-item menu-item-home">
+              <a href="/" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+                
+                首页
+              </a>
+            </li>
+          
+      
+        
+          
+            <li class="menu-item menu-item-categories">
+              <a href="/categories" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+                
+                分类
+              </a>
+            </li>
+          
+      
+        
+          
+            <li class="menu-item menu-item-archives">
+              <a href="/archives" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+                
+                归档
+              </a>
+            </li>
+          
+      
+        
+          
+            <li class="menu-item menu-item-tags">
+              <a href="/tags" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+                
+                标签
+              </a>
+            </li>
+          
+      
+        
+          
+            <li class="menu-item menu-item-demo">
+              <a href="/categories/Demo/" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-code"></i> <br />
+                
+                demo
+              </a>
+            </li>
+          
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                折腾博客系列之二
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-05-28T00:00:00+08:00" content="2016-05-28">
+              2016-05-28
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/搭建博客/" itemprop="url" rel="index">
+                    <span itemprop="name">搭建博客</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/05/28/2016-05-28-折腾博客系列之二/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/28/2016-05-28-折腾博客系列之二/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>之前弄的那个博客是基于<code>jekyll</code>,现在换成的这个博客是基于<code>hexo</code>。两者都是比较常用的静态博客系统。之所以将jekyll换成hexo呢，是因为看到了基于hexo的next模板（也就是本博客现在使用的模板），当时看到的时候，确实非常喜欢，简洁明了，再加上觉得之前的博客自己弄的样式太小清新了，额。。。当然现在的也还是走的小清新风格，弄成这样主要是为了和原生的next模板那种冷峻的style产生一丢丢辨识度。好了，废话不多说，下面简要介绍一下本博客搭建的过程。</p>
+<p>想学习如何使用jekyll生成博客，可以看我的上个博客的教程。</p>
+<h3 id="一-jekyll和hexo的区别"><a href="#一-jekyll和hexo的区别" class="headerlink" title="一. jekyll和hexo的区别"></a>一. jekyll和hexo的区别</h3><h4 id="1-jekyll"><a href="#1-jekyll" class="headerlink" title="1. jekyll"></a>1. jekyll</h4><p>jekyll是基于ruby</p>
+<p>优点：把原文上传到github上，可以直接生成博客。</p>
+<p>缺点：在windows上安装ruby时，非常麻烦，哪一步出错就有可能安装不成功；文件的分类名或者文件名如果是中文，那么在本地调试时就显示不出来。</p>
+<h4 id="2-hexo"><a href="#2-hexo" class="headerlink" title="2. hexo"></a>2. hexo</h4><p>hexo是基于nodejs</p>
+<p>优点:安装nodejs简单，生成起来快很多，主题种类多一些</p>
+<p>缺点：需要在本地生成html页面，再上传到git上</p>
+<h3 id="二-用hexo生成博客的过程"><a href="#二-用hexo生成博客的过程" class="headerlink" title="二. 用hexo生成博客的过程"></a>二. 用hexo生成博客的过程</h3><h4 id="1-用github-pages生成自己的博客仓库"><a href="#1-用github-pages生成自己的博客仓库" class="headerlink" title="1. 用github pages生成自己的博客仓库"></a>1. 用github pages生成自己的博客仓库</h4><h4 id="2-安装github"><a href="#2-安装github" class="headerlink" title="2. 安装github"></a>2. 安装github</h4><h4 id="3-安装nodejs"><a href="#3-安装nodejs" class="headerlink" title="3. 安装nodejs"></a>3. 安装nodejs</h4><h4 id="4-安装hexo"><a href="#4-安装hexo" class="headerlink" title="4. 安装hexo"></a>4. 安装hexo</h4><p>打开git shell</p>
+<p>输入<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br></pre></td></tr></table></figure></p>
+<p>进入自己的博客文件夹（自己本地的github仓库your_user_name.github.io）</p>
+<p>依次输入<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo init <span class="comment">//初始化一个博客</span></span><br><span class="line">npm install</span><br><span class="line">hexo s --debug <span class="comment">//在调试的状态下启动hexo</span></span><br></pre></td></tr></table></figure></p>
+<p>这样一个博客就生成了，就可以在<a href="http://localhost:4000本地查看" target="_blank" rel="external">http://localhost:4000本地查看</a></p>
+<h3 id="三-本地生成的博客上传到git上"><a href="#三-本地生成的博客上传到git上" class="headerlink" title="三. 本地生成的博客上传到git上"></a>三. 本地生成的博客上传到git上</h3><p>上面也说了，hexo博客是需要自己在本地根据.md文件生成<code>html</code>页面，然后再部署到git上。</p>
+<h4 id="1-修改-config-yml配置文件（站点配置文件）"><a href="#1-修改-config-yml配置文件（站点配置文件）" class="headerlink" title="1. 修改_config.yml配置文件（站点配置文件）"></a>1. 修改_config.yml配置文件（站点配置文件）</h4><p>将URL部分改成</p>
+<pre><code># URL
+## If your site is put in a subdirectory, set url as &apos;http://yoursite.com/child&apos; and root as &apos;/child/&apos;
+url: http://panpanfish.com  （自己的博客的域名）
+root: /
+permalink: :year/:month/:day/:title/
+permalink_defaults:
+</code></pre><p>将部署的部分改成</p>
+<pre><code># Deployment
+## Docs: https://hexo.io/docs/deployment.html
+deploy:
+  type: git
+  repository: https://github.com/panpan040828/panpan040828.github.io.git   (自己的博客仓库地址)
+  branch: master
+</code></pre><h4 id="2-在仓库的git-shell中执行如下命令"><a href="#2-在仓库的git-shell中执行如下命令" class="headerlink" title="2. 在仓库的git shell中执行如下命令"></a>2. 在仓库的git shell中执行如下命令</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">安装hexo部署到git上的插件</span><br><span class="line">npm install hexo-deployer-git --save</span><br><span class="line"></span><br><span class="line">执行清空之前生成的文件命令</span><br><span class="line">hexo clean</span><br><span class="line"></span><br><span class="line">执行生成对应的页面命令</span><br><span class="line">hexo generate</span><br><span class="line"></span><br><span class="line">执行部署命令</span><br><span class="line">hexo deploy</span><br><span class="line"></span><br><span class="line">然后将重新生成的文件提交到git上</span><br><span class="line">git commit</span><br><span class="line">git pull</span><br><span class="line">git push</span><br></pre></td></tr></table></figure>
+<h3 id="三-修改next主题部分样式"><a href="#三-修改next主题部分样式" class="headerlink" title="三. 修改next主题部分样式"></a>三. 修改next主题部分样式</h3><p>一些next主题自带的东西，在next的文档中都有详细的说明。</p>
+<p>为了不把原来的文件改错，我使用的是自定义样式，方法如下：</p>
+<p>在themes/next/source/css文件夹中的main.styl中的最后添加如下代码</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//my layer</span></span><br><span class="line"><span class="comment">//-------------------</span></span><br><span class="line">@<span class="keyword">import</span> <span class="string">"_my/mycss"</span></span><br></pre></td></tr></table></figure>
+<p>然后再在这个css文件夹里添加一个_my文件夹，里面创建一个mycss.styl文件，在文件中写上自己的样式。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">例如：</span><br><span class="line">.my-site-meta &#123;</span><br><span class="line">    padding: 20px 0;</span><br><span class="line">    color: #fff;</span><br><span class="line">    background: #E49A9A;</span><br><span class="line">    margin: 0;</span><br><span class="line">  	text-align: center;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后再在自己的页面引用这些样式就行。</p>
+<p>在themes/next/layout这个文件夹里，放的都是html页面文件</p>
+<p>_partials文件夹里的都是可以复用的部分</p>
+<ul>
+<li>head.swig是html页面的头部</li>
+<li>header.swig是左侧导航栏</li>
+<li>footer.swig是页面底部</li>
+<li>pagination.swig是分页</li>
+</ul>
+<p>_layout.swig是整个页面，每个页面都会使用，其中通过如下形式引用的其他部分</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#123;% include <span class="string">'_scripts/vendors.swig'</span> %&#125;</span><br><span class="line">&#123;% include <span class="string">'_scripts/commons.swig'</span> %&#125;</span><br></pre></td></tr></table></figure>
+<p>新增的demo页面是在page.swig里面修改的</p>
+<p>如果修改样式后，本地预览不对，可以重新启动一下hexo就可以了</p>
+<p>当然，还需要继续研究一下模板的各个文件代表的是什么意思，才能更好地去修改，或者自己写一个模板，任重而道远啊~~~</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/博客/" rel="tag"># 博客</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/05/27/2016-05-27-post和get的区别/" rel="next" title="Http请求中的post和get的区别">
+                <i class="fa fa-chevron-left"></i> Http请求中的post和get的区别
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/06/01/2016-06-01-web sovkets协议/" rel="prev" title="Web Sockets协议">
+                Web Sockets协议 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/05/28/2016-05-28-折腾博客系列之二/"
+           data-title="折腾博客系列之二" data-url="http://panpanfish.com/2016/05/28/2016-05-28-折腾博客系列之二/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/icon.jpg"
+               alt="Yu Pan" />
+          <p class="site-author-name" itemprop="name">Yu Pan</p>
+          <p class="site-description motion-element" itemprop="description">在学习中不断进步</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">81</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/panpan040828" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一-jekyll和hexo的区别"><span class="nav-number">1.</span> <span class="nav-text">一. jekyll和hexo的区别</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-jekyll"><span class="nav-number">1.1.</span> <span class="nav-text">1. jekyll</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-hexo"><span class="nav-number">1.2.</span> <span class="nav-text">2. hexo</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二-用hexo生成博客的过程"><span class="nav-number">2.</span> <span class="nav-text">二. 用hexo生成博客的过程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-用github-pages生成自己的博客仓库"><span class="nav-number">2.1.</span> <span class="nav-text">1. 用github pages生成自己的博客仓库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-安装github"><span class="nav-number">2.2.</span> <span class="nav-text">2. 安装github</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-安装nodejs"><span class="nav-number">2.3.</span> <span class="nav-text">3. 安装nodejs</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-安装hexo"><span class="nav-number">2.4.</span> <span class="nav-text">4. 安装hexo</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三-本地生成的博客上传到git上"><span class="nav-number">3.</span> <span class="nav-text">三. 本地生成的博客上传到git上</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-修改-config-yml配置文件（站点配置文件）"><span class="nav-number">3.1.</span> <span class="nav-text">1. 修改_config.yml配置文件（站点配置文件）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-在仓库的git-shell中执行如下命令"><span class="nav-number">3.2.</span> <span class="nav-text">2. 在仓库的git shell中执行如下命令</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三-修改next主题部分样式"><span class="nav-number">4.</span> <span class="nav-text">三. 修改next主题部分样式</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yu Pan</span>
+</div>
+
+<!--
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+-->
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"panpanfish"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  
+
+
+</body>
+</html>

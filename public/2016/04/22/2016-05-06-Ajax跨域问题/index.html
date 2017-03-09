@@ -1,0 +1,770 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="http," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+
+
+
+
+
+
+<meta name="description" content="一. Ajax跨域问题跨域：只要协议、域名、端口有一个不同，就被当做不同的域。
+ajax跨域：利用ajax技术请求不同域名上的数据。
+1. 什么是同源策略同源策略是由Netscape提出的一个著名的安全策略，现在所有的可支持javascript的浏览器都会使用这个策略。
+A网页设置的 Cookie，B网页不能打开，除非这两个网页”同源”。
+同源策略的作用：防止其他网页对本网页的非法篡改。
+同源指的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Ajax跨域问题">
+<meta property="og:url" content="http://panpanfish.com/2016/04/22/2016-05-06-Ajax跨域问题/index.html">
+<meta property="og:site_name" content="筱鱼兒">
+<meta property="og:description" content="一. Ajax跨域问题跨域：只要协议、域名、端口有一个不同，就被当做不同的域。
+ajax跨域：利用ajax技术请求不同域名上的数据。
+1. 什么是同源策略同源策略是由Netscape提出的一个著名的安全策略，现在所有的可支持javascript的浏览器都会使用这个策略。
+A网页设置的 Cookie，B网页不能打开，除非这两个网页”同源”。
+同源策略的作用：防止其他网页对本网页的非法篡改。
+同源指的">
+<meta property="og:updated_time" content="2016-10-15T14:22:08.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Ajax跨域问题">
+<meta name="twitter:description" content="一. Ajax跨域问题跨域：只要协议、域名、端口有一个不同，就被当做不同的域。
+ajax跨域：利用ajax技术请求不同域名上的数据。
+1. 什么是同源策略同源策略是由Netscape提出的一个著名的安全策略，现在所有的可支持javascript的浏览器都会使用这个策略。
+A网页设置的 Cookie，B网页不能打开，除非这两个网页”同源”。
+同源策略的作用：防止其他网页对本网页的非法篡改。
+同源指的">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+
+  <title> Ajax跨域问题 | 筱鱼兒 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?e18d9ee1b355055e9a39ffec741beb44";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="my-headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="my-site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">筱鱼兒</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">温柔于己，温柔于人</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+          
+            <li class="menu-item menu-item-home">
+              <a href="/" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+                
+                首页
+              </a>
+            </li>
+          
+      
+        
+          
+            <li class="menu-item menu-item-categories">
+              <a href="/categories" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+                
+                分类
+              </a>
+            </li>
+          
+      
+        
+          
+            <li class="menu-item menu-item-archives">
+              <a href="/archives" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+                
+                归档
+              </a>
+            </li>
+          
+      
+        
+          
+            <li class="menu-item menu-item-tags">
+              <a href="/tags" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+                
+                标签
+              </a>
+            </li>
+          
+      
+        
+          
+            <li class="menu-item menu-item-demo">
+              <a href="/categories/Demo/" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-code"></i> <br />
+                
+                demo
+              </a>
+            </li>
+          
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Ajax跨域问题
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-04-22T00:00:00+08:00" content="2016-04-22">
+              2016-04-22
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/http协议/" itemprop="url" rel="index">
+                    <span itemprop="name">http协议</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/04/22/2016-05-06-Ajax跨域问题/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/22/2016-05-06-Ajax跨域问题/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="一-Ajax跨域问题"><a href="#一-Ajax跨域问题" class="headerlink" title="一. Ajax跨域问题"></a>一. Ajax跨域问题</h3><p><strong>跨域</strong>：只要协议、域名、端口有一个不同，就被当做不同的域。</p>
+<p><strong>ajax跨域</strong>：利用ajax技术请求不同域名上的数据。</p>
+<h4 id="1-什么是同源策略"><a href="#1-什么是同源策略" class="headerlink" title="1. 什么是同源策略"></a>1. 什么是同源策略</h4><p><strong>同源策略</strong>是由Netscape提出的一个著名的<strong>安全策略</strong>，现在所有的可支持javascript的<strong>浏览器</strong>都会使用这个策略。</p>
+<p>A网页设置的 Cookie，B网页不能打开，除非这两个网页”同源”。</p>
+<p><strong>同源策略的作用</strong>：防止其他网页对本网页的非法篡改。</p>
+<p><strong>同源</strong>指的是：协议、域名、端口都相同。</p>
+<h3 id="二-跨域的方法"><a href="#二-跨域的方法" class="headerlink" title="二. 跨域的方法"></a>二. 跨域的方法</h3><h4 id="1-跨域资源共享（CORS）"><a href="#1-跨域资源共享（CORS）" class="headerlink" title="1. 跨域资源共享（CORS）"></a>1. 跨域资源共享（CORS）</h4><p>CORS（Cross-Origin Resource Sharing）跨域资源共享，定义了在访问跨域资源时，浏览器与服务器应该如何沟通。</p>
+<p>注意：跨域资源共享的请求默认都是不包含cookie信息</p>
+<p><strong>思想：</strong></p>
+<p>使用<strong>自定义的HTTP头部</strong>让浏览器与服务器进行沟通，从而决定请求或响应是应该成功还是失败。</p>
+<p>在request的请求头部中添加一个origin</p>
+<p><code>eg: origin: http://www.ooooo.net</code></p>
+<p>服务器在response的请求头部中设置Access-Control-Allow-Origin</p>
+<p><code>eg: Access-Control-Allow-Origin: 设置和请求头部中的origin中相同的地址</code></p>
+<p>如果浏览器检测到相应的设置，就可以允许Ajax进行跨域的访问。</p>
+<p><strong>CORS在浏览器中的实现：</strong></p>
+<p><strong>（1）IE中的CORS</strong></p>
+<p>使用XDR对象 XDomainRequest</p>
+<p>XDR对象和XHR类似，但是其open(请求方法, url)方法只接收两个参数，XDR的所有请求都是异步的。</p>
+<p><strong>（2）其它浏览器中的CORS</strong></p>
+<p>直接使用XHR对象</p>
+<p>open(请求方法, url, 是否发送异步请求)方法的url传入<strong>绝对的url</strong>就可以实现跨域资源共享</p>
+<p><strong>（3）跨浏览器的CORS</strong></p>
+<figure class="highlight qml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createCORSRequest</span>(<span class="params">method, url</span>) </span>&#123;</span><br><span class="line">	<span class="built_in">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">	<span class="comment">//检测XHR是否支持跨域请求</span></span><br><span class="line">	<span class="keyword">if</span>(<span class="string">'withCredentials'</span> <span class="keyword">in</span> xhr) &#123;</span><br><span class="line">	</span><br><span class="line">		xhr.open(method,<span class="built_in">url</span>,<span class="literal">true</span>);</span><br><span class="line">		</span><br><span class="line">	&#125; <span class="keyword">else</span> <span class="keyword">if</span>(<span class="keyword">typeof</span> XDomainRequest != <span class="string">'undefined'</span>) &#123;</span><br><span class="line">	</span><br><span class="line">		<span class="built_in">var</span> xdr = <span class="keyword">new</span> XDomainRequest();</span><br><span class="line">		xdr.open(method,<span class="built_in">url</span>);</span><br><span class="line">		</span><br><span class="line">	&#125; <span class="title">else</span> &#123;</span><br><span class="line">	</span><br><span class="line">		xhr = <span class="literal">null</span>;</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">var</span> request = createCORSRequest(<span class="string">'get'</span>, <span class="string">'http://....'</span>);</span><br><span class="line"><span class="keyword">if</span>(request) &#123;</span><br><span class="line">	request.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">		<span class="comment">//对request.responseText进行处理</span></span><br><span class="line">	&#125;;</span><br><span class="line">	request.send();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="2-利用-lt-script-gt-、-lt-img-gt-标签的src"><a href="#2-利用-lt-script-gt-、-lt-img-gt-标签的src" class="headerlink" title="2. 利用&lt;script&gt;、&lt;img&gt;标签的src"></a>2. 利用<code>&lt;script&gt;、&lt;img&gt;</code>标签的src</h4><font color="red"><strong>解决方法</strong>：</font>
+
+<p>Web页面上调用js文件时则不受是否跨域的影响（不仅如此，我们还发现凡是拥有“src”这个属性的标签都拥有跨域的能力，比如<code>&lt;script&gt;</code>、<code>&lt;img&gt;</code>、<code>&lt;iframe&gt;</code>）</p>
+<p><code>&lt;script&gt;、&lt;img&gt;</code>标签的src属性并不被同源策略所约束，所以可以获取任何服务器上脚本并执行。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="javascript"></span><br><span class="line">	<span class="function"><span class="keyword">function</span> <span class="title">addScriptTag</span>(<span class="params">src</span>) </span>&#123;</span><br><span class="line">			<span class="keyword">var</span> script = <span class="built_in">document</span>.createElement(<span class="string">'script'</span>);</span><br><span class="line">			script.setAttribute(<span class="string">"type"</span>, <span class="string">"text/javascript"</span>);</span><br><span class="line">			script.src = src;</span><br><span class="line">			<span class="built_in">document</span>.body.appendChild(script);</span><br><span class="line">		&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//调用加载ScrptTag函数</span></span><br><span class="line">		<span class="built_in">window</span>.onload =<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"></span><br><span class="line">		<span class="comment">//搜索apple，将自定义的回调函数名result传入callback参数中             </span></span><br><span class="line">		addScriptTag(<span class="string">"http://ajax.googleapis.com/ajax/services/search/web?v=1.0&amp;q=apple&amp;callback=result"</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">	<span class="comment">//自定义的回调函数result	</span></span><br><span class="line">	<span class="function"><span class="keyword">function</span> <span class="title">result</span>(<span class="params">data</span>) </span>&#123;</span><br><span class="line">			<span class="comment">//我们就简单的获取apple搜索结果的第一条记录中url数据    </span></span><br><span class="line">			alert(data.responseData.results[<span class="number">0</span>].unescapedUrl);</span><br><span class="line">		alert(data.responseData.results[<span class="number">0</span>].cacheUrl);</span><br><span class="line">	&#125;</span><br><span class="line"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="3-使用jsonp-json-with-padding-填充式json"><a href="#3-使用jsonp-json-with-padding-填充式json" class="headerlink" title="3. 使用jsonp(json with padding 填充式json)"></a>3. 使用jsonp(json with padding 填充式json)</h4><ul>
+<li>json是一种数据交换格式</li>
+<li>Jsonp是一种非官方跨域数据交互协议</li>
+</ul>
+<blockquote>
+<p>JSON是地下党们用来书写和交换情报的“暗号”，而JSONP则是把用暗号书写的情报传递给自己同志时使用的接头方式。看到没？一个是描述信息的格式，一个是信息传递双方约定的方法</p>
+</blockquote>
+<p><strong>客户端：</strong>在<strong>跨域的url请求</strong>中指定<strong>回调函数</strong>，回调函数是接收到响应时页面执行的函数。</p>
+<p> <code>http://域名/json/?callback=handle</code></p>
+<p><strong>服务器端：</strong>会将请求的json数据作为回调函数的参数，并调用回调函数。</p>
+<p> <code>eg: handle({&quot;name&quot;:&quot;xiaoming&quot;})</code></p>
+<p>jsonp包括两个部分：回调函数、数据</p>
+<p>jsonp跨域的原理也是利用script标签的src属性：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">//客户端的代码</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">handle</span>(<span class="params">response</span>) </span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(response.city + response.name);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> script = <span class="built_in">document</span>.createElement(<span class="string">'script'</span>);</span><br><span class="line">script.src = <span class="string">'http://域名/json/remote.js?callback=handle'</span>;</span><br><span class="line"><span class="built_in">document</span>.body.insertBefore(script,documen.body.firstChild);</span><br><span class="line"></span><br><span class="line"><span class="comment">//服务器返回的代码remote.js</span></span><br><span class="line">handle(&#123;<span class="string">"name"</span>:<span class="string">"xiaoming"</span>&#125;)</span><br></pre></td></tr></table></figure>
+<p>js文件载入成功后会执行我们在url参数中指定的函数，并且会把我们需要的json数据作为参数传入。</p>
+<p>所以jsonp是需要服务器端的页面进行相应的配合的。</p>
+<p><strong>jsonp的优点：</strong>简单适用，老式浏览器全部支持，服务器改造非常小。</p>
+<p><strong>jsonp的缺点：</strong>只能发送get请求</p>
+<h4 id="4-使用服务器代理的方式"><a href="#4-使用服务器代理的方式" class="headerlink" title="4. 使用服务器代理的方式"></a>4. 使用服务器代理的方式</h4><p>浏览器请求同源服务器，再由后者请求外部服务</p>
+<h4 id="5-Web-Socket"><a href="#5-Web-Socket" class="headerlink" title="5. Web Socket"></a>5. Web Socket</h4><p>是一个不受同源策略限制的通信协议</p>
+<h3 id="三-XSS跨站脚本攻击"><a href="#三-XSS跨站脚本攻击" class="headerlink" title="三. XSS跨站脚本攻击"></a>三. XSS跨站脚本攻击</h3><h4 id="1-什么是xss"><a href="#1-什么是xss" class="headerlink" title="1.什么是xss"></a>1.什么是xss</h4><p>xss的全称是：cross site scripting，跨站脚本</p>
+<p>攻击者通过向要攻击的网站中插入一些恶意的html、js代码，来达到攻击其他用户的目的。</p>
+<p>攻击者使被攻击者在浏览器中执行脚本后，收集来自被攻击者的数据（如cookie或其他敏感信息）。</p>
+<p>避免xss的方法：将用户提交的内容进行过滤。</p>
+<h4 id="2-什么是CSRF"><a href="#2-什么是CSRF" class="headerlink" title="2. 什么是CSRF"></a>2. 什么是CSRF</h4><p>CSRF:  跨站请求伪造，是在用户不知情的情况下，冒充其身份发起了一个请求。</p>
+<p>盗取用户cookie，伪造用户请求</p>
+<p>HttpOnly 属性可以阻止通过javascript访问cookie</p>
+<p>要完成一次CSRF攻击，受害者必须依次完成两个步骤：</p>
+<p>1.登录受信任网站A，并在本地生成Cookie。<br>2.在不登出A的情况下，访问危险网站B。</p>
+<p>xss是实现CSRF的一种方式。</p>
+<p>避免CSRF的方法：在请求中加入随机数，让钓鱼网站无法正常伪造请求。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/http/" rel="tag"># http</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/04/19/2016-04-19-万年历/" rel="next" title="万年历插件">
+                <i class="fa fa-chevron-left"></i> 万年历插件
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/04/22/2016-04-22-寻路算法/" rel="prev" title="寻路算法">
+                寻路算法 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/04/22/2016-05-06-Ajax跨域问题/"
+           data-title="Ajax跨域问题" data-url="http://panpanfish.com/2016/04/22/2016-05-06-Ajax跨域问题/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/icon.jpg"
+               alt="Yu Pan" />
+          <p class="site-author-name" itemprop="name">Yu Pan</p>
+          <p class="site-description motion-element" itemprop="description">在学习中不断进步</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">142</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">38</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/panpan040828" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一-Ajax跨域问题"><span class="nav-number">1.</span> <span class="nav-text">一. Ajax跨域问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-什么是同源策略"><span class="nav-number">1.1.</span> <span class="nav-text">1. 什么是同源策略</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二-跨域的方法"><span class="nav-number">2.</span> <span class="nav-text">二. 跨域的方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-跨域资源共享（CORS）"><span class="nav-number">2.1.</span> <span class="nav-text">1. 跨域资源共享（CORS）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-利用-lt-script-gt-、-lt-img-gt-标签的src"><span class="nav-number">2.2.</span> <span class="nav-text">2. 利用<script>、<img>标签的src</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-使用jsonp-json-with-padding-填充式json"><span class="nav-number">2.3.</span> <span class="nav-text">3. 使用jsonp(json with padding 填充式json)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-使用服务器代理的方式"><span class="nav-number">2.4.</span> <span class="nav-text">4. 使用服务器代理的方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-Web-Socket"><span class="nav-number">2.5.</span> <span class="nav-text">5. Web Socket</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三-XSS跨站脚本攻击"><span class="nav-number">3.</span> <span class="nav-text">三. XSS跨站脚本攻击</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-什么是xss"><span class="nav-number">3.1.</span> <span class="nav-text">1.什么是xss</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-什么是CSRF"><span class="nav-number">3.2.</span> <span class="nav-text">2. 什么是CSRF</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yu Pan</span>
+</div>
+
+<!--
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+-->
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"panpanfish"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  
+
+
+</body>
+</html>

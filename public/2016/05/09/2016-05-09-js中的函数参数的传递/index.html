@@ -1,0 +1,831 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="javaScript,函数," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+
+
+
+
+
+
+<meta name="description" content="函数外部的值复制给函数内部的参数，就和把值从一个变量复制到另一个变量一样。
+一. js里面变量的类型js里变量类型包括两种：基本类型值、引用类型值。
+基本类型：简单的数据段。包括：undefined、Null、Boolean、Number、String（按值访问）
+引用类型：指的是可能由多个值构成的对象。包括：对象、数组、日期、正则表达式、函数（按引用访问）
+二. 复制变量1. 复制基本类型的变量">
+<meta property="og:type" content="article">
+<meta property="og:title" content="js中的函数参数传递">
+<meta property="og:url" content="http://panpanfish.com/2016/05/09/2016-05-09-js中的函数参数的传递/index.html">
+<meta property="og:site_name" content="筱鱼兒">
+<meta property="og:description" content="函数外部的值复制给函数内部的参数，就和把值从一个变量复制到另一个变量一样。
+一. js里面变量的类型js里变量类型包括两种：基本类型值、引用类型值。
+基本类型：简单的数据段。包括：undefined、Null、Boolean、Number、String（按值访问）
+引用类型：指的是可能由多个值构成的对象。包括：对象、数组、日期、正则表达式、函数（按引用访问）
+二. 复制变量1. 复制基本类型的变量">
+<meta property="og:updated_time" content="2016-08-19T03:02:16.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="js中的函数参数传递">
+<meta name="twitter:description" content="函数外部的值复制给函数内部的参数，就和把值从一个变量复制到另一个变量一样。
+一. js里面变量的类型js里变量类型包括两种：基本类型值、引用类型值。
+基本类型：简单的数据段。包括：undefined、Null、Boolean、Number、String（按值访问）
+引用类型：指的是可能由多个值构成的对象。包括：对象、数组、日期、正则表达式、函数（按引用访问）
+二. 复制变量1. 复制基本类型的变量">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+
+  <title> js中的函数参数传递 | 筱鱼兒 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?e18d9ee1b355055e9a39ffec741beb44";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="my-headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="my-site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">筱鱼兒</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">温柔于己，温柔于人</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+          
+            <li class="menu-item menu-item-home">
+              <a href="/" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+                
+                首页
+              </a>
+            </li>
+          
+      
+        
+          
+            <li class="menu-item menu-item-categories">
+              <a href="/categories" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+                
+                分类
+              </a>
+            </li>
+          
+      
+        
+          
+            <li class="menu-item menu-item-archives">
+              <a href="/archives" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+                
+                归档
+              </a>
+            </li>
+          
+      
+        
+          
+            <li class="menu-item menu-item-tags">
+              <a href="/tags" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+                
+                标签
+              </a>
+            </li>
+          
+      
+        
+          
+            <li class="menu-item menu-item-demo">
+              <a href="/categories/Demo/" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-code"></i> <br />
+                
+                demo
+              </a>
+            </li>
+          
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                js中的函数参数传递
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-05-09T00:00:00+08:00" content="2016-05-09">
+              2016-05-09
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/javaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">javaScript</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/05/09/2016-05-09-js中的函数参数的传递/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/09/2016-05-09-js中的函数参数的传递/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>函数外部的值复制给函数内部的参数，就和把值从一个<strong>变量</strong>复制到另一个变量一样。</p>
+<h3 id="一-js里面变量的类型"><a href="#一-js里面变量的类型" class="headerlink" title="一. js里面变量的类型"></a>一. js里面变量的类型</h3><p>js里变量类型包括两种：基本类型值、引用类型值。</p>
+<p><strong>基本类型：</strong>简单的数据段。包括：undefined、Null、Boolean、Number、String（按值访问）</p>
+<p><strong>引用类型：</strong>指的是可能由多个值构成的对象。包括：对象、数组、日期、正则表达式、函数（按引用访问）</p>
+<h3 id="二-复制变量"><a href="#二-复制变量" class="headerlink" title="二. 复制变量"></a>二. 复制变量</h3><h4 id="1-复制基本类型的变量"><a href="#1-复制基本类型的变量" class="headerlink" title="1. 复制基本类型的变量"></a>1. 复制基本类型的变量</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> num1 = <span class="number">5</span>;</span><br><span class="line"><span class="keyword">var</span> num2 = num1;<span class="comment">//num2中保存的值也是5，但是这个与num1中的值是完全独立的。</span></span><br></pre></td></tr></table></figure>
+<h4 id="2-复制引用类型的变量"><a href="#2-复制引用类型的变量" class="headerlink" title="2. 复制引用类型的变量"></a>2. 复制引用类型的变量</h4><pre><code class="js"><span class="keyword">var</span> obj1 = {
+    age: <span class="number">2</span>;
+}<span class="comment">//创建了一个对象，并存储这个对象的内存地址赋给obj1</span>
+
+<span class="keyword">var</span> obj2 = obj1;<span class="comment">//将obj1指向的内存地址赋给obj2，因此obj1和obj2指向同一个内存</span>
+
+<span class="comment">//若改变obj2.age的值</span>
+obj2.age = <span class="number">3</span>;
+<span class="built_in">console</span>.log(obj1.age);<span class="comment">//3 因为obj1和obj2引用的是同一个对象</span>
+</code></pre>
+<h3 id="三-js中函数参数的传递"><a href="#三-js中函数参数的传递" class="headerlink" title="三. js中函数参数的传递"></a>三. js中函数参数的传递</h3><h4 id="1-传递的是基本类型的参数"><a href="#1-传递的是基本类型的参数" class="headerlink" title="1. 传递的是基本类型的参数"></a>1. 传递的是基本类型的参数</h4><p>函数传递的是基本类型的参数时，只是将传递的值复制给一个函数内部的局部变量（arguments对象中的一个元素），而原来那个变量没有变化。</p>
+<pre><code>eg:
+function addTen(num){
+  num+=10;
+  return num;
+}
+var count=20;
+var reslut=addTen(count);//30
+alert(count);//20 并没有变化
+</code></pre><h4 id="2-传递的是引用类型的参数时"><a href="#2-传递的是引用类型的参数时" class="headerlink" title="2. 传递的是引用类型的参数时"></a>2. 传递的是引用类型的参数时</h4><p>在向参数传递引用类型的值时，会把这个值在内存中的<strong>地址</strong>复制给函数中的局部变量（arguments对象中的一个元素），因此这个局部变量的变化会反映在函数的外部。</p>
+<pre><code> eg1:
+ function setName(obj){
+   obj.name=&quot;ss&quot;;
+ }
+ var person=new Object();
+ setName(person);//把person在内存中的地址复制给了obj，所以对obj的修改其实就是对外部person的修改
+ alert(person.name);//&quot;ss&quot;
+
+eg2:
+function setName(obj){
+  obj.name=&quot;ss&quot;;
+  obj=new Object();//相当于把新创建的对象地址赋值给了obj，因此下面对obj.name进行赋值不回影响person
+  obj.name=&quot;dd&quot;;
+}
+var person=new Object();
+setName(person);//将person的地址传给了obj
+alert(person.name)//&quot;ss&quot;
+
+
+eg3:
+var a={b:1};
+var c=1;
+var foo1 = function(value){
+   value=2;
+}
+
+foo1(a.b);
+foo1(c);
+console.log(a.b);//1
+console.log(c);//1
+
+var foo2 = function(value){
+    value.b = 2;
+}
+foo2(a);
+console.log(a.b);//2 按引用传
+</code></pre><h3 id="四-如何让引用类型赋值时也实现传值"><a href="#四-如何让引用类型赋值时也实现传值" class="headerlink" title="四. 如何让引用类型赋值时也实现传值"></a>四. 如何让引用类型赋值时也实现传值</h3><h4 id="1-遍历数组或对象，拆成一个个基本类型，然后进行赋值"><a href="#1-遍历数组或对象，拆成一个个基本类型，然后进行赋值" class="headerlink" title="1. 遍历数组或对象，拆成一个个基本类型，然后进行赋值"></a>1. 遍历数组或对象，拆成一个个基本类型，然后进行赋值</h4><p><strong>利用for… in…进行遍历</strong></p>
+<pre><code>eg:
+//遍历数组
+var a = [&apos;o&apos;,&apos;p&apos;,&apos;q&apos;], c = [];
+
+for(var i in a) {
+    c[i] = a[i];
+    typeof i; //String
+}
+
+c[2] = &apos;s&apos;;
+console.log(a[2]); //q
+
+//遍历对象
+var b = {name: &quot;xiaoming&quot;,
+         age: 7,
+         tel: 12345
+    },
+e = {};
+
+for(var i in b) {
+    e[i] = b[i];
+}
+
+e[name] = &apos;lala&apos;;
+
+console.log(b[name]); // xiaoming
+</code></pre><p> 但是一般还是不要使用for-in对数组进行遍历，其缺点有：</p>
+<p>（1）循环变量i的值不是数字，而是字符串“0”、“1”、“2”，此时很可能在无意之间进行字符串算数计算，例如：“2” + 1 == “21”，这给编码过程带来极大的不便。</p>
+<p>（2）作用于数组的for-in循环体除了遍历数组元素外，还会遍历自定义属性。举个例子，如果你的数组中有一个可枚举属性myArray.name，循环将额外执行一次，遍历到名为“name”的索引。就连数组原型链上的属性都能被访问到。</p>
+<p>（3）最让人震惊的是，在某些情况下，这段代码可能按照随机顺序遍历数组元素。</p>
+<p>总之，for-in是为普通对象设计的，你可以遍历得到字符串类型的键，因此不适用于数组遍历。</p>
+<h4 id="2-数组实现传值的简单做法"><a href="#2-数组实现传值的简单做法" class="headerlink" title="2. 数组实现传值的简单做法"></a>2. 数组实现传值的简单做法</h4><p><strong>利用slice()和concat()函数</strong></p>
+<pre><code>由于slice()和concat()都是会生成一个新的数组，因此可以利用这两个函数让数组传值
+
+eg:
+
+var a = [1,2,3];
+var b = a;
+b.push(4);
+console.log(a);//[1,2,3,4]，a也发生了变化
+console.log(b);//[1,2,3,4]
+
+利用slice()或者concat()让数组实现传值
+var a = [1,2,3];
+var b = a.slice();
+var c = a.concat();
+
+b.push(4);
+c.push(5);
+console.log(a);//[1,2,3]
+console.log(b);//[1,2,3,4]
+console.log(c);//[1,2,3,5]
+
+//concat／slice对数组是深复制，但是对数组里面的对象是浅复制
+var a = [{a:1}];
+var b = a.slice();
+var c = a.concat();
+
+b[0].a = 2;
+console.log(a[0].a); //2
+</code></pre>
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/javaScript/" rel="tag"># javaScript</a>
+          
+            <a href="/tags/函数/" rel="tag"># 函数</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/05/08/2016-05-08-js中的关键字in/" rel="next" title="js中的关键字in">
+                <i class="fa fa-chevron-left"></i> js中的关键字in
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/05/09/2016-05-08-前端性能优化的经验/" rel="prev" title="前端性能优化的经验">
+                前端性能优化的经验 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/05/09/2016-05-09-js中的函数参数的传递/"
+           data-title="js中的函数参数传递" data-url="http://panpanfish.com/2016/05/09/2016-05-09-js中的函数参数的传递/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/icon.jpg"
+               alt="Yu Pan" />
+          <p class="site-author-name" itemprop="name">Yu Pan</p>
+          <p class="site-description motion-element" itemprop="description">在学习中不断进步</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">142</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">38</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/panpan040828" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一-js里面变量的类型"><span class="nav-number">1.</span> <span class="nav-text">一. js里面变量的类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二-复制变量"><span class="nav-number">2.</span> <span class="nav-text">二. 复制变量</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-复制基本类型的变量"><span class="nav-number">2.1.</span> <span class="nav-text">1. 复制基本类型的变量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-复制引用类型的变量"><span class="nav-number">2.2.</span> <span class="nav-text">2. 复制引用类型的变量</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三-js中函数参数的传递"><span class="nav-number">3.</span> <span class="nav-text">三. js中函数参数的传递</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-传递的是基本类型的参数"><span class="nav-number">3.1.</span> <span class="nav-text">1. 传递的是基本类型的参数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-传递的是引用类型的参数时"><span class="nav-number">3.2.</span> <span class="nav-text">2. 传递的是引用类型的参数时</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四-如何让引用类型赋值时也实现传值"><span class="nav-number">4.</span> <span class="nav-text">四. 如何让引用类型赋值时也实现传值</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-遍历数组或对象，拆成一个个基本类型，然后进行赋值"><span class="nav-number">4.1.</span> <span class="nav-text">1. 遍历数组或对象，拆成一个个基本类型，然后进行赋值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-数组实现传值的简单做法"><span class="nav-number">4.2.</span> <span class="nav-text">2. 数组实现传值的简单做法</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yu Pan</span>
+</div>
+
+<!--
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+-->
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"panpanfish"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  
+
+
+</body>
+</html>

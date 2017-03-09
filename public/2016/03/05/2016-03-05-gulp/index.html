@@ -1,0 +1,950 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="工具,优化," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+
+
+
+
+
+
+<meta name="description" content="一. gulp简介gulp是一种任务自动处理工具，简单地说，gulp是一个工具框架，有很多插件扩展它的功能。
+gulp能够自动化地完成 javascript/coffee/sass/less/html/image/css 等文件的的测试、检查、合并、压缩、格式化、浏览器自动刷新、部署文件生成，并监听文件在改动后重复指定的这些步骤。
+gulp的优点：
+
+基于流的构建工具，利用流的方式进行文件的处理">
+<meta property="og:type" content="article">
+<meta property="og:title" content="gulp 前端代码构建工具">
+<meta property="og:url" content="http://panpanfish.com/2016/03/05/2016-03-05-gulp/index.html">
+<meta property="og:site_name" content="筱鱼兒">
+<meta property="og:description" content="一. gulp简介gulp是一种任务自动处理工具，简单地说，gulp是一个工具框架，有很多插件扩展它的功能。
+gulp能够自动化地完成 javascript/coffee/sass/less/html/image/css 等文件的的测试、检查、合并、压缩、格式化、浏览器自动刷新、部署文件生成，并监听文件在改动后重复指定的这些步骤。
+gulp的优点：
+
+基于流的构建工具，利用流的方式进行文件的处理">
+<meta property="og:updated_time" content="2016-08-24T09:49:50.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="gulp 前端代码构建工具">
+<meta name="twitter:description" content="一. gulp简介gulp是一种任务自动处理工具，简单地说，gulp是一个工具框架，有很多插件扩展它的功能。
+gulp能够自动化地完成 javascript/coffee/sass/less/html/image/css 等文件的的测试、检查、合并、压缩、格式化、浏览器自动刷新、部署文件生成，并监听文件在改动后重复指定的这些步骤。
+gulp的优点：
+
+基于流的构建工具，利用流的方式进行文件的处理">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+
+  <title> gulp 前端代码构建工具 | 筱鱼兒 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?e18d9ee1b355055e9a39ffec741beb44";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="my-headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="my-site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">筱鱼兒</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">温柔于己，温柔于人</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+          
+            <li class="menu-item menu-item-home">
+              <a href="/" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+                
+                首页
+              </a>
+            </li>
+          
+      
+        
+          
+            <li class="menu-item menu-item-categories">
+              <a href="/categories" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+                
+                分类
+              </a>
+            </li>
+          
+      
+        
+          
+            <li class="menu-item menu-item-archives">
+              <a href="/archives" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+                
+                归档
+              </a>
+            </li>
+          
+      
+        
+          
+            <li class="menu-item menu-item-tags">
+              <a href="/tags" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+                
+                标签
+              </a>
+            </li>
+          
+      
+        
+          
+            <li class="menu-item menu-item-demo">
+              <a href="/categories/Demo/" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-code"></i> <br />
+                
+                demo
+              </a>
+            </li>
+          
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                gulp 前端代码构建工具
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-03-05T00:00:00+08:00" content="2016-03-05">
+              2016-03-05
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/工具/" itemprop="url" rel="index">
+                    <span itemprop="name">工具</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/03/05/2016-03-05-gulp/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/05/2016-03-05-gulp/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="一-gulp简介"><a href="#一-gulp简介" class="headerlink" title="一. gulp简介"></a>一. gulp简介</h3><p><strong>gulp</strong>是一种任务自动处理工具，简单地说，gulp是一个工具框架，有很多插件扩展它的功能。</p>
+<p><strong>gulp</strong>能够自动化地完成 javascript/coffee/sass/less/html/image/css 等文件的的测试、检查、合并、压缩、格式化、浏览器自动刷新、部署文件生成，并监听文件在改动后重复指定的这些步骤。</p>
+<p><strong>gulp的优点：</strong></p>
+<ol>
+<li>基于流的构建工具，利用流的方式进行文件的处理</li>
+<li>代码优于配置，通过简单的配置能够完成很多重复的功能</li>
+<li>简单明了，目的明确，一般一个插件只完成一个任务</li>
+<li>gulp的gulpfile.js的写法更加通俗易懂，易上手</li>
+</ol>
+<h3 id="二-使用gulp的步骤："><a href="#二-使用gulp的步骤：" class="headerlink" title="二.  使用gulp的步骤："></a>二.  使用gulp的步骤：</h3><p>由于gulp是基于node.js的，因此在安装gulp之前需要安装node.js</p>
+<p><strong>node.js</strong>是一个后端的js运行环境，也就是说：你写一个服务器端的js代码，可以交给node.js来解释执行。</p>
+<font color="red">安装nodejs -&gt; 全局安装gulp -&gt; 项目安装gulp以及gulp插件 -&gt; 配置gulpfile.js -&gt; 运行任务</font>
+
+<h4 id="1-安装nodejs"><a href="#1-安装nodejs" class="headerlink" title="1. 安装nodejs"></a>1. 安装nodejs</h4><p>从官网上直接下载安装（路径随意）</p>
+<p>打开cmd：</p>
+<pre><code>输入 node -v       /* 查看nodejs版本号*/
+输入npm -v         /* 查看npm版本号 */
+输入D:             /*定位到D盘*/
+输入cd  nodejs       /* 定位到安装目录*/
+输入dir           /*查看当前定位目录下的文件*/
+输入cls           /* 清空内容*/
+</code></pre><h4 id="2-全局安装gulp"><a href="#2-全局安装gulp" class="headerlink" title="2. 全局安装gulp"></a>2. 全局安装gulp</h4><p><strong>目的</strong>：通过全局安装的gulp执行gulp任务，全局安装完gulp之后，就可以使用gulp命令行</p>
+<pre><code>输入 npm install gulp -g   /*全局安装gulp*/
+输入 gulp -v               /*查看安装的gulp的版本号，出现版本号即为正确安装*/
+</code></pre><h4 id="3-新建package-json文件"><a href="#3-新建package-json文件" class="headerlink" title="3. 新建package.json文件"></a>3. 新建package.json文件</h4><p>package.json是nodejs项目必不可少的配置文件，存放在项目的根目录下</p>
+<pre><code>输入 npm init          /*创建 package.json文件*/
+</code></pre><p>前三项（项目名称，项目版本，项目描述）必须输入，后几项可留空</p>
+<pre><code>输入 npm help package.json   /*查看package.json帮助文档*/
+</code></pre><h4 id="4-项目安装gulp依赖"><a href="#4-项目安装gulp依赖" class="headerlink" title="4. 项目安装gulp依赖"></a>4. 项目安装gulp依赖</h4><pre><code>输入 npm install gulp --save-dev     /*本地安装gulp*/
+输入 npm install 插件名 --save-dev   /*安装gulp插件*/
+</code></pre><p>–save : 将配置信息保存至 <strong>package.json</strong></p>
+<p>-dev：将配置信息保存至<strong>package.json</strong> 的 <strong>devDependencies</strong>节点</p>
+<h4 id="5-在项目的根目录下创建gulpfile-js文件"><a href="#5-在项目的根目录下创建gulpfile-js文件" class="headerlink" title="5. 在项目的根目录下创建gulpfile.js文件"></a>5. 在项目的根目录下创建gulpfile.js文件</h4><pre><code>//导入工具包 require(&apos;node_modules里对应模块&apos;)
+var gulp = require(&apos;gulp&apos;), //本地安装gulp所用到的地方
+  less = require(&apos;gulp-less&apos;);
+
+//定义一个testLess任务（自定义任务名称）
+gulp.task(&apos;testLess&apos;, function () {
+        gulp.src(&apos;src/less/index.less&apos;) //该任务针对的文件
+            .pipe(less()) //该任务调用的模块
+            .pipe(gulp.dest(&apos;src/css&apos;)); //将会在src/css下生成index.css
+});
+
+gulp.task(&apos;default&apos;,[&apos;testLess&apos;, &apos;elseTask&apos;]); //定义默认任务
+
+//gulp.task(name[, deps], fn) 定义任务  name：任务名称 deps：依赖任务名称 fn：回调函数
+//gulp.src(globs[, options]) 执行任务处理的文件  globs：处理的文件路径(字符串或者字符串数组)
+//gulp.dest(path[, options]) 处理完后文件生成路径
+</code></pre><h4 id="6-运行gulp"><a href="#6-运行gulp" class="headerlink" title="6. 运行gulp"></a>6. 运行gulp</h4><pre><code>输入$gulp                 /*运行gulp*/
+输入gulp default          /*运行gulpfile.js中一个名为default的函数*/
+</code></pre><h3 id="二-gulp的API（在gulpfile-js里面会用到）"><a href="#二-gulp的API（在gulpfile-js里面会用到）" class="headerlink" title="二. gulp的API（在gulpfile.js里面会用到）"></a>二. gulp的API（在gulpfile.js里面会用到）</h3><h4 id="1-task-用于定义一个gulp的任务"><a href="#1-task-用于定义一个gulp的任务" class="headerlink" title="1. task  用于定义一个gulp的任务"></a>1. task  用于定义一个gulp的任务</h4><pre><code>gulp.task(name, [deps] , fn)
+</code></pre><p><strong>name</strong>为任务名称<strong> ‘default’</strong></p>
+<p><strong>deps</strong>为任务依赖的任务，可有多个，按照顺序执行 [‘task’, ‘task2’]</p>
+<p><strong>fn</strong> 该任务调用的插件操作</p>
+<h4 id="2-src-指定需要处理的源文件的路径"><a href="#2-src-指定需要处理的源文件的路径" class="headerlink" title="2. src  指定需要处理的源文件的路径"></a>2. src  指定需要处理的源文件的路径</h4><pre><code>gulp.src(文件路径的模式匹配globs, {options})
+</code></pre><p>globs为需要处理的源文件匹配符路径（字符串或者字符串数组）</p>
+<pre><code>eg：&quot;src/a.js&quot;                                             匹配具体文件
+
+    &quot;src/*.js&quot;                                             匹配src目录下的所有js文件
+
+    &quot;src/**/*.js&quot;                                         匹配src目录下的 0个或多个子文件夹 下的所有js文件
+
+    &quot;src/{a,b}.js&quot; 或者&quot;src/*.{jpg,png}&quot;     同时匹配多个文件
+</code></pre><p><strong>options：有3个属性buffer  read  base</strong></p>
+<p><strong>buffer：</strong>默认true        设置为false时，将返回file.content的流并且不缓冲文件，处理大文件时非常有用；</p>
+<p><strong>read：</strong> 默认为true      设置为false，将不执行读取文件操作，返回null；</p>
+<p><strong>base：</strong>为string类型    设置输出路径以某个路径的某个组成部分为基础向后拼接。</p>
+<h4 id="3-dest-指定处理完之后文件的输出路径"><a href="#3-dest-指定处理完之后文件的输出路径" class="headerlink" title="3. dest 指定处理完之后文件的输出路径"></a>3. dest 指定处理完之后文件的输出路径</h4><pre><code>gulp.dest(path,{option})
+</code></pre><p>path为文件的输出路径</p>
+<p><strong>options：有2个属性cwd mode</strong></p>
+<p>cwd：类型string  默认：process.cwd()：前脚本的工作目录的路径当文件输出路径为相对路径将会用到；</p>
+<p>mode：类型：String  默认：0777 指定被创建文件夹的权限；</p>
+<h4 id="4-watch-监听文件的变化"><a href="#4-watch-监听文件的变化" class="headerlink" title="4. watch 监听文件的变化"></a>4. watch 监听文件的变化</h4><pre><code>gulp.watch(文件路径, [, opts ] , tasks ) 
+</code></pre><p>tasks为当任务为多个时，执行的任务的名称的数组<br><figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">eg</span>：</span><br><span class="line">	<span class="selector-tag">gulp</span><span class="selector-class">.task</span>(<span class="string">'uglify'</span>,function()&#123;</span><br><span class="line"> 		<span class="comment">//do something</span></span><br><span class="line">	&#125;);</span><br><span class="line">	</span><br><span class="line">	<span class="selector-tag">gulp</span><span class="selector-class">.task</span>(<span class="string">'reload'</span>,function()&#123;</span><br><span class="line"> 	<span class="comment">//do something</span></span><br><span class="line">	&#125;);</span><br><span class="line">	</span><br><span class="line">	<span class="selector-tag">gulp</span><span class="selector-class">.watch</span>(<span class="string">'js/**/*.js'</span>, [<span class="string">'uglify'</span>,<span class="string">'reload'</span>]);</span><br><span class="line">	<span class="selector-tag">watcher</span><span class="selector-class">.on</span>(<span class="string">'change'</span>, function(event) &#123;</span><br><span class="line">		console<span class="selector-class">.log</span>(<span class="string">'File '</span> + event.path + <span class="string">' was '</span> + event.type + <span class="string">', running tasks...'</span>);</span><br><span class="line">	&#125;);</span><br><span class="line"></span><br><span class="line">	<span class="selector-tag">gulp</span><span class="selector-class">.watch</span>(glob, [,opts], cb(event))</span><br><span class="line">	<span class="selector-tag">cb</span>(event)为每个变化执行的回调函数</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">eg</span>：</span><br><span class="line"></span><br><span class="line">	<span class="selector-tag">gulp</span><span class="selector-class">.watch</span>(<span class="string">'js/**/*.js'</span>, function(event)&#123;</span><br><span class="line"> 		<span class="comment">//变化类型 added为新增,deleted为删除，changed为改变</span></span><br><span class="line">	console<span class="selector-class">.log</span>(event.type);</span><br><span class="line">		 <span class="comment">//变化的文件的路径</span></span><br><span class="line">	console<span class="selector-class">.log</span>(event.path);</span><br><span class="line">	&#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="三-gulp常见插件的使用"><a href="#三-gulp常见插件的使用" class="headerlink" title="三. gulp常见插件的使用"></a>三. gulp常见插件的使用</h3><h4 id="1-gulp-uglify-压缩javascript文件，减小文件大小"><a href="#1-gulp-uglify-压缩javascript文件，减小文件大小" class="headerlink" title="1. gulp-uglify  压缩javascript文件，减小文件大小"></a>1. gulp-uglify  压缩javascript文件，减小文件大小</h4><h5 id="1-输入-npm-install-gulp-uglify-–save-dev-安装插件"><a href="#1-输入-npm-install-gulp-uglify-–save-dev-安装插件" class="headerlink" title="(1) 输入 npm install gulp-uglify –save-dev  安装插件"></a>(1) 输入 npm install gulp-uglify –save-dev  安装插件</h5><h5 id="2-在gulpfile-js中引入"><a href="#2-在gulpfile-js中引入" class="headerlink" title="(2) 在gulpfile.js中引入"></a>(2) 在gulpfile.js中引入</h5><pre><code>var gulp = require(&apos;gulp&apos;),
+uglify = require(&quot;gulp-uglify&quot;);
+gulp.task(&apos;minify-js&apos;, function () {
+gulp.src(&apos;js/*.js&apos;) // 要压缩的js文件
+ .pipe(uglify())
+.pipe(gulp.dest(&apos;dist/js&apos;)); //压缩后的路径
+});
+
+  //压缩多个文件
+   var gulp = require(&apos;gulp&apos;),
+  uglify = require(&apos;gulp-uglify&apos;);
+  gulp.task(&apos;jsmin&apos;, function () {
+ //多个文件以数组形式传入
+ gulp.src([&apos;src/js/index.js&apos;,&apos;src/js/detail.js&apos;])
+     .pipe(uglify())
+     .pipe(gulp.dest(&apos;dist/js&apos;));
+});
+
+var gulp = require(&apos;gulp&apos;),
+uglify= require(&apos;gulp-uglify&apos;);
+
+匹配符“!”，“*”，“**”，“{}”
+gulp.task(&apos;jsmin&apos;, function () {
+ //压缩src/js目录下的所有js文件
+ //除了test1.js和test2.js（**匹配src/js的0个或多个子文件夹）
+gulp.src([&apos;src/js/*.js&apos;, &apos;!src/js/**/{test1,test2}.js&apos;])
+ .pipe(uglify())
+ .pipe(gulp.dest(&apos;dist/js&apos;));
+});
+</code></pre><p>详细介绍：<a href="[https://www.npmjs.com/package/gulp-uglify](https://www.npmjs.com/package/gulp-uglify">https://www.npmjs.com/package/gulp-uglify</a>)</p>
+<h4 id="2-gulp-rename-重命名文件流中的文件"><a href="#2-gulp-rename-重命名文件流中的文件" class="headerlink" title="2. gulp-rename 重命名文件流中的文件"></a>2. gulp-rename 重命名文件流中的文件</h4><p>用 gulp.dest() 方法写入文件时，文件名使用的是文件流中的文件名，如果要想改变文件名，那可以在之前用 gulp-rename 插件来改变文件流中的文件名。</p>
+<h5 id="1-安装gulp-rename"><a href="#1-安装gulp-rename" class="headerlink" title="(1) 安装gulp-rename"></a>(1) 安装gulp-rename</h5><pre><code>npm install gulp-rename --save-dev
+</code></pre><h5 id="2-运用"><a href="#2-运用" class="headerlink" title="(2) 运用"></a>(2) 运用</h5><pre><code>var gulp = require(&apos;gulp&apos;),
+rename = require(&apos;gulp-rename&apos;),
+uglify = require(&quot;gulp-uglify&quot;);
+gulp.task(&apos;rename&apos;, function () {
+gulp.src(&apos;js/jquery.js&apos;)
+ .pipe(uglify()) //压缩
+ //会将jquery.js重命名为jquery.min.js
+ .pipe(rename(&apos;jquery.min.js&apos;))        //给所有文件加min后缀  .pipe(rename({ suffix: &apos;.min&apos; }))
+ .pipe(gulp.dest(&apos;js&apos;));
+});
+</code></pre><p>详细介绍：(<a href="https://www.npmjs.com/package/gulp-rename)[https://www.npmjs.com/package/gulp-rename](https://www.npmjs.com/package/gulp-rename" target="_blank" rel="external">https://www.npmjs.com/package/gulp-rename)[https://www.npmjs.com/package/gulp-rename](https://www.npmjs.com/package/gulp-rename</a>)</p>
+<h4 id="3-gulp-minify-css-压缩css文件时并给引用url添加版本号避免缓存"><a href="#3-gulp-minify-css-压缩css文件时并给引用url添加版本号避免缓存" class="headerlink" title="3. gulp-minify-css 压缩css文件时并给引用url添加版本号避免缓存"></a>3. gulp-minify-css 压缩css文件时并给引用url添加版本号避免缓存</h4><h5 id="1-安装"><a href="#1-安装" class="headerlink" title="(1) 安装"></a>(1) 安装</h5><pre><code>npm install gulp-minify-css --save-dev
+</code></pre><h5 id="2-运用-1"><a href="#2-运用-1" class="headerlink" title="(2) 运用"></a>(2) 运用</h5><pre><code>var gulp = require(&apos;gulp&apos;),
+cssmin = require(&apos;gulp-minify-css&apos;);
+ //确保已本地安装gulp-make-css-url-version [npm install gulp-make-css-url-version --save-dev]
+cssver = require(&apos;gulp-make-css-url-version&apos;);
+gulp.task(&apos;testCssmin&apos;, function () {
+gulp.src(&apos;src/css/*.css&apos;)
+ .pipe(cssver()) //给css文件里引用文件加版本号（文件MD5）
+ .pipe(cssmin())
+ .pipe(gulp.dest(&apos;dist/css&apos;));
+});
+</code></pre><p>详细介绍：<a href="https://www.npmjs.com/package/gulp-minify-css/" target="_blank" rel="external">https://www.npmjs.com/package/gulp-minify-css/</a></p>
+<h4 id="4-gulp-htmlmin"><a href="#4-gulp-htmlmin" class="headerlink" title="4. gulp-htmlmin"></a>4. gulp-htmlmin</h4><p>压缩html，可以压缩页面javascript、css，去除页面空格、注释，删除多余属性等操作。</p>
+<h5 id="1-安装-1"><a href="#1-安装-1" class="headerlink" title="(1) 安装"></a>(1) 安装</h5><pre><code>npm install gulp-htmlmin --save-dev
+</code></pre><h5 id="2-运用-2"><a href="#2-运用-2" class="headerlink" title="(2) 运用"></a>(2) 运用</h5><pre><code>var gulp = require(&apos;gulp&apos;),
+htmlmin = require(&apos;gulp-htmlmin&apos;);
+gulp.task(&apos;testHtmlmin&apos;, function () {
+ var options = {
+removeComments: true,//清除HTML注释
+collapseWhitespace: true,//压缩HTML
+ //省略布尔属性的值 &lt;input checked=&quot;true&quot;/&gt; ==&gt; &lt;input /&gt;
+collapseBooleanAttributes: true,
+ //删除所有空格作属性值 &lt;input id=&quot;&quot; /&gt; ==&gt; &lt;input /&gt;
+removeEmptyAttributes: true,
+ //删除&lt;script&gt;的type=&quot;text/javascript&quot;
+removeScriptTypeAttributes: true,
+ //删除&lt;style&gt;和&lt;link&gt;的type=&quot;text/css&quot;
+removeStyleLinkTypeAttributes: true,
+minifyJS: true,//压缩页面JS
+minifyCSS: true//压缩页面CSS
+ };
+gulp.src(&apos;src/html/*.html&apos;)
+ .pipe(htmlmin(options))
+ .pipe(gulp.dest(&apos;dist/html&apos;));
+});
+</code></pre><p>详细介绍：<a href="https://github.com/kangax/html-minifier#user-content-options-quick-reference" target="_blank" rel="external">https://github.com/kangax/html-minifier#user-content-options-quick-reference</a></p>
+<h4 id="5-gulp-concat"><a href="#5-gulp-concat" class="headerlink" title="5. gulp-concat"></a>5. gulp-concat</h4><p>用来把多个文件合并为一个文件,我们可以用它来合并js或css文件等，这样就能减少页面的http请求数了。</p>
+<h5 id="1-安装-2"><a href="#1-安装-2" class="headerlink" title="(1)安装"></a>(1)安装</h5><pre><code>npm install gulp-concat --save-dev
+</code></pre><h5 id="2-运用-3"><a href="#2-运用-3" class="headerlink" title="(2) 运用"></a>(2) 运用</h5><pre><code>var gulp = require(&apos;gulp&apos;),
+concat = require(&quot;gulp-concat&quot;);
+gulp.task(&apos;concat&apos;, function () {
+gulp.src(&apos;js/*.js&apos;) //要合并的文件
+ .pipe(concat(&apos;all.js&apos;)) // 合并匹配到的js文件并命名为 &quot;all.js&quot;
+ .pipe(gulp.dest(&apos;dist/js&apos;));
+});
+</code></pre><p>详细介绍：<a href="https://www.npmjs.com/package/gulp-concat/" target="_blank" rel="external">https://www.npmjs.com/package/gulp-concat/</a></p>
+<h4 id="6-gulp-imagemin-压缩图片文件"><a href="#6-gulp-imagemin-压缩图片文件" class="headerlink" title="6. gulp-imagemin 压缩图片文件"></a>6. gulp-imagemin 压缩图片文件</h4><p>详细介绍：<a href="https://github.com/sindresorhus/gulp-imagemin" target="_blank" rel="external">https://github.com/sindresorhus/gulp-imagemin</a></p>
+<h4 id="7-gulp-jshint-检测JavaScript代码中错误和潜在问题"><a href="#7-gulp-jshint-检测JavaScript代码中错误和潜在问题" class="headerlink" title="7. gulp-jshint 检测JavaScript代码中错误和潜在问题"></a>7. gulp-jshint 检测JavaScript代码中错误和潜在问题</h4><p>详细介绍：<a href="https://www.npmjs.com/package/gulp-jshint" target="_blank" rel="external">https://www.npmjs.com/package/gulp-jshint</a></p>
+<h4 id="8-gulp-rev-给文件增加MD5值"><a href="#8-gulp-rev-给文件增加MD5值" class="headerlink" title="8.gulp-rev 给文件增加MD5值"></a>8.gulp-rev 给文件增加MD5值</h4><p>结果如下：</p>
+<p>“css/unicorn.css”: “css/unicorn-d41d8cd98f.css”,<br>“js/unicorn.js”: “js/unicorn-273c2cin3f.js”</p>
+<h5 id="1-安装："><a href="#1-安装：" class="headerlink" title="(1) 安装："></a>(1) 安装：</h5><pre><code>npm install gulp-rev --save-rev
+</code></pre><h5 id="2-运用-4"><a href="#2-运用-4" class="headerlink" title="(2) 运用"></a>(2) 运用</h5><pre><code>var gulp = require(&apos;gulp&apos;);
+var rev = require(&apos;gulp-rev&apos;);
+
+gulp.task(&apos;default&apos;, function () {
+return gulp.src(&apos;assets/css/*.css&apos;)
+        .pipe(rev())
+        .pipe(gulp.dest(&apos;dist/css&apos;))  
+        .pipe(rev.manifest())//生成一个json文件，记录添加MD5值前后文件名的对应关系
+        .pipe(gulp.dest(&apos;dist/rev&apos;));
+});
+</code></pre><h4 id="9-gulp-rev-recollector-替换掉html文件中的引用路径"><a href="#9-gulp-rev-recollector-替换掉html文件中的引用路径" class="headerlink" title="9. gulp-rev-recollector  替换掉html文件中的引用路径"></a>9. gulp-rev-recollector  替换掉html文件中的引用路径</h4><p>本插件必须在gulp-rev安装成功后，用.pipe(rev.manifest())生成了对应的json文件才能替换html文件中的引用路径</p>
+<h5 id="1-安装-3"><a href="#1-安装-3" class="headerlink" title="(1) 安装"></a>(1) 安装</h5><pre><code>npm install gulp-rev-recollector --save-dev
+</code></pre><h5 id="2-运用-5"><a href="#2-运用-5" class="headerlink" title="(2) 运用"></a>(2) 运用</h5><pre><code>var revCollector = require(&apos;gulp-rev-collector&apos;); 
+gulp.task(&apos;rev&apos;, [&apos;使用gulp-rev的函数名&apos;] , function () {
+    return gulp.src([&apos;rev/**/*.json&apos;, &apos;templates/**/*.html&apos;])
+    .pipe( revCollector({
+               replaceReved: true,
+               dirReplacements: {
+                                             &apos;css&apos;: &apos;/dist/css&apos;,
+                                             &apos;/js/&apos;: &apos;/dist/js/&apos;,
+                                              &apos;cdn/&apos;: function(manifest_value) {
+                                               return &apos;//cdn&apos; + (Math.floor(Math.random() * 9) + 1) + &apos;.&apos; + &apos;exsample.dot&apos; + &apos;/img/&apos; +     
+                                                manifest_value;
+                 }
+   }
+ }) )
+ .pipe( gulp.dest(&apos;dist&apos;) );
+});
+</code></pre><font color="red"> 注意：由于gulp完成各个task是异步的，因此执行gulp-rev-recollector之前需要执行gulo-rev，解决方法：见代码第二行红色部分 </font>
+
+<h4 id="10-gulp-autoprefixer-针对不同的浏览器，给CSS文件添加相应的前缀"><a href="#10-gulp-autoprefixer-针对不同的浏览器，给CSS文件添加相应的前缀" class="headerlink" title="10.gulp-autoprefixer 针对不同的浏览器，给CSS文件添加相应的前缀"></a>10.gulp-autoprefixer 针对不同的浏览器，给CSS文件添加相应的前缀</h4><h5 id="1-安装-4"><a href="#1-安装-4" class="headerlink" title="(1) 安装"></a>(1) 安装</h5><pre><code>npm install gulp-autoprefixer --save-dev
+</code></pre><h5 id="2-运用-6"><a href="#2-运用-6" class="headerlink" title="(2) 运用"></a>(2) 运用</h5><pre><code>//引入插件
+var gulp = require(&apos;gulp&apos;);
+var autoprefixer = require(&apos;gulp-autoprefixer&apos;);
+//默认执行任务
+gulp.task(&apos;default&apos;, function () {
+//找到src目录下app.css，为其补全浏览器兼容的css
+return gulp.src(&apos;src/app.css&apos;)
+        .pipe(autoprefixer({
+            browsers: [&apos;last 2 versions&apos;],
+            cascade: false
+        }))
+//输出到dist文件夹
+        .pipe(gulp.dest(&apos;dist&apos;));
+});
+</code></pre><h4 id="11-gulp-watch-path-若文件有改动，针对改动的文件进行压缩"><a href="#11-gulp-watch-path-若文件有改动，针对改动的文件进行压缩" class="headerlink" title="11. gulp-watch-path   若文件有改动，针对改动的文件进行压缩"></a>11. gulp-watch-path   若文件有改动，针对改动的文件进行压缩</h4><h5 id="1-安装-5"><a href="#1-安装-5" class="headerlink" title="(1) 安装"></a>(1) 安装</h5><pre><code>npm install gulp-watch-path --save-dev
+</code></pre><h5 id="2-运用-7"><a href="#2-运用-7" class="headerlink" title="(2) 运用"></a>(2) 运用</h5><pre><code>var watchPath=require(&apos;gulp-watch-path&apos;);
+gulp.task(&apos;auto-css&apos;,function(){ 
+     gulp.watch(&apos;static/css/**/*.css&apos;, function (event) { 
+        var paths = watchPath(event, &apos;static/&apos;, &apos;dist/&apos;) 
+        /* 
+        paths 
+            { srcPath: &apos;src/js/log.js&apos;, 
+              srcDir: &apos;src/js/&apos;, 
+              distPath: &apos;dist/js/log.js&apos;, 
+              distDir: &apos;dist/js/&apos;, 
+              srcFilename: &apos;log.js&apos;, 
+              distFilename: &apos;log.js&apos; } 
+        */ 
+        //gutil.log(gutil.colors.green(event.type) + &apos; &apos; + paths.srcPath) 
+        //gutil.log(&apos;Dist &apos; + paths.distPath) 
+        gulp.src(paths.srcPath)
+        .pipe(minifycss()) 
+        .pipe(gulp.dest(paths.distDir)) 
+    }) 
+});
+</code></pre><h4 id="12-压缩图片gulp-imagemin"><a href="#12-压缩图片gulp-imagemin" class="headerlink" title="12. 压缩图片gulp-imagemin"></a>12. 压缩图片gulp-imagemin</h4><p>可以压缩gif，png和jpg。</p>
+<p>用这个插件压缩jpg图片，体积压缩得越小，图片就越不清晰，所以不建议把jpg图片压缩质量设置得过低，60%-80%为宜。</p>
+<p>而把png24压缩成png8，提及一般可以减少50%以上。</p>
+<p>图片质量，优化等级进行设置</p>
+<p><a href="http://www.ydcss.com/archives/26" target="_blank" rel="external">http://www.ydcss.com/archives/26</a></p>
+<h3 id="三-在使用时应注意"><a href="#三-在使用时应注意" class="headerlink" title="三. 在使用时应注意"></a>三. 在使用时应注意</h3><p>安装的插件和gulp不需要上传到代码托管工具上，只需要上传package.json 这个文件即可， package.json 这个文件记录了项目中依赖的 glup 插件。将代码下载下来之后，只需要在这个项目文件夹下面，输入命令 npm install，NPM 会自动读取 package.json 文件，将 gulp 和有关插件下载下来。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/工具/" rel="tag"># 工具</a>
+          
+            <a href="/tags/优化/" rel="tag"># 优化</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/03/04/2016-03-04-jQuery Ajax/" rel="next" title="jQuery Ajax">
+                <i class="fa fa-chevron-left"></i> jQuery Ajax
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/03/07/2016-03-07-性能优化资源的非覆盖式发布/" rel="prev" title="性能优化 资源的非覆盖式发布">
+                性能优化 资源的非覆盖式发布 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/03/05/2016-03-05-gulp/"
+           data-title="gulp 前端代码构建工具" data-url="http://panpanfish.com/2016/03/05/2016-03-05-gulp/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/icon.jpg"
+               alt="Yu Pan" />
+          <p class="site-author-name" itemprop="name">Yu Pan</p>
+          <p class="site-description motion-element" itemprop="description">在学习中不断进步</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">142</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">38</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/panpan040828" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一-gulp简介"><span class="nav-number">1.</span> <span class="nav-text">一. gulp简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二-使用gulp的步骤："><span class="nav-number">2.</span> <span class="nav-text">二.  使用gulp的步骤：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-安装nodejs"><span class="nav-number">2.1.</span> <span class="nav-text">1. 安装nodejs</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-全局安装gulp"><span class="nav-number">2.2.</span> <span class="nav-text">2. 全局安装gulp</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-新建package-json文件"><span class="nav-number">2.3.</span> <span class="nav-text">3. 新建package.json文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-项目安装gulp依赖"><span class="nav-number">2.4.</span> <span class="nav-text">4. 项目安装gulp依赖</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-在项目的根目录下创建gulpfile-js文件"><span class="nav-number">2.5.</span> <span class="nav-text">5. 在项目的根目录下创建gulpfile.js文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-运行gulp"><span class="nav-number">2.6.</span> <span class="nav-text">6. 运行gulp</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二-gulp的API（在gulpfile-js里面会用到）"><span class="nav-number">3.</span> <span class="nav-text">二. gulp的API（在gulpfile.js里面会用到）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-task-用于定义一个gulp的任务"><span class="nav-number">3.1.</span> <span class="nav-text">1. task  用于定义一个gulp的任务</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-src-指定需要处理的源文件的路径"><span class="nav-number">3.2.</span> <span class="nav-text">2. src  指定需要处理的源文件的路径</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-dest-指定处理完之后文件的输出路径"><span class="nav-number">3.3.</span> <span class="nav-text">3. dest 指定处理完之后文件的输出路径</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-watch-监听文件的变化"><span class="nav-number">3.4.</span> <span class="nav-text">4. watch 监听文件的变化</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三-gulp常见插件的使用"><span class="nav-number">4.</span> <span class="nav-text">三. gulp常见插件的使用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-gulp-uglify-压缩javascript文件，减小文件大小"><span class="nav-number">4.1.</span> <span class="nav-text">1. gulp-uglify  压缩javascript文件，减小文件大小</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-输入-npm-install-gulp-uglify-–save-dev-安装插件"><span class="nav-number">4.1.1.</span> <span class="nav-text">(1) 输入 npm install gulp-uglify –save-dev  安装插件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-在gulpfile-js中引入"><span class="nav-number">4.1.2.</span> <span class="nav-text">(2) 在gulpfile.js中引入</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-gulp-rename-重命名文件流中的文件"><span class="nav-number">4.2.</span> <span class="nav-text">2. gulp-rename 重命名文件流中的文件</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-安装gulp-rename"><span class="nav-number">4.2.1.</span> <span class="nav-text">(1) 安装gulp-rename</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-运用"><span class="nav-number">4.2.2.</span> <span class="nav-text">(2) 运用</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-gulp-minify-css-压缩css文件时并给引用url添加版本号避免缓存"><span class="nav-number">4.3.</span> <span class="nav-text">3. gulp-minify-css 压缩css文件时并给引用url添加版本号避免缓存</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-安装"><span class="nav-number">4.3.1.</span> <span class="nav-text">(1) 安装</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-运用-1"><span class="nav-number">4.3.2.</span> <span class="nav-text">(2) 运用</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-gulp-htmlmin"><span class="nav-number">4.4.</span> <span class="nav-text">4. gulp-htmlmin</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-安装-1"><span class="nav-number">4.4.1.</span> <span class="nav-text">(1) 安装</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-运用-2"><span class="nav-number">4.4.2.</span> <span class="nav-text">(2) 运用</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-gulp-concat"><span class="nav-number">4.5.</span> <span class="nav-text">5. gulp-concat</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-安装-2"><span class="nav-number">4.5.1.</span> <span class="nav-text">(1)安装</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-运用-3"><span class="nav-number">4.5.2.</span> <span class="nav-text">(2) 运用</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-gulp-imagemin-压缩图片文件"><span class="nav-number">4.6.</span> <span class="nav-text">6. gulp-imagemin 压缩图片文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-gulp-jshint-检测JavaScript代码中错误和潜在问题"><span class="nav-number">4.7.</span> <span class="nav-text">7. gulp-jshint 检测JavaScript代码中错误和潜在问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8-gulp-rev-给文件增加MD5值"><span class="nav-number">4.8.</span> <span class="nav-text">8.gulp-rev 给文件增加MD5值</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-安装："><span class="nav-number">4.8.1.</span> <span class="nav-text">(1) 安装：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-运用-4"><span class="nav-number">4.8.2.</span> <span class="nav-text">(2) 运用</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#9-gulp-rev-recollector-替换掉html文件中的引用路径"><span class="nav-number">4.9.</span> <span class="nav-text">9. gulp-rev-recollector  替换掉html文件中的引用路径</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-安装-3"><span class="nav-number">4.9.1.</span> <span class="nav-text">(1) 安装</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-运用-5"><span class="nav-number">4.9.2.</span> <span class="nav-text">(2) 运用</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#10-gulp-autoprefixer-针对不同的浏览器，给CSS文件添加相应的前缀"><span class="nav-number">4.10.</span> <span class="nav-text">10.gulp-autoprefixer 针对不同的浏览器，给CSS文件添加相应的前缀</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-安装-4"><span class="nav-number">4.10.1.</span> <span class="nav-text">(1) 安装</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-运用-6"><span class="nav-number">4.10.2.</span> <span class="nav-text">(2) 运用</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#11-gulp-watch-path-若文件有改动，针对改动的文件进行压缩"><span class="nav-number">4.11.</span> <span class="nav-text">11. gulp-watch-path   若文件有改动，针对改动的文件进行压缩</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-安装-5"><span class="nav-number">4.11.1.</span> <span class="nav-text">(1) 安装</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-运用-7"><span class="nav-number">4.11.2.</span> <span class="nav-text">(2) 运用</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#12-压缩图片gulp-imagemin"><span class="nav-number">4.12.</span> <span class="nav-text">12. 压缩图片gulp-imagemin</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三-在使用时应注意"><span class="nav-number">5.</span> <span class="nav-text">三. 在使用时应注意</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yu Pan</span>
+</div>
+
+<!--
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+-->
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"panpanfish"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  
+
+
+</body>
+</html>

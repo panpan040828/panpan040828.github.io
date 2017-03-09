@@ -1,0 +1,775 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Sass,模块化," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+
+
+
+
+
+
+<meta name="description" content="之前看过一些sass和模块化编程的知识，现在想通过这个小功能来运用一下。
+一. 工具栏工具栏demo地址：
+http://panpanfish.com/myDemo/toolbar/toolbar2.html
+工具栏代码地址：
+https://github.com/panpan040828/myDemo/tree/gh-pages/toolbar
+二. HTML和css部分实现常见的工具栏有两种方">
+<meta property="og:type" content="article">
+<meta property="og:title" content="实现工具栏——学习使用Sass和requireJS">
+<meta property="og:url" content="http://panpanfish.com/2016/07/03/2016-07-01-实现侧边栏——学习使用sass和requireJS/index.html">
+<meta property="og:site_name" content="筱鱼兒">
+<meta property="og:description" content="之前看过一些sass和模块化编程的知识，现在想通过这个小功能来运用一下。
+一. 工具栏工具栏demo地址：
+http://panpanfish.com/myDemo/toolbar/toolbar2.html
+工具栏代码地址：
+https://github.com/panpan040828/myDemo/tree/gh-pages/toolbar
+二. HTML和css部分实现常见的工具栏有两种方">
+<meta property="og:updated_time" content="2016-07-03T13:43:50.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="实现工具栏——学习使用Sass和requireJS">
+<meta name="twitter:description" content="之前看过一些sass和模块化编程的知识，现在想通过这个小功能来运用一下。
+一. 工具栏工具栏demo地址：
+http://panpanfish.com/myDemo/toolbar/toolbar2.html
+工具栏代码地址：
+https://github.com/panpan040828/myDemo/tree/gh-pages/toolbar
+二. HTML和css部分实现常见的工具栏有两种方">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+
+  <title> 实现工具栏——学习使用Sass和requireJS | 筱鱼兒 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?e18d9ee1b355055e9a39ffec741beb44";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="my-headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="my-site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">筱鱼兒</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">温柔于己，温柔于人</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+          
+            <li class="menu-item menu-item-home">
+              <a href="/" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+                
+                首页
+              </a>
+            </li>
+          
+      
+        
+          
+            <li class="menu-item menu-item-categories">
+              <a href="/categories" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+                
+                分类
+              </a>
+            </li>
+          
+      
+        
+          
+            <li class="menu-item menu-item-archives">
+              <a href="/archives" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+                
+                归档
+              </a>
+            </li>
+          
+      
+        
+          
+            <li class="menu-item menu-item-tags">
+              <a href="/tags" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+                
+                标签
+              </a>
+            </li>
+          
+      
+        
+          
+            <li class="menu-item menu-item-demo">
+              <a href="/categories/Demo/" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-code"></i> <br />
+                
+                demo
+              </a>
+            </li>
+          
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                实现工具栏——学习使用Sass和requireJS
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-03T00:00:00+08:00" content="2016-07-03">
+              2016-07-03
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Demo/" itemprop="url" rel="index">
+                    <span itemprop="name">Demo</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/07/03/2016-07-01-实现侧边栏——学习使用sass和requireJS/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/03/2016-07-01-实现侧边栏——学习使用sass和requireJS/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>之前看过一些sass和模块化编程的知识，现在想通过这个小功能来运用一下。</p>
+<h3 id="一-工具栏"><a href="#一-工具栏" class="headerlink" title="一. 工具栏"></a>一. 工具栏</h3><p>工具栏demo地址：</p>
+<p><a href="http://panpanfish.com/myDemo/toolbar/toolbar2.html">http://panpanfish.com/myDemo/toolbar/toolbar2.html</a></p>
+<p>工具栏代码地址：</p>
+<p><a href="https://github.com/panpan040828/myDemo/tree/gh-pages/toolbar" target="_blank" rel="external">https://github.com/panpan040828/myDemo/tree/gh-pages/toolbar</a></p>
+<h3 id="二-HTML和css部分"><a href="#二-HTML和css部分" class="headerlink" title="二. HTML和css部分"></a>二. HTML和css部分</h3><p>实现常见的工具栏有两种方式：</p>
+<ul>
+<li>使用背景图片，然后再使用css sprite技术进行定位</li>
+<li>使用图标字体</li>
+</ul>
+<h4 id="1-两种方法的优缺点"><a href="#1-两种方法的优缺点" class="headerlink" title="1. 两种方法的优缺点"></a>1. 两种方法的优缺点</h4><font color="red">使用背景图片 + css sprite的方式</font>
+
+<p><strong>优点：</strong></p>
+<ul>
+<li>HTML结构简单</li>
+<li>兼容性良好</li>
+</ul>
+<p><strong>缺点：</strong></p>
+<ul>
+<li>使用了大量的图片，对性能有一定的影响</li>
+<li>有一个最大的缺点就是，当你需要修改一些样式时，需要对图片进行修改，这样就会非常麻烦</li>
+</ul>
+<p>css sprite主要是利用<code>background-image</code>，<code>background-position</code></p>
+<font color="red">使用图标字体的方式</font>
+
+<p><strong>优点：</strong></p>
+<p>避免了图片的使用，节约了性能，并且修改方便</p>
+<p><strong>缺点：</strong></p>
+<p>HTML结构复杂了一些<br>不兼容IE6和IE7</p>
+<p>综上所述，还是使用图标字体的方式更好。</p>
+<h4 id="2-获取免费的图标的方式"><a href="#2-获取免费的图标的方式" class="headerlink" title="2. 获取免费的图标的方式"></a>2. 获取免费的图标的方式</h4><p>下列网站上提供了很多免费的图标</p>
+<p><a href="https://icomoon.io/app/#/select" target="_blank" rel="external">https://icomoon.io/app/#/select</a></p>
+<p>(1) 选中自己需要的图标，点击右下角的<code>Generate Font</code></p>
+<p>(2) 然后将生成的图标下载下来（点击右下角的<code>Download</code>）</p>
+<p>(3) 下载好的文件夹解压，解压后有用的文件只有</p>
+<ul>
+<li>fonts文件夹</li>
+<li>style.css文件</li>
+</ul>
+<p>将上述文件放在项目的<code>css文件夹</code>里，然后将<code>style.css</code>里的代码放在自己的<code>css文件</code>里，并在<code>html</code>页面的图标标签里引用相应的样式即可。</p>
+<h4 id="3-使用sass来写css"><a href="#3-使用sass来写css" class="headerlink" title="3. 使用sass来写css"></a>3. 使用sass来写css</h4><p>第一次使用sass来写css，感觉确实很方便。</p>
+<p>这里使用了sass的变量，混合器，嵌套，导入其他scss文件这几个功能。</p>
+<p><strong>写scss时需要注意：</strong></p>
+<ul>
+<li>运算符两边需要空格</li>
+<li>在导入其他的scss文件时，可以不写命名前的下划线和后缀</li>
+</ul>
+<h4 id="4-这里的很多动画效果是利用才css3里面的属性完成的"><a href="#4-这里的很多动画效果是利用才css3里面的属性完成的" class="headerlink" title="4. 这里的很多动画效果是利用才css3里面的属性完成的"></a>4. 这里的很多动画效果是利用才css3里面的属性完成的</h4><p><strong>(1) transition属性</strong></p>
+<p>修改图标的top值来改变显示，同时使用transition来平滑过渡</p>
+<p><strong>(2) transform属性</strong></p>
+<p>使用transform：scale()来改变图片的大小，同时使用transition来平滑过渡</p>
+<p>改变转换的基准点可以使用属性<code>transform-origin</code></p>
+<p>这里需要注意不同浏览器之间的兼容性，这里利用了sass里面的@mixin。</p>
+<h3 id="三-js部分"><a href="#三-js部分" class="headerlink" title="三. js部分"></a>三. js部分</h3><p>这个工具栏需要用js来实现的功能就只有，第四个图标的返回顶部的功能。</p>
+<p>虽然这只是一个很小的插件，但是为了学习使用requireJS，这里还是用了requireJS。</p>
+<h4 id="1-requireJS的使用"><a href="#1-requireJS的使用" class="headerlink" title="1. requireJS的使用"></a>1. requireJS的使用</h4><p>(1) 首先需要在requireJS的官网上下载require.js放入js文件夹中</p>
+<p>requireJS中文官网：<a href="http://www.requirejs.cn/" target="_blank" rel="external">http://www.requirejs.cn/</a></p>
+<p>(2) 然后再html里面引入reuqire.js，并指明入口文件</p>
+<pre><code>&lt;script src=&quot;js/require.js&quot; data-main=&quot;js/toolbar.js&quot;&gt;&lt;/script&gt;
+</code></pre><p>(3) toolbar.js里面的内容</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">requirejs([<span class="string">"base"</span>,<span class="string">"common_backTop"</span>], <span class="function"><span class="keyword">function</span>(<span class="params">GLOBAL, backTop</span>) </span>&#123;</span><br><span class="line">	<span class="keyword">var</span> topDiv = GLOBAL.Dom.$(<span class="string">"backTop"</span>);</span><br><span class="line">	<span class="built_in">console</span>.log(topDiv);</span><br><span class="line">	<span class="keyword">var</span> top = <span class="keyword">new</span> backTop.BackTop(topDiv, &#123;</span><br><span class="line">		mode: <span class="string">"move"</span>,</span><br><span class="line">		des: <span class="number">0</span>,</span><br><span class="line">		moveTime: <span class="number">100</span></span><br><span class="line">	&#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>表明引入了两个模块，一个是js的基础模块<code>base.js</code>；另外一个是实现回到顶部功能的<code>common_backTop.js</code>。</p>
+<p>(4) common_backTop.js模块的定义</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line">define([<span class="string">"base"</span>], <span class="function"><span class="keyword">function</span>(<span class="params">GLOBAL</span>)</span>&#123;</span><br><span class="line">	<span class="keyword">var</span> BackTop = <span class="function"><span class="keyword">function</span>(<span class="params">ele, config</span>) </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.ele = ele;</span><br><span class="line">		<span class="keyword">this</span>.config = config;</span><br><span class="line">		<span class="keyword">var</span> that = <span class="keyword">this</span>;</span><br><span class="line">		<span class="keyword">if</span>(<span class="keyword">this</span>.config.mode == <span class="string">"move"</span>) &#123;</span><br><span class="line">			GLOBAL.Eve.addEvent(<span class="keyword">this</span>.ele, <span class="string">"click"</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">				that.move();</span><br><span class="line">			&#125;);</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			GLOBAL.Eve.addEvent(<span class="keyword">this</span>.ele, <span class="string">"click"</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">				that.go();</span><br><span class="line">			&#125;);</span><br><span class="line">		&#125;		</span><br><span class="line">		<span class="keyword">this</span>.checkPos();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	BackTop.prototype = &#123;</span><br><span class="line">		<span class="keyword">constructor</span>: BackTop,</span><br><span class="line"></span><br><span class="line">		move: function() &#123;	</span><br><span class="line">			<span class="keyword">var</span> that = <span class="keyword">this</span>.config;	</span><br><span class="line">			<span class="function"><span class="keyword">function</span> <span class="title">scroll</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">				<span class="keyword">var</span> scrollTop = <span class="built_in">document</span>.documentElement.scrollTop || <span class="built_in">document</span>.body.scrollTop;</span><br><span class="line">				<span class="keyword">if</span>(scrollTop &gt; that.des) &#123;</span><br><span class="line">					scrollTop -= <span class="number">100</span>;</span><br><span class="line">					<span class="keyword">if</span>(<span class="built_in">document</span>.documentElement.scrollTop) &#123;</span><br><span class="line">						<span class="built_in">document</span>.documentElement.scrollTop = scrollTop;</span><br><span class="line">					&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">						<span class="built_in">document</span>.body.scrollTop = scrollTop;			</span><br><span class="line">					&#125;</span><br><span class="line">					setTimeout(scroll, that.moveTime);</span><br><span class="line">				&#125; <span class="keyword">else</span> <span class="keyword">if</span>(scrollTop &lt; that.des) &#123;</span><br><span class="line">					scrollTop += <span class="number">100</span>;</span><br><span class="line">					<span class="keyword">if</span>(<span class="built_in">document</span>.documentElement.scrollTop) &#123;</span><br><span class="line">						<span class="built_in">document</span>.documentElement.scrollTop = scrollTop;</span><br><span class="line">					&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">						<span class="built_in">document</span>.body.scrollTop = scrollTop;			</span><br><span class="line">					&#125;</span><br><span class="line">					setTimeout(scroll, that.moveTime);</span><br><span class="line">				&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">					<span class="keyword">return</span>;</span><br><span class="line">				&#125;				</span><br><span class="line">			&#125;</span><br><span class="line">			scroll();</span><br><span class="line">		&#125;,</span><br><span class="line"></span><br><span class="line">		go: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">			<span class="keyword">if</span>(<span class="built_in">document</span>.documentElement.scrollTop) &#123;</span><br><span class="line">				<span class="built_in">document</span>.documentElement.scrollTop = <span class="keyword">this</span>.config.des;</span><br><span class="line">			&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">				<span class="built_in">console</span>.log(<span class="keyword">this</span>.config);</span><br><span class="line">				<span class="built_in">document</span>.body.scrollTop = <span class="keyword">this</span>.config.des;			</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;,</span><br><span class="line"></span><br><span class="line">		checkPos: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">			<span class="keyword">var</span> scrollTop = <span class="built_in">document</span>.documentElement.scrollTop || <span class="built_in">document</span>.body.scrollTop;</span><br><span class="line">			<span class="keyword">if</span>(scrollTop &lt; <span class="built_in">document</span>.body.clientHeight) &#123;</span><br><span class="line">				<span class="keyword">this</span>.ele.style.display = <span class="string">"block"</span>;</span><br><span class="line">			&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">				<span class="keyword">this</span>.ele.style.display = <span class="string">"none"</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;,</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> &#123;</span><br><span class="line">		BackTop: BackTop</span><br><span class="line">	&#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Sass/" rel="tag"># Sass</a>
+          
+            <a href="/tags/模块化/" rel="tag"># 模块化</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/07/01/2016-07-01-js模块化编程之requireJS/" rel="next" title="js模块化编程之requireJS">
+                <i class="fa fa-chevron-left"></i> js模块化编程之requireJS
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/07/06/2016-07-06-js中的错误处理与调试/" rel="prev" title="js中的错误处理与调试">
+                js中的错误处理与调试 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/07/03/2016-07-01-实现侧边栏——学习使用sass和requireJS/"
+           data-title="实现工具栏——学习使用Sass和requireJS" data-url="http://panpanfish.com/2016/07/03/2016-07-01-实现侧边栏——学习使用sass和requireJS/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/icon.jpg"
+               alt="Yu Pan" />
+          <p class="site-author-name" itemprop="name">Yu Pan</p>
+          <p class="site-description motion-element" itemprop="description">在学习中不断进步</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">142</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">38</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/panpan040828" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一-工具栏"><span class="nav-number">1.</span> <span class="nav-text">一. 工具栏</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二-HTML和css部分"><span class="nav-number">2.</span> <span class="nav-text">二. HTML和css部分</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-两种方法的优缺点"><span class="nav-number">2.1.</span> <span class="nav-text">1. 两种方法的优缺点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-获取免费的图标的方式"><span class="nav-number">2.2.</span> <span class="nav-text">2. 获取免费的图标的方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-使用sass来写css"><span class="nav-number">2.3.</span> <span class="nav-text">3. 使用sass来写css</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-这里的很多动画效果是利用才css3里面的属性完成的"><span class="nav-number">2.4.</span> <span class="nav-text">4. 这里的很多动画效果是利用才css3里面的属性完成的</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三-js部分"><span class="nav-number">3.</span> <span class="nav-text">三. js部分</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-requireJS的使用"><span class="nav-number">3.1.</span> <span class="nav-text">1. requireJS的使用</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yu Pan</span>
+</div>
+
+<!--
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+-->
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"panpanfish"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  
+
+
+</body>
+</html>

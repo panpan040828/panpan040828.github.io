@@ -1,0 +1,730 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="算法,读书笔记," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+
+
+
+
+
+
+<meta name="description" content="一. 数组js中的数组的一些基本方法见博客http://
+1. 二维数组(1). 二维数组的创建123456789101112function matrix(row,col,init) &amp;#123;	var arr = [];	for(var i = 0; i &amp;lt; row; i++) &amp;#123;		arr[i] = [];		for(var j = 0; j &amp;lt; col; j++)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据结构与算法——javaScript">
+<meta property="og:url" content="http://panpanfish.com/2016/08/28/2016-08-28-数据结构与算法——javaScript/index.html">
+<meta property="og:site_name" content="筱鱼兒">
+<meta property="og:description" content="一. 数组js中的数组的一些基本方法见博客http://
+1. 二维数组(1). 二维数组的创建123456789101112function matrix(row,col,init) &amp;#123;	var arr = [];	for(var i = 0; i &amp;lt; row; i++) &amp;#123;		arr[i] = [];		for(var j = 0; j &amp;lt; col; j++)">
+<meta property="og:updated_time" content="2016-08-30T02:35:30.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="数据结构与算法——javaScript">
+<meta name="twitter:description" content="一. 数组js中的数组的一些基本方法见博客http://
+1. 二维数组(1). 二维数组的创建123456789101112function matrix(row,col,init) &amp;#123;	var arr = [];	for(var i = 0; i &amp;lt; row; i++) &amp;#123;		arr[i] = [];		for(var j = 0; j &amp;lt; col; j++)">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+
+  <title> 数据结构与算法——javaScript | 筱鱼兒 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?e18d9ee1b355055e9a39ffec741beb44";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="my-headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="my-site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">筱鱼兒</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">温柔于己，温柔于人</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+          
+            <li class="menu-item menu-item-home">
+              <a href="/" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+                
+                首页
+              </a>
+            </li>
+          
+      
+        
+          
+            <li class="menu-item menu-item-categories">
+              <a href="/categories" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+                
+                分类
+              </a>
+            </li>
+          
+      
+        
+          
+            <li class="menu-item menu-item-archives">
+              <a href="/archives" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+                
+                归档
+              </a>
+            </li>
+          
+      
+        
+          
+            <li class="menu-item menu-item-tags">
+              <a href="/tags" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+                
+                标签
+              </a>
+            </li>
+          
+      
+        
+          
+            <li class="menu-item menu-item-demo">
+              <a href="/categories/Demo/" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-code"></i> <br />
+                
+                demo
+              </a>
+            </li>
+          
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                数据结构与算法——javaScript
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-08-28T00:00:00+08:00" content="2016-08-28">
+              2016-08-28
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/算法学习/" itemprop="url" rel="index">
+                    <span itemprop="name">算法学习</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/08/28/2016-08-28-数据结构与算法——javaScript/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/28/2016-08-28-数据结构与算法——javaScript/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="一-数组"><a href="#一-数组" class="headerlink" title="一. 数组"></a>一. 数组</h3><p>js中的数组的一些基本方法见博客<a href="http://" target="_blank" rel="external">http://</a></p>
+<h4 id="1-二维数组"><a href="#1-二维数组" class="headerlink" title="1. 二维数组"></a>1. 二维数组</h4><h5 id="1-二维数组的创建"><a href="#1-二维数组的创建" class="headerlink" title="(1). 二维数组的创建"></a>(1). 二维数组的创建</h5><figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">function <span class="built_in">matrix</span>(<span class="built_in">row</span>,<span class="built_in">col</span>,init) &#123;</span><br><span class="line">	<span class="built_in">var</span> arr = [];</span><br><span class="line">	<span class="keyword">for</span>(<span class="built_in">var</span> i = <span class="number">0</span>; i &lt; <span class="built_in">row</span>; i++) &#123;</span><br><span class="line">		arr[i] = [];</span><br><span class="line">		<span class="keyword">for</span>(<span class="built_in">var</span> j = <span class="number">0</span>; j &lt; <span class="built_in">col</span>; j++) &#123;</span><br><span class="line">			arr[i][j] = init;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">return</span> arr;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">matrix</span>(<span class="number">2</span>,<span class="number">3</span>,<span class="number">0</span>);</span><br></pre></td></tr></table></figure>
+<h5 id="2-访问二维数组"><a href="#2-访问二维数组" class="headerlink" title="(2). 访问二维数组"></a>(2). 访问二维数组</h5><p><strong>按行访问</strong></p>
+<figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">var</span> grade = [ [<span class="number">11</span>,<span class="number">12</span>,<span class="number">13</span>],</span><br><span class="line">			  [<span class="number">21</span>,<span class="number">22</span>,<span class="number">23</span>],</span><br><span class="line">			  [<span class="number">31</span>,<span class="number">32</span>,<span class="number">33</span>] ];</span><br><span class="line"><span class="keyword">for</span>(<span class="built_in">var</span> <span class="built_in">row</span> = <span class="number">0</span>; <span class="built_in">row</span> &lt; grade.<span class="built_in">length</span>; <span class="built_in">row</span>++) &#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="built_in">var</span> <span class="built_in">col</span> = <span class="number">0</span>; <span class="built_in">col</span> &lt; grade[<span class="built_in">row</span>].<span class="built_in">length</span>; <span class="built_in">col</span>++) &#123;</span><br><span class="line">		console.<span class="built_in">log</span>(grade[<span class="built_in">row</span>][<span class="built_in">col</span>]);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>按列访问</strong></p>
+<figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">var</span> grade = [ [<span class="number">11</span>,<span class="number">12</span>,<span class="number">13</span>],</span><br><span class="line">			  [<span class="number">21</span>,<span class="number">22</span>,<span class="number">23</span>],</span><br><span class="line">			  [<span class="number">31</span>,<span class="number">32</span>,<span class="number">33</span>] ];</span><br><span class="line"><span class="keyword">for</span>(<span class="built_in">var</span> <span class="built_in">col</span> = <span class="number">0</span>; <span class="built_in">col</span> &lt; grade.<span class="built_in">length</span>; <span class="built_in">col</span>++) &#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="built_in">var</span> <span class="built_in">row</span> = <span class="number">0</span>; <span class="built_in">row</span> &lt; grade[<span class="built_in">col</span>].<span class="built_in">length</span>; <span class="built_in">row</span>++) &#123;</span><br><span class="line">		console.<span class="built_in">log</span>(grade[<span class="built_in">row</span>][<span class="built_in">col</span>]);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="2-对象数组、数组对象"><a href="#2-对象数组、数组对象" class="headerlink" title="2. 对象数组、数组对象"></a>2. 对象数组、数组对象</h4><p><strong>对象数组</strong></p>
+<p>数组中的元素是对象</p>
+<p><code>eg: [{a: 1},{b: 2}]</code></p>
+<p><strong>数组对象</strong></p>
+<p>对象中的属性是数组</p>
+<p><code>eg: {a: [1,2,3]}</code></p>
+<h3 id="二-列表"><a href="#二-列表" class="headerlink" title="二. 列表"></a>二. 列表</h3><p>当不需要在一个很长的序列中查找元素，或者对其进行排序时，可以使用列表。</p>
+<h3 id="三-栈"><a href="#三-栈" class="headerlink" title="三. 栈"></a>三. 栈</h3><h4 id="1-栈是一种特殊的列表，只能通过一端访问。后入先出。"><a href="#1-栈是一种特殊的列表，只能通过一端访问。后入先出。" class="headerlink" title="1. 栈是一种特殊的列表，只能通过一端访问。后入先出。"></a>1. 栈是一种特殊的列表，只能通过一端访问。后入先出。</h4><p>function Stack() {<br>    this.dataStore = []; //存放栈中的元素<br>    this.top = 0; //栈顶的位置 ＋ 1<br>    this.push = push; //入栈的函数<br>    this.pop = pop; //出栈的函数<br>    this.peek = peek; //返回栈顶的元素<br>}</p>
+<h4 id="2-使用栈的例子"><a href="#2-使用栈的例子" class="headerlink" title="2.使用栈的例子"></a>2.使用栈的例子</h4><p><strong>数制间的相互转换</strong></p>
+<p>输入的数字是n，转换为以b为基数的数字</p>
+<ul>
+<li>最低位是<code>n%b</code>，将此位压入栈</li>
+<li>使用<code>Math.floor(n/b)</code>代替之前的n再次输入</li>
+<li>重复前2个步骤，直到<code>Math.floor(n/b)</code>为0，则不再循环</li>
+</ul>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">function mulBase(<span class="built_in">num</span>, base) &#123;</span><br><span class="line">	<span class="keyword">var</span> stack = [];</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//将每一次求得得余数入栈</span></span><br><span class="line">	<span class="keyword">do</span> &#123;</span><br><span class="line">		stack.push(<span class="built_in">num</span> % base);</span><br><span class="line">		<span class="built_in">num</span> = Math.floor(<span class="built_in">num</span> / base);</span><br><span class="line">	&#125; <span class="keyword">while</span> (<span class="built_in">num</span> &gt; <span class="number">0</span>)</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">var</span> result = <span class="string">''</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//依次出栈</span></span><br><span class="line">	<span class="keyword">while</span>(stack.length &gt; <span class="number">0</span>) &#123;</span><br><span class="line">		result += stack.pop();</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//返回输出的结果</span></span><br><span class="line">	<span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>回文</strong></p>
+<p>字符串反转之后是否与原字符串相等，如果相等，则为回文</p>
+<p>使用栈的思想，首先将字符串依次入栈，再依次出栈，判断两个字符串是否相等</p>
+<font color="red">注意：js中字符串没有反转操作的函数，而数组有arr.reverse()</font>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isHuiWen</span>(<span class="params">str</span>) </span>&#123;</span><br><span class="line">	<span class="keyword">var</span> arr = str.split();</span><br><span class="line">	<span class="keyword">var</span> reverseStr = <span class="string">''</span>;</span><br><span class="line">	<span class="keyword">while</span>(arr.length &gt; <span class="number">0</span>) &#123;</span><br><span class="line">		reverseStr += arr.pop();</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">if</span>(reverseStr == str) &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="四-队列"><a href="#四-队列" class="headerlink" title="四. 队列"></a>四. 队列</h3><p>先入先出</p>
+<p>function Queue() {<br>    this.dataStore = []; //存放队列中元素的数组<br>    this.enqueue = enqueue; //入队列，队尾增加元素<br>    this.dequeue = dequeue; //出队列，队头删除元素<br>    this.front = front;<br>    this.back = back;<br>    this.toString = toString;<br>    this.empty = empty;<br>}</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/算法/" rel="tag"># 算法</a>
+          
+            <a href="/tags/读书笔记/" rel="tag"># 读书笔记</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/08/20/2016-03-01-编写可维护的js/" rel="next" title="编写可维护的javaScript">
+                <i class="fa fa-chevron-left"></i> 编写可维护的javaScript
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/09/03/2016-09-03-斐波那契数列/" rel="prev" title="斐波那契数列">
+                斐波那契数列 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/08/28/2016-08-28-数据结构与算法——javaScript/"
+           data-title="数据结构与算法——javaScript" data-url="http://panpanfish.com/2016/08/28/2016-08-28-数据结构与算法——javaScript/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/icon.jpg"
+               alt="Yu Pan" />
+          <p class="site-author-name" itemprop="name">Yu Pan</p>
+          <p class="site-description motion-element" itemprop="description">在学习中不断进步</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">142</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">38</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/panpan040828" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一-数组"><span class="nav-number">1.</span> <span class="nav-text">一. 数组</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-二维数组"><span class="nav-number">1.1.</span> <span class="nav-text">1. 二维数组</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-二维数组的创建"><span class="nav-number">1.1.1.</span> <span class="nav-text">(1). 二维数组的创建</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-访问二维数组"><span class="nav-number">1.1.2.</span> <span class="nav-text">(2). 访问二维数组</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-对象数组、数组对象"><span class="nav-number">1.2.</span> <span class="nav-text">2. 对象数组、数组对象</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二-列表"><span class="nav-number">2.</span> <span class="nav-text">二. 列表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三-栈"><span class="nav-number">3.</span> <span class="nav-text">三. 栈</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-栈是一种特殊的列表，只能通过一端访问。后入先出。"><span class="nav-number">3.1.</span> <span class="nav-text">1. 栈是一种特殊的列表，只能通过一端访问。后入先出。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-使用栈的例子"><span class="nav-number">3.2.</span> <span class="nav-text">2.使用栈的例子</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四-队列"><span class="nav-number">4.</span> <span class="nav-text">四. 队列</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yu Pan</span>
+</div>
+
+<!--
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+-->
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"panpanfish"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  
+
+
+</body>
+</html>

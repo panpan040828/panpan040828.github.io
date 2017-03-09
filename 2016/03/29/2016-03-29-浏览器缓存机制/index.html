@@ -1,0 +1,846 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="浏览器," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+
+
+
+
+
+
+<meta name="description" content="一. 什么是缓存web缓存是一个设备，这个设备可以自动保存常用的文档的副本。在客户端发起请求的时候，如果就近的缓存拥有客户端想要的副本，那么就会加快网站的响应速度。
+在出现带宽不足、瞬间拥塞（很多用户同时访问某一站点）、距离时延（由于距离很远产生时延）这些情况下，缓存的优势就会体现出来了。
+缓存可分为：私有缓存和公有缓存。
+私有缓存是个人缓存，包含单个用户最常用的页面。（浏览器的缓存是私有缓存）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="浏览器缓存机制">
+<meta property="og:url" content="http://panpanfish.com/2016/03/29/2016-03-29-浏览器缓存机制/index.html">
+<meta property="og:site_name" content="筱鱼兒">
+<meta property="og:description" content="一. 什么是缓存web缓存是一个设备，这个设备可以自动保存常用的文档的副本。在客户端发起请求的时候，如果就近的缓存拥有客户端想要的副本，那么就会加快网站的响应速度。
+在出现带宽不足、瞬间拥塞（很多用户同时访问某一站点）、距离时延（由于距离很远产生时延）这些情况下，缓存的优势就会体现出来了。
+缓存可分为：私有缓存和公有缓存。
+私有缓存是个人缓存，包含单个用户最常用的页面。（浏览器的缓存是私有缓存）">
+<meta property="og:image" content="http://panpanfish.com/img/post/20160329/broswer-caching.jpg">
+<meta property="og:image" content="http://panpanfish.com/img/post/20160329/http-caching.jpg">
+<meta property="og:updated_time" content="2016-04-28T13:19:11.360Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="浏览器缓存机制">
+<meta name="twitter:description" content="一. 什么是缓存web缓存是一个设备，这个设备可以自动保存常用的文档的副本。在客户端发起请求的时候，如果就近的缓存拥有客户端想要的副本，那么就会加快网站的响应速度。
+在出现带宽不足、瞬间拥塞（很多用户同时访问某一站点）、距离时延（由于距离很远产生时延）这些情况下，缓存的优势就会体现出来了。
+缓存可分为：私有缓存和公有缓存。
+私有缓存是个人缓存，包含单个用户最常用的页面。（浏览器的缓存是私有缓存）">
+<meta name="twitter:image" content="http://panpanfish.com/img/post/20160329/broswer-caching.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+
+  <title> 浏览器缓存机制 | 筱鱼兒 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?e18d9ee1b355055e9a39ffec741beb44";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="my-headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="my-site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">筱鱼兒</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">温柔于己，温柔于人</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+          
+            <li class="menu-item menu-item-home">
+              <a href="/" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+                
+                首页
+              </a>
+            </li>
+          
+      
+        
+          
+            <li class="menu-item menu-item-categories">
+              <a href="/categories" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+                
+                分类
+              </a>
+            </li>
+          
+      
+        
+          
+            <li class="menu-item menu-item-archives">
+              <a href="/archives" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+                
+                归档
+              </a>
+            </li>
+          
+      
+        
+          
+            <li class="menu-item menu-item-tags">
+              <a href="/tags" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+                
+                标签
+              </a>
+            </li>
+          
+      
+        
+          
+            <li class="menu-item menu-item-demo">
+              <a href="/categories/Demo/" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-code"></i> <br />
+                
+                demo
+              </a>
+            </li>
+          
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                浏览器缓存机制
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-03-29T00:00:00+08:00" content="2016-03-29">
+              2016-03-29
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/前端笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">前端笔记</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/03/29/2016-03-29-浏览器缓存机制/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/29/2016-03-29-浏览器缓存机制/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="一-什么是缓存"><a href="#一-什么是缓存" class="headerlink" title="一. 什么是缓存"></a>一. 什么是缓存</h4><p><strong>web缓存</strong>是一个设备，这个设备可以自动保存常用的文档的副本。在客户端发起请求的时候，如果就近的缓存拥有客户端想要的副本，那么就会加快网站的响应速度。</p>
+<p>在出现<strong>带宽不足</strong>、<strong>瞬间拥塞</strong>（很多用户同时访问某一站点）、<strong>距离时延</strong>（由于距离很远产生时延）这些情况下，缓存的优势就会体现出来了。</p>
+<p>缓存可分为：<strong>私有缓存</strong>和<strong>公有缓存</strong>。</p>
+<p><strong>私有缓存</strong>是个人缓存，包含单个用户最常用的页面。（浏览器的缓存是私有缓存）</p>
+<p><strong>公有缓存</strong>包含了某个用户团体的常用的页面。</p>
+<h4 id="二-浏览器缓存"><a href="#二-浏览器缓存" class="headerlink" title="二. 浏览器缓存"></a>二. 浏览器缓存</h4><p><strong>浏览器缓存</strong>（Browser Caching）是浏览器的一种优化机制。浏览器的缓存中保存了用户经常访问的一些文档的副本，避免了一些重复的网络请求，浏览器能够快速地读取本地的数据，这样就会加快网站的访问速度。</p>
+<h5 id="1-浏览器有哪几种缓存机制"><a href="#1-浏览器有哪几种缓存机制" class="headerlink" title="1. 浏览器有哪几种缓存机制"></a>1. 浏览器有哪几种缓存机制</h5><p>浏览器一共有九种缓存机制</p>
+<p>打开浏览器 -&gt; 点击F12 -&gt; 点resourses</p>
+<p>可以看到浏览器的八种缓存机制</p>
+<p><img src="/img/post/20160329/broswer-caching.jpg" alt="浏览器的几种缓存机制"></p>
+<h4 id="1-http缓存"><a href="#1-http缓存" class="headerlink" title="(1). http缓存"></a>(1). http缓存</h4><p>http缓存是基于http协议的浏览器文件缓存机制，当重复请求某一个文件时，浏览器可以根据协议的头文件判断是从服务器端请求文件还是从本地读取文件。</p>
+<p>上图中的Frames展示的就是http缓存</p>
+<p><img src="/img/post/20160329/http-caching.jpg" alt="http缓存"></p>
+<p><strong>a. 判断过期的两种方式：Expires和Cache-Control:max-age</strong></p>
+<pre><code>Expires：存的是绝对的过期的日期（例如：牛奶的保质期）
+
+Cache-Control:max-age 存的是还可以保鲜多久，是相对时间，用秒做单位
+</code></pre><p><strong>b. 如果a中判断缓存已经过期，那么就要进行缓存再验证</strong></p>
+<p>缓存再验证的两种方式：If-Modified-Since:Date和If-None-Match</p>
+<pre><code>If-Modified-Since:Date  对修改日期进行验证
+
+If-None-Match：&lt;tags&gt; 对实体标签的版本标识符进行验证
+</code></pre><p><strong>c. b中再验证的结果有两种：服务器中的文件未修改 和 服务器中的文件有修改</strong></p>
+<pre><code>服务器中的文件未修改：缓存中的副本可以使用，那么浏览器直接从缓存读取文档，返回304
+
+服务器中的文件有修改：缓存中的副本不能使用，那么直接从服务器端读取文档，返回200
+</code></pre><h4 id="2-Web-SQL-客户端本地数据库（小型数据库）（已被废弃）"><a href="#2-Web-SQL-客户端本地数据库（小型数据库）（已被废弃）" class="headerlink" title="(2). Web SQL 客户端本地数据库（小型数据库）（已被废弃）"></a>(2). Web SQL 客户端本地数据库（小型数据库）（已被废弃）</h4><p>HTML5中新增了在本地存储数据库的功能，让浏览器实现小型数据库存储功能。本地数据库通过JavaScript脚本来进行对数据库的操作。</p>
+<p>HTML5的Web SQL的三个主要方法：</p>
+<p><strong>1. openDatabase：创建数据库 或者 使用现有的数据库</strong></p>
+<pre><code>var db = openDatabase(&apos;mydatabase&apos;, &apos;2.0&apos;, my db&apos;, 2 * 1024);
+</code></pre><p><strong>1. transaction：对数据库进行操作</strong></p>
+<p><strong>1. executeSql：这个方法用于执行真实的SQL查询。</strong></p>
+<pre><code>db.transaction(function (tx) {
+  tx.executeSql(&apos;CREATE TABLE IF NOT EXISTS t1 (id unique, log)&apos;);  
+   });
+</code></pre><h4 id="3-indexDB-客户端本地数据库（大型数据库）"><a href="#3-indexDB-客户端本地数据库（大型数据库）" class="headerlink" title="(3). indexDB 客户端本地数据库（大型数据库）"></a>(3). indexDB 客户端本地数据库（大型数据库）</h4><p>indexDB是浏览器中的一种数据库，用来保存结构化数据。</p>
+<p>indexDB设计的操作完全是异步进行的。</p>
+<p>indexDB最大的特色是<strong>使用对象保存数据</strong>。</p>
+<p>indexDB.open(“database”) 打开数据库 或者 创建并打开数据库</p>
+<p>indexDB.setVersion(“1.0”) 为数据库指定一个版本号</p>
+<p>database.transaction(); 创建事务，对数据库进行操作</p>
+<p>openCursor() 在对象存储空间上调用这个方法，通过游标查找数据</p>
+<p>createIndex() 创建索引</p>
+<p>indexDB的并发问题</p>
+<h4 id="4-Cookies"><a href="#4-Cookies" class="headerlink" title="(4). Cookies"></a>(4). Cookies</h4><p> <strong>1.cookies是什么</strong></p>
+<p>cookies是服务器用来标识web用户的一小块数据。</p>
+<p>cookies的基本思想就是让浏览器积累一组服务器特有的信息，并在客户端和服务器端来回传递。</p>
+<p>Cookies是由服务器端生成，发送给浏览器，浏览器会将Cookies的key/value保存到某个目录下的文本文件内，下次请求同一网站时就发送该Cookies给服务器（前提是浏览器设置为启用cookies）。</p>
+<p>Cookies一般存在用户本地终端上，通常经过加密处理。</p>
+<p>Cookies一般通过http请求中的头部一起发送到服务器端。在客户端和服务器端之间来回传递。</p>
+<p>一条cookie记录主要由键、值、域、过期时间、大小组成。</p>
+<p><strong>2. cookies的分类：持久cookies 和 会话cookies</strong></p>
+<p>持久cookies：生存时间更长一些，保存在用户终端（电脑硬盘里），会一直存到一个过期日期为止。</p>
+<p>会话cookies：生存时间短，在用户<strong>退出浏览器</strong>便会被删除。</p>
+<p><strong>3. cookies的安全性问题：</strong></p>
+<p>第三方web站点使用持久cookie来跟踪用户，当用户访问同一个广告公司提供的站点，浏览器就会回送之前设置的持久cookie，广告公司便可构建成一个用户档案和浏览习惯的详尽数据集。</p>
+<h4 id="5-localstorage-和-sessionStorage"><a href="#5-localstorage-和-sessionStorage" class="headerlink" title="(5). localstorage 和 sessionStorage"></a>(5). localstorage 和 sessionStorage</h4><p><strong>localstorage</strong> 和 <strong>sessionstorage</strong> 都是<strong>HTML5</strong>提供的在<strong>客户端</strong>存储数据的新方法。</p>
+<p>这两个都是windows对象的属性。</p>
+<p><strong>其主要区别是：</strong></p>
+<p>localStorage - 没有时间限制的数据存储，主要用来存储ajax返回的数据，加快下次访问的渲染速度。</p>
+<p>sessionStorage - 针对一个 session 的数据存储，<strong>浏览器标签页关闭</strong>之后，数据就会被删除（注意是标签页！！！）。</p>
+<p>不同的浏览器无法共享localStorage或sessionStorage中的信息。</p>
+<p>相同浏览器的不同页面间可以共享相同的localStorage的信息</p>
+<p>相同浏览器的不同页面或者标签页间无法共享sessionStorage的信息</p>
+<pre><code>注意：cookies、localStorage、sessionStorage的区别
+
+1. 存储时间不同
+
+cookies分两种：
+
+会话cookies在浏览器关闭之后删除（注意是浏览器！！！）
+
+持久cookies在过期日期之前都会存在
+
+localStorage会一直存在，除非主动删除
+
+sessionStorage在标签页关闭之后就会删除（注意是标签页！！！）
+
+2. 存储的位置不同
+
+cookies是存在用户终端，也就是电脑硬盘上，cookies始终在同源的http请求中携带，会在浏览器和服务器间来回传递。
+
+localStorage和sessionStorage是存在浏览器端
+
+3. 存储大小不同
+
+cookies数据大小不能超过4k
+
+sessionStorage和localStorage存储大小比cookies大得多，可以达到5M
+</code></pre><h4 id="6-application-cache-离线存储"><a href="#6-application-cache-离线存储" class="headerlink" title="(6). application cache 离线存储"></a>(6). application cache 离线存储</h4><p>1.什么是application cache</p>
+<p>application cache是HTML5的新特性，允许<strong>浏览器</strong>在本地存储页面所需要的资源，使得页面离线也可以访问。</p>
+<p>在用户没有与因特网进行连接时，可以正常访问站点或应用，在用户与因特网连接时，更新用户机器上的缓存文件。</p>
+<p>application cache是从浏览器的缓存中分出来的一块缓存区。</p>
+<p>2.使用方法</p>
+<p>a. 首先需要写一下application cache的配置文件</p>
+<p>配置文件称为缓存清单文件（cache manifest），这个很好理解，可以理解成我们通过这个文件告诉浏览器需要缓存哪些文件。</p>
+<p>这个文件一般为.appcache类型</p>
+<p>缓存清单文件一般包括4个部分：</p>
+<p>第一部分  文件头部信息 标注文件类型</p>
+<pre><code>CACHE MANIFEST
+# version XX.XX.XX
+</code></pre><p>第二部分  CACHE部分  标注哪些资源文件需要被缓存</p>
+<pre><code>CACHE：
+image.png
+myjavascript.js
+</code></pre><p>第三部分  NETWORK部分  标注哪些文件需要连接服务器</p>
+<pre><code>NETWORK：
+login.php
+</code></pre><font color="red">注意：如果CACHE和NETWORK里面有相同的资源，那么这个资源还是会被离线缓存，CACHE的有限级更高。</font>
+
+<p>第四部分  FALLBACK  表示没有响应时的替代方案</p>
+<pre><code>FALLBACK：
+static.htmi
+</code></pre><p>b. 在html标签上添加manifest属性</p>
+<pre><code>&lt;html manifest=&quot;name.appcache&quot;&gt;
+</code></pre><p>c. 在离线状态下操作window.applicationCache进行需求实现</p>
+<p>另外，需要注意的是更新缓存。可以通过window.applicationCache 对象来访问浏览器的app cache。</p>
+<pre><code>window.applicationCache.status 为cache当前的状态
+
+window.applicationCache.update() 会更新当前的缓存
+
+window.applicationCache.swapCache() 会启用新的缓存
+
+oncached:当离线资源存储完成之后触发这个事件，这个是文档的说法，我在Chrome上面测试的时候并没有触发这个事件。
+
+onchecking:当浏览器对离线存储资源进行更新检查的时候会触发这个事件
+ondownloading:当浏览器开始下载离线资源的时候会触发这个事件
+
+onprogress:当浏览器在下载每一个资源的时候会触发这个事件，每下载一个资源就会触发一次。
+
+onupdateready:当浏览器对离线资源更新完成之后会触发这个事件
+
+onnoupdate:当浏览器检查更新之后发现没有资源更新的时候触发这个事件
+</code></pre><p>在网上看到的一篇讲离线存储讲得很好的文章，<a href="https://segmentfault.com/a/1190000000732617" title="HTML5：离线储存" target="_blank" rel="external">https://segmentfault.com/a/1190000000732617</a></p>
+<h4 id="7-cacheStorage"><a href="#7-cacheStorage" class="headerlink" title="(7). cacheStorage"></a>(7). cacheStorage</h4><p>cacheStorage 在浏览器上的引用名叫 caches </p>
+<p>CacheStorage 是多个 Cache 的集合，而每个 Cache 可以存储多个 Response 对象</p>
+<p>cacheStorage有open、match、has、delete、keys五个核心方法，可以对cache对象的不同匹配进行不同的响应</p>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/API/CacheStorage" title="CacheStorage的MDN" target="_blank" rel="external">https://developer.mozilla.org/en-US/docs/Web/API/CacheStorage</a></p>
+<h4 id="8-flash缓存"><a href="#8-flash缓存" class="headerlink" title="(8). flash缓存"></a>(8). flash缓存</h4><p>这种方式基本不用，这一方法主要基于flash有读写浏览器端本地目录的功能，同时也可以向js提供调用的api，则页面可以通过js调用flash去读写特定的磁盘目录，达到本地数据缓存的目的。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/浏览器/" rel="tag"># 浏览器</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/03/25/2016-03-27-浏览器跨标签通信/" rel="next" title="浏览器跨标签通信">
+                <i class="fa fa-chevron-left"></i> 浏览器跨标签通信
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/03/29/2016-03-31-CSS选择器总结/" rel="prev" title="CSS选择器总结">
+                CSS选择器总结 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/03/29/2016-03-29-浏览器缓存机制/"
+           data-title="浏览器缓存机制" data-url="http://panpanfish.com/2016/03/29/2016-03-29-浏览器缓存机制/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/icon.jpg"
+               alt="Yu Pan" />
+          <p class="site-author-name" itemprop="name">Yu Pan</p>
+          <p class="site-description motion-element" itemprop="description">在学习中不断进步</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">81</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/panpan040828" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#一-什么是缓存"><span class="nav-number">1.</span> <span class="nav-text">一. 什么是缓存</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二-浏览器缓存"><span class="nav-number">2.</span> <span class="nav-text">二. 浏览器缓存</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-浏览器有哪几种缓存机制"><span class="nav-number">2.1.</span> <span class="nav-text">1. 浏览器有哪几种缓存机制</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-http缓存"><span class="nav-number">3.</span> <span class="nav-text">(1). http缓存</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-Web-SQL-客户端本地数据库（小型数据库）（已被废弃）"><span class="nav-number">4.</span> <span class="nav-text">(2). Web SQL 客户端本地数据库（小型数据库）（已被废弃）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-indexDB-客户端本地数据库（大型数据库）"><span class="nav-number">5.</span> <span class="nav-text">(3). indexDB 客户端本地数据库（大型数据库）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-Cookies"><span class="nav-number">6.</span> <span class="nav-text">(4). Cookies</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-localstorage-和-sessionStorage"><span class="nav-number">7.</span> <span class="nav-text">(5). localstorage 和 sessionStorage</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-application-cache-离线存储"><span class="nav-number">8.</span> <span class="nav-text">(6). application cache 离线存储</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-cacheStorage"><span class="nav-number">9.</span> <span class="nav-text">(7). cacheStorage</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8-flash缓存"><span class="nav-number">10.</span> <span class="nav-text">(8). flash缓存</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yu Pan</span>
+</div>
+
+<!--
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+-->
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"panpanfish"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  
+
+
+</body>
+</html>

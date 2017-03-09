@@ -1,0 +1,839 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="javaScript," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+
+
+
+
+
+
+<meta name="description" content="这篇博客是对js中对字符串的一些操作方法的总结。
+一. js中的string类型string类型是字符串的对象包装类型（与字符串对应的引用类型）
+var stringObj = new String(&amp;quot;Hi&amp;quot;);
+二. js中对字符串的一些操作1. 创建字符串var myStr = &amp;quot;Hi&amp;quot;;
+2. myStr.length 获得字符串的长度var mySt">
+<meta property="og:type" content="article">
+<meta property="og:title" content="js中的string类型">
+<meta property="og:url" content="http://panpanfish.com/2016/04/24/2016-04-23-js中的string类型/index.html">
+<meta property="og:site_name" content="筱鱼兒">
+<meta property="og:description" content="这篇博客是对js中对字符串的一些操作方法的总结。
+一. js中的string类型string类型是字符串的对象包装类型（与字符串对应的引用类型）
+var stringObj = new String(&amp;quot;Hi&amp;quot;);
+二. js中对字符串的一些操作1. 创建字符串var myStr = &amp;quot;Hi&amp;quot;;
+2. myStr.length 获得字符串的长度var mySt">
+<meta property="og:updated_time" content="2016-05-16T08:42:57.561Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="js中的string类型">
+<meta name="twitter:description" content="这篇博客是对js中对字符串的一些操作方法的总结。
+一. js中的string类型string类型是字符串的对象包装类型（与字符串对应的引用类型）
+var stringObj = new String(&amp;quot;Hi&amp;quot;);
+二. js中对字符串的一些操作1. 创建字符串var myStr = &amp;quot;Hi&amp;quot;;
+2. myStr.length 获得字符串的长度var mySt">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+
+  <title> js中的string类型 | 筱鱼兒 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?e18d9ee1b355055e9a39ffec741beb44";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="my-headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="my-site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">筱鱼兒</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">温柔于己，温柔于人</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+          
+            <li class="menu-item menu-item-home">
+              <a href="/" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+                
+                首页
+              </a>
+            </li>
+          
+      
+        
+          
+            <li class="menu-item menu-item-categories">
+              <a href="/categories" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+                
+                分类
+              </a>
+            </li>
+          
+      
+        
+          
+            <li class="menu-item menu-item-archives">
+              <a href="/archives" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+                
+                归档
+              </a>
+            </li>
+          
+      
+        
+          
+            <li class="menu-item menu-item-tags">
+              <a href="/tags" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+                
+                标签
+              </a>
+            </li>
+          
+      
+        
+          
+            <li class="menu-item menu-item-demo">
+              <a href="/categories/Demo/" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-code"></i> <br />
+                
+                demo
+              </a>
+            </li>
+          
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                js中的string类型
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-04-24T00:00:00+08:00" content="2016-04-24">
+              2016-04-24
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/前端笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">前端笔记</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/04/24/2016-04-23-js中的string类型/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/24/2016-04-23-js中的string类型/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>这篇博客是对js中对字符串的一些操作方法的总结。</p>
+<h3 id="一-js中的string类型"><a href="#一-js中的string类型" class="headerlink" title="一. js中的string类型"></a>一. js中的string类型</h3><p>string类型是字符串的对象包装类型（与字符串对应的引用类型）</p>
+<pre><code>var stringObj = new String(&quot;Hi&quot;);
+</code></pre><h3 id="二-js中对字符串的一些操作"><a href="#二-js中对字符串的一些操作" class="headerlink" title="二. js中对字符串的一些操作"></a>二. js中对字符串的一些操作</h3><h4 id="1-创建字符串"><a href="#1-创建字符串" class="headerlink" title="1. 创建字符串"></a>1. 创建字符串</h4><pre><code>var myStr = &quot;Hi&quot;;
+</code></pre><h4 id="2-myStr-length-获得字符串的长度"><a href="#2-myStr-length-获得字符串的长度" class="headerlink" title="2. myStr.length 获得字符串的长度"></a>2. myStr.length 获得字符串的长度</h4><pre><code>var myStr = &quot;Hi&quot;;
+alert(myStr.length)；//字符串长度为2
+</code></pre><h4 id="3-访问特定字符的方法-charAt-、charCodeAt"><a href="#3-访问特定字符的方法-charAt-、charCodeAt" class="headerlink" title="3. 访问特定字符的方法 charAt()、charCodeAt()"></a>3. 访问特定字符的方法 charAt()、charCodeAt()</h4><ul>
+<li>charAt()：获得指定位置的字符</li>
+<li><p>charCodeAt()：获得指定位置的字符编码</p>
+<p>  var myStr = “Hello”;<br>  alert(myStr.charAt(1))；// e 字符串的位置以0开始<br>  alert(myStr.charCodeAt(1))；//101  字符串的位置以0开始</p>
+</li>
+</ul>
+<h4 id="4-拼接字符串-号操作符、concat"><a href="#4-拼接字符串-号操作符、concat" class="headerlink" title="4. 拼接字符串 +号操作符、concat()"></a>4. 拼接字符串 +号操作符、concat()</h4><p>用+号用得比较多</p>
+<p>concat()会生成一个新的字符串</p>
+<pre><code>var myStr1 = &quot;Hello&quot;;
+var myRes = myStr.concat(&quot;!&quot;);
+alert(myRes);//&quot;Hello!&quot;
+</code></pre><h4 id="5-截取字符串-slice-、substr-、substring-、"><a href="#5-截取字符串-slice-、substr-、substring-、" class="headerlink" title="5. 截取字符串 slice()、substr()、substring()、"></a>5. 截取字符串 slice()、substr()、substring()、</h4><p>这三个方法也不会修改原字符串，会生成一个新的字符串</p>
+<p><strong>slice(a,b)</strong></p>
+<p>a为截取的起始位置，b为截取的结束位置+1</p>
+<p>b可以省略，若省略，则一直截取到字符串末尾</p>
+<pre><code>var myStr1 = &quot;Hello&quot;;
+var myRes = myStr.slice(1,3);
+alert(myRes);//&quot;el&quot;
+</code></pre><p>若a,b为负值，则slice(a,b) = slice(a+字符串长度，b+字符串长度)</p>
+<p><strong>substring(a,b)</strong></p>
+<p>a为截取的起始位置，b为截取的结束位置+1</p>
+<p>b可以省略，若省略，则一直截取到字符串末尾</p>
+<pre><code>var myStr1 = &quot;Hello&quot;;
+var myRes = myStr.substring(1,3);
+alert(myRes);//&quot;el&quot;
+</code></pre><p>若a,b为负值，则substring会将为负值的参数转化为0</p>
+<p><strong>substr(a,b)</strong></p>
+<p>a为截取的起始位置，b为截取的长度</p>
+<p>b可以省略，若省略，则一直截取到字符串末尾</p>
+<pre><code>var myStr1 = &quot;Hello&quot;;
+var myRes = myStr.substr(1,3);
+alert(myRes);//&quot;ell&quot;
+</code></pre><p>若a,b为负值，则substr会将a加上字符串的长度，将b转化为0</p>
+<h4 id="6-字符串中字符的位置-indexOf-、lastIndexOf"><a href="#6-字符串中字符的位置-indexOf-、lastIndexOf" class="headerlink" title="6. 字符串中字符的位置 indexOf()、lastIndexOf()"></a>6. 字符串中字符的位置 indexOf()、lastIndexOf()</h4><p>indexOf()：从字符串的第一个字符开始查找</p>
+<p>lastIndexOf():从字符串的最后一个字符开始查找</p>
+<pre><code>var myStr1 = &quot;Hello&quot;;
+var myRes = myStr.indexOf(&quot;l&quot;);//2
+var myRes = myStr.lastIndexOf(&quot;l&quot;);//3
+</code></pre><p>若有第二个参数，则可从指定位置开始查找</p>
+<pre><code>var myStr1 = &quot;Hello&quot;;
+var myRes = myStr.indexOf(&quot;l&quot;，2);//2
+var myRes = myStr.lastIndexOf(&quot;l&quot;，2);//2
+</code></pre><h4 id="7-字符串删除前后空格的方法-trim"><a href="#7-字符串删除前后空格的方法-trim" class="headerlink" title="7. 字符串删除前后空格的方法 trim()"></a>7. 字符串删除前后空格的方法 trim()</h4><p>原字符串不变，会生成一个新的字符串</p>
+<pre><code>var myStr1 = &quot; Hello&quot;;
+var myRes = myStr.trim();//&quot;Hello&quot;
+</code></pre><h4 id="8-字符串大小写转换-toLowerCase-、toUpperCase-、toLocaleLowerCase-、toLocaleUpperCase"><a href="#8-字符串大小写转换-toLowerCase-、toUpperCase-、toLocaleLowerCase-、toLocaleUpperCase" class="headerlink" title="8. 字符串大小写转换 toLowerCase()、toUpperCase()、toLocaleLowerCase()、toLocaleUpperCase()"></a>8. 字符串大小写转换 toLowerCase()、toUpperCase()、toLocaleLowerCase()、toLocaleUpperCase()</h4><p>toLocaleLowerCase()、toLocaleUpperCase()是针对地区的实现</p>
+<pre><code>var myStr1 = &quot;Hello&quot;;
+var myRes = myStr.toLowerCase();//hello
+var myRes = myStr.toUpperCase();//HELLO
+</code></pre><h4 id="9-字符串的模式匹配match-、search-、replace-、split"><a href="#9-字符串的模式匹配match-、search-、replace-、split" class="headerlink" title="9. 字符串的模式匹配match()、search()、replace()、split()"></a>9. 字符串的模式匹配match()、search()、replace()、split()</h4><p>match()会返回一个数组，数组里面是第一个匹配的字符串，数组只有一项</p>
+<p>eg:</p>
+<pre><code>var myStr1 = &quot;car,mar&quot;;
+var myRes = myStr.match(&quot;ar&quot;);//myRes[0] = ar
+var myRes = myStr.match(/.ar/);//myRes[0] = car
+</code></pre><p>search()返回字符串中第一个匹配项的索引，没有找到，返回-1</p>
+<p>eg:</p>
+<pre><code>var myStr1 = &quot;car,mar&quot;;
+var myRes = myStr.search(&quot;a&quot;);//1
+var myRes = myStr.search(&quot;t&quot;);//-1
+</code></pre><p>replace()用于替换指定字符串或者满足正则表达式的字符串，会返回一个新的数组</p>
+<p>replace(a,b)</p>
+<ul>
+<li>a可以为指定字符串或者正则表达式</li>
+<li>b可以为字符串、特殊的字符序列、函数</li>
+</ul>
+<p>eg:</p>
+<pre><code>var myStr = &quot;car,mar&quot;;
+var result = myStr.replace(&quot;ar&quot;,&quot;&quot;);//&quot;c,mar&quot;
+</code></pre><p>split()以特定的分隔符将字符串分割成多个子字符串，并将结果存在一个数组中。</p>
+<p>eg:</p>
+<pre><code>var myStr = &quot;car,mar&quot;;
+var myRes = myStr.split(&quot;,&quot;);//myRes=[&quot;car&quot;,&quot;mar&quot;]
+</code></pre><h4 id="10-localeCompare"><a href="#10-localeCompare" class="headerlink" title="10. localeCompare()"></a>10. localeCompare()</h4><p>比较两个字符串的在字母表中的先后顺序</p>
+<p>eg:</p>
+<pre><code>var myStr = &quot;car&quot;;
+var myRes = myStr.localeCompare(&quot;aar&quot;);//1
+</code></pre><h4 id="11-fromCharCode"><a href="#11-fromCharCode" class="headerlink" title="11. fromCharCode()"></a>11. fromCharCode()</h4><p>将字符编码转换成字符串</p>
+<p>(1) every()用于检测数组是否<strong>每一项</strong>都满足某个条件，如果是，则返回true;否则返回false</p>
+<p>eg:</p>
+<pre><code>var num = [1,2,3,4,5];
+
+var numRes = num.every(function(item,index,array){
+        return (item &gt;= 1);
+
+});//numRes为true
+</code></pre><p>(2) some()用于检测数组中是否有一项满足某个条件，如果是，则返回true;否则返回false</p>
+<p>eg:</p>
+<pre><code>var num = [1,2,3,4,5];
+
+var numRes = num.some(function(item,index,array){
+        return (item &gt;= 5);
+
+});//numRes为true
+</code></pre><p>(3) filter()用于选出数组中满足某个条件的项，并形成一个新的数组</p>
+<p>eg:</p>
+<pre><code>var num = [1,2,3,4,5];
+
+var numRes = num.filter(function(item,index,array){
+        return (item &gt;= 3);
+
+});//numRes为[3,4,5]
+</code></pre><p>(4) map()用于将数组中的每一项都做一个操作，并形成一个新的数组</p>
+<p>eg:</p>
+<pre><code>var num = [1,2,3,4,5];
+
+var numRes = num.map(function(item,index,array){
+        return (item + 3);
+
+});//numRes为[4,5,6,7,8]
+</code></pre><p>(5) forEach()用于将数组中的每一项都做一个操作（原数组发生了改变）</p>
+<p>eg:</p>
+<pre><code>var num = [1,2,3,4,5];
+
+num.forEach(function(item,index,array){
+        return (item + 3);
+
+});//num为[4,5,6,7,8]
+</code></pre><h4 id="8-数组中的归并方法-reduce-、reduceRight"><a href="#8-数组中的归并方法-reduce-、reduceRight" class="headerlink" title="8. 数组中的归并方法 reduce()、reduceRight()"></a>8. 数组中的归并方法 reduce()、reduceRight()</h4><p>将数组中的每一项进行迭代，最终返回一个值；两者的区别是迭代的方向不同，<strong>reduce()是从数组的第一项开始，reduceRight()是从数组的最后一项开始</strong>。</p>
+<p>eg:</p>
+<pre><code>var num = [1,2,3,4,5];
+
+var numRes = num.reduce(function(prev,cur,index,array){
+
+return prev + cur;
+
+})//numRes为15
+</code></pre>
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/javaScript/" rel="tag"># javaScript</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/04/23/2016-04-23-js中对数组的一些操作/" rel="next" title="js中对数组的一些操作">
+                <i class="fa fa-chevron-left"></i> js中对数组的一些操作
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/04/25/2016-04-25-HTML5中的canvas/" rel="prev" title="HTML5中的canvas">
+                HTML5中的canvas <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/04/24/2016-04-23-js中的string类型/"
+           data-title="js中的string类型" data-url="http://panpanfish.com/2016/04/24/2016-04-23-js中的string类型/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/icon.jpg"
+               alt="Yu Pan" />
+          <p class="site-author-name" itemprop="name">Yu Pan</p>
+          <p class="site-description motion-element" itemprop="description">在学习中不断进步</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">81</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/panpan040828" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一-js中的string类型"><span class="nav-number">1.</span> <span class="nav-text">一. js中的string类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二-js中对字符串的一些操作"><span class="nav-number">2.</span> <span class="nav-text">二. js中对字符串的一些操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-创建字符串"><span class="nav-number">2.1.</span> <span class="nav-text">1. 创建字符串</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-myStr-length-获得字符串的长度"><span class="nav-number">2.2.</span> <span class="nav-text">2. myStr.length 获得字符串的长度</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-访问特定字符的方法-charAt-、charCodeAt"><span class="nav-number">2.3.</span> <span class="nav-text">3. 访问特定字符的方法 charAt()、charCodeAt()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-拼接字符串-号操作符、concat"><span class="nav-number">2.4.</span> <span class="nav-text">4. 拼接字符串 +号操作符、concat()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-截取字符串-slice-、substr-、substring-、"><span class="nav-number">2.5.</span> <span class="nav-text">5. 截取字符串 slice()、substr()、substring()、</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-字符串中字符的位置-indexOf-、lastIndexOf"><span class="nav-number">2.6.</span> <span class="nav-text">6. 字符串中字符的位置 indexOf()、lastIndexOf()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-字符串删除前后空格的方法-trim"><span class="nav-number">2.7.</span> <span class="nav-text">7. 字符串删除前后空格的方法 trim()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8-字符串大小写转换-toLowerCase-、toUpperCase-、toLocaleLowerCase-、toLocaleUpperCase"><span class="nav-number">2.8.</span> <span class="nav-text">8. 字符串大小写转换 toLowerCase()、toUpperCase()、toLocaleLowerCase()、toLocaleUpperCase()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#9-字符串的模式匹配match-、search-、replace-、split"><span class="nav-number">2.9.</span> <span class="nav-text">9. 字符串的模式匹配match()、search()、replace()、split()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#10-localeCompare"><span class="nav-number">2.10.</span> <span class="nav-text">10. localeCompare()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#11-fromCharCode"><span class="nav-number">2.11.</span> <span class="nav-text">11. fromCharCode()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8-数组中的归并方法-reduce-、reduceRight"><span class="nav-number">2.12.</span> <span class="nav-text">8. 数组中的归并方法 reduce()、reduceRight()</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yu Pan</span>
+</div>
+
+<!--
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+-->
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"panpanfish"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  
+
+
+</body>
+</html>

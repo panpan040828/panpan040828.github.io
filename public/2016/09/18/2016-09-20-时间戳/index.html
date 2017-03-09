@@ -1,0 +1,761 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="javaScript," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+
+
+
+
+
+
+<meta name="description" content="一. 什么是Unix时间戳？Unix时间戳指的是：当前时刻（年-月-日-时-分-秒）距离格林威治时间（1970年1月1日00时00分00秒）的总秒数（单位是秒不是毫秒）。
+在js中获得时间戳：
+
+使用Date.now()
+
+返回当前时刻的时间戳
+
+使用+操作符
+
+在不支持Date.now()的浏览器中可以如下所示获得当前时刻的时间戳：
+var t = +new Date();
+
+获得某一个指定时间">
+<meta property="og:type" content="article">
+<meta property="og:title" content="时间戳">
+<meta property="og:url" content="http://panpanfish.com/2016/09/18/2016-09-20-时间戳/index.html">
+<meta property="og:site_name" content="筱鱼兒">
+<meta property="og:description" content="一. 什么是Unix时间戳？Unix时间戳指的是：当前时刻（年-月-日-时-分-秒）距离格林威治时间（1970年1月1日00时00分00秒）的总秒数（单位是秒不是毫秒）。
+在js中获得时间戳：
+
+使用Date.now()
+
+返回当前时刻的时间戳
+
+使用+操作符
+
+在不支持Date.now()的浏览器中可以如下所示获得当前时刻的时间戳：
+var t = +new Date();
+
+获得某一个指定时间">
+<meta property="og:updated_time" content="2016-09-20T12:15:14.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="时间戳">
+<meta name="twitter:description" content="一. 什么是Unix时间戳？Unix时间戳指的是：当前时刻（年-月-日-时-分-秒）距离格林威治时间（1970年1月1日00时00分00秒）的总秒数（单位是秒不是毫秒）。
+在js中获得时间戳：
+
+使用Date.now()
+
+返回当前时刻的时间戳
+
+使用+操作符
+
+在不支持Date.now()的浏览器中可以如下所示获得当前时刻的时间戳：
+var t = +new Date();
+
+获得某一个指定时间">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+
+  <title> 时间戳 | 筱鱼兒 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?e18d9ee1b355055e9a39ffec741beb44";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="my-headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="my-site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">筱鱼兒</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">温柔于己，温柔于人</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+          
+            <li class="menu-item menu-item-home">
+              <a href="/" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+                
+                首页
+              </a>
+            </li>
+          
+      
+        
+          
+            <li class="menu-item menu-item-categories">
+              <a href="/categories" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+                
+                分类
+              </a>
+            </li>
+          
+      
+        
+          
+            <li class="menu-item menu-item-archives">
+              <a href="/archives" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+                
+                归档
+              </a>
+            </li>
+          
+      
+        
+          
+            <li class="menu-item menu-item-tags">
+              <a href="/tags" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+                
+                标签
+              </a>
+            </li>
+          
+      
+        
+          
+            <li class="menu-item menu-item-demo">
+              <a href="/categories/Demo/" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-code"></i> <br />
+                
+                demo
+              </a>
+            </li>
+          
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                时间戳
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-09-18T00:00:00+08:00" content="2016-09-18">
+              2016-09-18
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/javaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">javaScript</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/09/18/2016-09-20-时间戳/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/18/2016-09-20-时间戳/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="一-什么是Unix时间戳？"><a href="#一-什么是Unix时间戳？" class="headerlink" title="一. 什么是Unix时间戳？"></a>一. 什么是Unix时间戳？</h3><p>Unix时间戳指的是：当前时刻（年-月-日-时-分-秒）距离格林威治时间（1970年1月1日00时00分00秒）的<strong>总秒数</strong>（单位是秒不是毫秒）。</p>
+<p><strong>在js中获得时间戳：</strong></p>
+<ol>
+<li>使用Date.now()</li>
+</ol>
+<p>返回当前时刻的时间戳</p>
+<ol>
+<li>使用+操作符</li>
+</ol>
+<p>在不支持Date.now()的浏览器中可以如下所示获得当前时刻的时间戳：</p>
+<p>var t = +new Date();</p>
+<ol>
+<li>获得某一个指定时间的时间戳</li>
+</ol>
+<p><strong>date.getTime()对象方法</strong></p>
+<figure class="highlight lasso"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">eg: <span class="built_in">var</span> <span class="built_in">date</span> = <span class="literal">new</span> <span class="built_in">Date</span>(<span class="number">2016</span>,<span class="number">8</span>,<span class="number">20</span>,<span class="number">19</span>,<span class="number">54</span>,<span class="number">11</span>);</span><br><span class="line">    <span class="built_in">var</span> t = <span class="built_in">date</span>.getTime()/<span class="number">1000</span>; <span class="comment">//getTime()得到的单位是毫秒</span></span><br></pre></td></tr></table></figure>
+<p><strong>Date.parse()静态方法</strong></p>
+<figure class="highlight gauss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">eg: var <span class="built_in">date</span> = <span class="keyword">new</span> <span class="built_in">Date</span>(<span class="number">2016</span>,<span class="number">8</span>,<span class="number">20</span>,<span class="number">19</span>,<span class="number">54</span>,<span class="number">11</span>);</span><br><span class="line">    <span class="built_in">Date</span>.<span class="built_in">parse</span>(<span class="built_in">date</span>)/<span class="number">1000</span>; <span class="comment">//Date.parse()得到的单位是毫秒</span></span><br></pre></td></tr></table></figure>
+<p><strong>已知时间戳，输出日期：date.setTime(毫秒)</strong></p>
+<p>var timestamp = 1403058804;<br>var newDate = new Date();<br>newDate.setTime(timestamp * 1000);</p>
+<h3 id="二-moment-js"><a href="#二-moment-js" class="headerlink" title="二. moment.js"></a>二. moment.js</h3><p>moment.js是一个js日期处理类库</p>
+<h4 id="1-实现comment-js中按规定格式输出日期"><a href="#1-实现comment-js中按规定格式输出日期" class="headerlink" title="1. 实现comment.js中按规定格式输出日期"></a>1. 实现comment.js中按规定格式输出日期</h4><figure class="highlight qml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Date</span>.prototype.format = <span class="function"><span class="keyword">function</span>(<span class="params">format</span>) </span>&#123;</span><br><span class="line">       <span class="built_in">var</span> <span class="built_in">date</span> = &#123;</span><br><span class="line">              <span class="string">"M+"</span>: <span class="keyword">this</span>.getMonth() + <span class="number">1</span>,</span><br><span class="line">              <span class="string">"D+"</span>: <span class="keyword">this</span>.getDate(),</span><br><span class="line">              <span class="string">"h+"</span>: <span class="keyword">this</span>.getHours(),</span><br><span class="line">              <span class="string">"m+"</span>: <span class="keyword">this</span>.getMinutes(),</span><br><span class="line">              <span class="string">"s+"</span>: <span class="keyword">this</span>.getSeconds(),</span><br><span class="line">       &#125;;</span><br><span class="line">       <span class="keyword">if</span> (<span class="regexp">/(Y+)/i</span>.test(format)) &#123;</span><br><span class="line">              format = format.replace(<span class="built_in">RegExp</span>.$<span class="number">1</span>, (<span class="keyword">this</span>.getFullYear() + <span class="string">''</span>).substr(<span class="number">4</span> - <span class="built_in">RegExp</span>.$<span class="number">1.</span>length));</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">for</span> (<span class="built_in">var</span> k <span class="keyword">in</span> <span class="built_in">date</span>) &#123;</span><br><span class="line">              <span class="keyword">if</span> (<span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">"("</span> + k + <span class="string">")"</span>).test(format)) &#123;</span><br><span class="line">                     format = format.replace(<span class="built_in">RegExp</span>.$<span class="number">1</span>, <span class="built_in">RegExp</span>.$<span class="number">1.</span>length == <span class="number">1</span></span><br><span class="line">                            ? <span class="built_in">date</span>[k] : (<span class="string">"00"</span> + <span class="built_in">date</span>[k]).substr((<span class="string">""</span> + <span class="built_in">date</span>[k]).length));</span><br><span class="line">              &#125;</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">return</span> format;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(newDate.format(<span class="string">'YYYY-MM-DD h:m:s'</span>));</span><br></pre></td></tr></table></figure>
+<h4 id="2-输出当前日期YYYY-MM-DD（不使用正则表达式）"><a href="#2-输出当前日期YYYY-MM-DD（不使用正则表达式）" class="headerlink" title="2. 输出当前日期YYYY-MM-DD（不使用正则表达式）"></a>2. 输出当前日期YYYY-MM-DD（不使用正则表达式）</h4><figure class="highlight processing"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">function nowDate() &#123;</span><br><span class="line">  		var nowDate = <span class="keyword">new</span> Date();</span><br><span class="line">  		var <span class="built_in">year</span> = nowDate.getFullYear();</span><br><span class="line">  		var <span class="built_in">month</span> = parseInt(nowDate.getMonth()) + <span class="number">1</span>;</span><br><span class="line">  		var <span class="built_in">day</span> = parseInt(nowDate.getDate());</span><br><span class="line">  		<span class="keyword">if</span>(<span class="built_in">month</span> &lt; <span class="number">10</span>) &#123;</span><br><span class="line">  			<span class="built_in">month</span> = <span class="string">'0'</span> + <span class="built_in">month</span>;</span><br><span class="line">  		&#125;</span><br><span class="line"></span><br><span class="line">  		<span class="keyword">if</span>(<span class="built_in">day</span> &lt; <span class="number">10</span>) &#123;</span><br><span class="line">  			<span class="built_in">day</span> = <span class="string">'0'</span> + <span class="built_in">day</span>;</span><br><span class="line">  		&#125;</span><br><span class="line"></span><br><span class="line">  		var result = <span class="built_in">year</span> + <span class="string">'-'</span> + <span class="built_in">month</span> + <span class="string">'-'</span> + <span class="built_in">day</span>;</span><br><span class="line">  		<span class="keyword">return</span> result;</span><br><span class="line">  	&#125;</span><br><span class="line">  	console.<span class="built_in">log</span>(nowDate());</span><br></pre></td></tr></table></figure>
+<p><strong>要注意的地方：</strong></p>
+<ul>
+<li>获取年份的函数是：date.getFullyear()</li>
+<li>获取月份的函数是从0开始算起：12月份 date.getMonth() = 11</li>
+<li>获取天数的函数是：date.getDate()</li>
+<li>获取星期的函数是：date.getDay() 注意，周天不是7而是0</li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/javaScript/" rel="tag"># javaScript</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/09/18/2016-09-18-二分查找/" rel="next" title="二分查找">
+                <i class="fa fa-chevron-left"></i> 二分查找
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/09/20/2016-09-20-字典/" rel="prev" title="字典">
+                字典 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/09/18/2016-09-20-时间戳/"
+           data-title="时间戳" data-url="http://panpanfish.com/2016/09/18/2016-09-20-时间戳/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/icon.jpg"
+               alt="Yu Pan" />
+          <p class="site-author-name" itemprop="name">Yu Pan</p>
+          <p class="site-description motion-element" itemprop="description">在学习中不断进步</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">142</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">38</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/panpan040828" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一-什么是Unix时间戳？"><span class="nav-number">1.</span> <span class="nav-text">一. 什么是Unix时间戳？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二-moment-js"><span class="nav-number">2.</span> <span class="nav-text">二. moment.js</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-实现comment-js中按规定格式输出日期"><span class="nav-number">2.1.</span> <span class="nav-text">1. 实现comment.js中按规定格式输出日期</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-输出当前日期YYYY-MM-DD（不使用正则表达式）"><span class="nav-number">2.2.</span> <span class="nav-text">2. 输出当前日期YYYY-MM-DD（不使用正则表达式）</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yu Pan</span>
+</div>
+
+<!--
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+-->
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"panpanfish"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  
+
+
+</body>
+</html>

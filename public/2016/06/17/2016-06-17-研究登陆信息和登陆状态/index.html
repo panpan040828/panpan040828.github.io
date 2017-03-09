@@ -1,0 +1,738 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="浏览器," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+
+
+
+
+
+
+<meta name="description" content="这几天看了一下session和cookie的内容，突然对登陆页面产生了兴趣，经过测试发现，无论在多进程还是多线程浏览器中，淘宝的登陆是满足：
+
+在浏览器的a标签页面登陆自己的账号，同时打开该浏览器的另外一个标签页b，在b页面访问淘宝，发现b页面是显示的登陆状态。
+
+若在b页面退出登陆，再打开a页面，在不执行任何操作的情况下，a页面显示的虽然是登陆状态，但其实已经退出登陆了，刷新页面或者点击一个链接">
+<meta property="og:type" content="article">
+<meta property="og:title" content="研究登陆信息与登陆状态">
+<meta property="og:url" content="http://panpanfish.com/2016/06/17/2016-06-17-研究登陆信息和登陆状态/index.html">
+<meta property="og:site_name" content="筱鱼兒">
+<meta property="og:description" content="这几天看了一下session和cookie的内容，突然对登陆页面产生了兴趣，经过测试发现，无论在多进程还是多线程浏览器中，淘宝的登陆是满足：
+
+在浏览器的a标签页面登陆自己的账号，同时打开该浏览器的另外一个标签页b，在b页面访问淘宝，发现b页面是显示的登陆状态。
+
+若在b页面退出登陆，再打开a页面，在不执行任何操作的情况下，a页面显示的虽然是登陆状态，但其实已经退出登陆了，刷新页面或者点击一个链接">
+<meta property="og:updated_time" content="2016-06-17T07:05:54.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="研究登陆信息与登陆状态">
+<meta name="twitter:description" content="这几天看了一下session和cookie的内容，突然对登陆页面产生了兴趣，经过测试发现，无论在多进程还是多线程浏览器中，淘宝的登陆是满足：
+
+在浏览器的a标签页面登陆自己的账号，同时打开该浏览器的另外一个标签页b，在b页面访问淘宝，发现b页面是显示的登陆状态。
+
+若在b页面退出登陆，再打开a页面，在不执行任何操作的情况下，a页面显示的虽然是登陆状态，但其实已经退出登陆了，刷新页面或者点击一个链接">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+
+  <title> 研究登陆信息与登陆状态 | 筱鱼兒 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?e18d9ee1b355055e9a39ffec741beb44";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="my-headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="my-site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">筱鱼兒</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">温柔于己，温柔于人</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+          
+            <li class="menu-item menu-item-home">
+              <a href="/" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+                
+                首页
+              </a>
+            </li>
+          
+      
+        
+          
+            <li class="menu-item menu-item-categories">
+              <a href="/categories" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+                
+                分类
+              </a>
+            </li>
+          
+      
+        
+          
+            <li class="menu-item menu-item-archives">
+              <a href="/archives" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+                
+                归档
+              </a>
+            </li>
+          
+      
+        
+          
+            <li class="menu-item menu-item-tags">
+              <a href="/tags" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+                
+                标签
+              </a>
+            </li>
+          
+      
+        
+          
+            <li class="menu-item menu-item-demo">
+              <a href="/categories/Demo/" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-code"></i> <br />
+                
+                demo
+              </a>
+            </li>
+          
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                研究登陆信息与登陆状态
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-06-17T00:00:00+08:00" content="2016-06-17">
+              2016-06-17
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/浏览器/" itemprop="url" rel="index">
+                    <span itemprop="name">浏览器</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/06/17/2016-06-17-研究登陆信息和登陆状态/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/17/2016-06-17-研究登陆信息和登陆状态/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>这几天看了一下session和cookie的内容，突然对登陆页面产生了兴趣，经过测试发现，无论在多进程还是多线程浏览器中，淘宝的登陆是满足：</p>
+<ol>
+<li><p>在浏览器的a标签页面登陆自己的账号，同时打开该浏览器的另外一个标签页b，在b页面访问淘宝，发现b页面是显示的登陆状态。</p>
+</li>
+<li><p>若在b页面退出登陆，再打开a页面，在不执行任何操作的情况下，a页面显示的虽然是登陆状态，但其实已经退出登陆了，刷新页面或者点击一个链接，都会跳到让你登陆的页面。</p>
+</li>
+<li><p>a页面处于登录状态，若关闭浏览器，再次打开浏览器，访问淘宝，则仍然需要输入账号密码来登录。</p>
+</li>
+</ol>
+<p>基于上面3点，产生了下面的疑问：</p>
+<ol>
+<li><p>登录的信息（账号、密码）存在哪里？</p>
+</li>
+<li><p>登录的状态是保存在哪里？</p>
+</li>
+<li><p>如何做到不同标签页共享同一个登录状态，在关闭浏览器之后，该登录状态又失效？</p>
+</li>
+<li><p>当勾选了记住密码，用户名和密码是保存在哪里的？</p>
+</li>
+</ol>
+<blockquote>
+<p>Cookie来起登陆作用的呢，有兴趣的可以把浏览器的Cookie禁用掉，应该大部分的网站登陆不进去，为什么不是全部呢，是因为cookie确实不是唯一一种支持登陆的方式，如果你懂得这个原理，你就知道，可以通过URL添加登陆参数来每次验证或者可以采用把登陆相关信息放到隐藏的表单里面，如果你采用以上方法的时候一定要重视用户登录信息的安全性。</p>
+</blockquote>
+<h3 id="一-登陆信息存在哪里"><a href="#一-登陆信息存在哪里" class="headerlink" title="一. 登陆信息存在哪里?"></a>一. 登陆信息存在哪里?</h3><p>由于session是存在服务器的，session比cookie安全一些，因此向用户名和密码这种比较重要的信息都是用session进行保存的。</p>
+<p>然后使用cookie来保存session id</p>
+<h3 id="二-登录的状态是保存在哪里？"><a href="#二-登录的状态是保存在哪里？" class="headerlink" title="二. 登录的状态是保存在哪里？"></a>二. 登录的状态是保存在哪里？</h3><p>登陆状态和登陆信息的处理方法是一样的。</p>
+<h3 id="三-如何做到不同标签页共享同一个登录状态，在关闭浏览器之后，该登录状态又失效？"><a href="#三-如何做到不同标签页共享同一个登录状态，在关闭浏览器之后，该登录状态又失效？" class="headerlink" title="三. 如何做到不同标签页共享同一个登录状态，在关闭浏览器之后，该登录状态又失效？"></a>三. 如何做到不同标签页共享同一个登录状态，在关闭浏览器之后，该登录状态又失效？</h3><p>不同标签页之间是共享同一个session的，关闭浏览器之后，再登陆该网站，session id变了，之前的session也被删掉了，因此需要重新登陆。</p>
+<p>一般利用会话cookie来保存session id。</p>
+<h3 id="四-当勾选了记住密码，用户名和密码是保存在哪里的"><a href="#四-当勾选了记住密码，用户名和密码是保存在哪里的" class="headerlink" title="四. 当勾选了记住密码，用户名和密码是保存在哪里的?"></a>四. 当勾选了记住密码，用户名和密码是保存在哪里的?</h3><p>勾选了记住密码，再点击登陆按钮的时候，如果登陆成功就把用户名和密码设置到cookies（持久cookie）中。</p>
+<p>下一次的打开这个登陆网页的时候  在onload中先查看cookies中有没有数据，有的话就将之前记住的用户名和密码显示出来；没有的话就显示页面  然后和前面一样，点登陆的时候再设置cookie。</p>
+<p>上面都是现在自己的理解，也不知道是不是全部对的~不断地查漏补缺吧~&gt;_&lt;</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/浏览器/" rel="tag"># 浏览器</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/06/17/2016-06-17-浏览器跨标签页通信/" rel="next" title="浏览器跨标签页通信">
+                <i class="fa fa-chevron-left"></i> 浏览器跨标签页通信
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/06/18/2016-06-18-编写高质量代码——HTML、CSS/" rel="prev" title="编写高质量代码————HTML、CSS">
+                编写高质量代码————HTML、CSS <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/06/17/2016-06-17-研究登陆信息和登陆状态/"
+           data-title="研究登陆信息与登陆状态" data-url="http://panpanfish.com/2016/06/17/2016-06-17-研究登陆信息和登陆状态/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/icon.jpg"
+               alt="Yu Pan" />
+          <p class="site-author-name" itemprop="name">Yu Pan</p>
+          <p class="site-description motion-element" itemprop="description">在学习中不断进步</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">142</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">38</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/panpan040828" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一-登陆信息存在哪里"><span class="nav-number">1.</span> <span class="nav-text">一. 登陆信息存在哪里?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二-登录的状态是保存在哪里？"><span class="nav-number">2.</span> <span class="nav-text">二. 登录的状态是保存在哪里？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三-如何做到不同标签页共享同一个登录状态，在关闭浏览器之后，该登录状态又失效？"><span class="nav-number">3.</span> <span class="nav-text">三. 如何做到不同标签页共享同一个登录状态，在关闭浏览器之后，该登录状态又失效？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四-当勾选了记住密码，用户名和密码是保存在哪里的"><span class="nav-number">4.</span> <span class="nav-text">四. 当勾选了记住密码，用户名和密码是保存在哪里的?</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yu Pan</span>
+</div>
+
+<!--
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+-->
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"panpanfish"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  
+
+
+</body>
+</html>

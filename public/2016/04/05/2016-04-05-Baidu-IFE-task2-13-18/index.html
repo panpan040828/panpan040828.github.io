@@ -1,0 +1,792 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="BaiduIFE," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+
+
+
+
+
+
+<meta name="description" content="参加百度前端公开课的第一阶段任务">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Baidu IFE 第二阶段任务13~18">
+<meta property="og:url" content="http://panpanfish.com/2016/04/05/2016-04-05-Baidu-IFE-task2-13-18/index.html">
+<meta property="og:site_name" content="筱鱼兒">
+<meta property="og:description" content="参加百度前端公开课的第一阶段任务">
+<meta property="og:image" content="http://panpanfish.com/uploads/post/demo/baidu-ife-task2.jpg">
+<meta property="og:updated_time" content="2016-05-30T09:43:06.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Baidu IFE 第二阶段任务13~18">
+<meta name="twitter:description" content="参加百度前端公开课的第一阶段任务">
+<meta name="twitter:image" content="http://panpanfish.com/uploads/post/demo/baidu-ife-task2.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+
+  <title> Baidu IFE 第二阶段任务13~18 | 筱鱼兒 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?e18d9ee1b355055e9a39ffec741beb44";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="my-headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="my-site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">筱鱼兒</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">温柔于己，温柔于人</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+          
+            <li class="menu-item menu-item-home">
+              <a href="/" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+                
+                首页
+              </a>
+            </li>
+          
+      
+        
+          
+            <li class="menu-item menu-item-categories">
+              <a href="/categories" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+                
+                分类
+              </a>
+            </li>
+          
+      
+        
+          
+            <li class="menu-item menu-item-archives">
+              <a href="/archives" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+                
+                归档
+              </a>
+            </li>
+          
+      
+        
+          
+            <li class="menu-item menu-item-tags">
+              <a href="/tags" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+                
+                标签
+              </a>
+            </li>
+          
+      
+        
+          
+            <li class="menu-item menu-item-demo">
+              <a href="/categories/Demo/" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-code"></i> <br />
+                
+                demo
+              </a>
+            </li>
+          
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Baidu IFE 第二阶段任务13~18
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-04-05T00:00:00+08:00" content="2016-04-05">
+              2016-04-05
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Demo/" itemprop="url" rel="index">
+                    <span itemprop="name">Demo</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/04/05/2016-04-05-Baidu-IFE-task2-13-18/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/05/2016-04-05-Baidu-IFE-task2-13-18/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="一-第二阶段任务"><a href="#一-第二阶段任务" class="headerlink" title="一.  第二阶段任务"></a>一.  第二阶段任务</h3><p>百度前端技术学院的第一阶段主要是针对HTML和CSS的学习和训练，第二阶段就进入javascript的学习了。</p>
+<p>进入js之后发现很多基础的东西虽然之前看过，但是用起来时候还是得再返回去看一下，希望自己能在做任务的过程中不断进步~~</p>
+<p><img src="/uploads/post/demo/baidu-ife-task2.jpg" alt="第二阶段任务"></p>
+<h3 id="二-我的任务"><a href="#二-我的任务" class="headerlink" title="二.  我的任务"></a>二.  我的任务</h3><p>我的任务列表<a href="http://panpanfish.com/baiduIFE/">http://panpanfish.com/baiduIFE/</a></p>
+<h4 id="1-任务十三"><a href="#1-任务十三" class="headerlink" title="1. 任务十三"></a>1. 任务十三</h4><h4 id="1-任务十三需要完成的功能"><a href="#1-任务十三需要完成的功能" class="headerlink" title="(1). 任务十三需要完成的功能"></a>(1). 任务十三需要完成的功能</h4><p><strong>任务要求：</strong></p>
+<p>本任务完成的功能为：用户可以在输入框中输入任何内容，点击“确认填写”按钮后，用户输入的内容会显示在“您输入的值是”文字的右边</p>
+<h4 id="2-任务十三demo"><a href="#2-任务十三demo" class="headerlink" title="(2). 任务十三demo"></a>(2). 任务十三demo</h4><p><a href="http://panpanfish.com/baiduIFE/task2-13.html">http://panpanfish.com/baiduIFE/task2-13.html</a></p>
+<h4 id="3-任务十三代码"><a href="#3-任务十三代码" class="headerlink" title="(3). 任务十三代码"></a>(3). 任务十三代码</h4><p><a href="https://github.com/panpan040828/baiduIFE/blob/gh-pages/task2-13.html" target="_blank" rel="external">https://github.com/panpan040828/baiduIFE/blob/gh-pages/task2-13.html</a></p>
+<h4 id="4-任务十三笔记"><a href="#4-任务十三笔记" class="headerlink" title="(4). 任务十三笔记"></a>(4). 任务十三笔记</h4><p><strong>a. (function(){})();</strong></p>
+<p>这个代表一个<strong>自执行的匿名函数</strong>，function(){}代表一个函数，但是没有对函数命名，于是用()将其括起来，后面的()代表函数自动执行</p>
+<p><strong>b. click()和onclick的区别</strong></p>
+<p><strong>click()</strong>是一个方法，对某一个DOM节点调用这个方法之后，就会执行click这个动作。</p>
+<p><strong>onclick</strong>是一个事件，我们可以给这个事件添加响应这个事件的函数（事件处理程序）。</p>
+<pre><code>onclick = function(){}
+
+函数里面的内容代表：当执行这个事件时（click这个动作时）会做出什么样的响应
+</code></pre><p><strong>c. 利用id名获取DOM节点</strong></p>
+<pre><code>document.getElementById(&quot;myid&quot;)
+</code></pre><p><strong>d. 获取input框的输入值</strong></p>
+<pre><code>document.getElementById(&quot;myinput&quot;).value
+</code></pre><p><strong>e. DOM 的innerHTML属性</strong></p>
+<p>获取或者设置标签内部的HTML</p>
+<h4 id="2-任务十四"><a href="#2-任务十四" class="headerlink" title="2. 任务十四"></a>2. 任务十四</h4><h4 id="1-任务十四需要完成的功能"><a href="#1-任务十四需要完成的功能" class="headerlink" title="(1). 任务十四需要完成的功能"></a>(1). 任务十四需要完成的功能</h4><p><strong>任务要求：</strong></p>
+<p>页面加载后，将提供的空气质量数据数组，按照某种逻辑（比如空气质量大于60）进行过滤筛选，最后将符合条件的数据按照一定的格式要求显示在网页上</p>
+<pre><code>&lt;li&gt;第一名：福州（样例），10&lt;/li&gt;
+  &lt;li&gt;第二名：福州（样例），10&lt;/li&gt; 
+</code></pre><h4 id="2-任务十四demo"><a href="#2-任务十四demo" class="headerlink" title="(2). 任务十四demo"></a>(2). 任务十四demo</h4><p><a href="http://panpanfish.com/baiduIFE/task2-14.html">http://panpanfish.com/baiduIFE/task2-14.html</a></p>
+<h4 id="3-任务十四代码"><a href="#3-任务十四代码" class="headerlink" title="(3). 任务十四代码"></a>(3). 任务十四代码</h4><p><a href="https://github.com/panpan040828/baiduIFE/blob/gh-pages/task2-14.html" target="_blank" rel="external">https://github.com/panpan040828/baiduIFE/blob/gh-pages/task2-14.html</a></p>
+<h4 id="4-任务十四笔记"><a href="#4-任务十四笔记" class="headerlink" title="(4). 任务十四笔记"></a>(4). 任务十四笔记</h4><p><strong>a. 数组的重排序方法</strong></p>
+<p><strong>sort()</strong> 会将数组的元素进行排序，是直接将原数组进行排序。</p>
+<ul>
+<li><p><strong>直接调用array.sort()时，将会按照字符编码的顺序进行升序排序。</strong></p>
+<p>  sort()方法会调用数组中每一项的toString()方法，然后比较得到的字符串，来确定如何排序。</p>
+</li>
+</ul>
+<p>eg:</p>
+<pre><code>var values=[0,1,5,10,15]
+values.sort();
+alert(values);
+
+结果是：0，1，10，15，5 //不是对数值进行排序，而是对数字转换成的字符的编码顺序进行排序
+</code></pre><ul>
+<li><p><strong>给sort()传入一个比较函数，可以按照数值大小进行排序</strong></p>
+<pre><code>values.sort(compare);
+
+compare为比较函数
+
+function compare(value1,value2)
+{
+    if(value1 &lt; value2)
+    {return -1;}
+
+    if(value1 = value2)
+    {return -1;}
+
+    if(value1 &gt; value2)
+    {return 1;}
+}
+
+**比较函数返回参数解释：**
+- 若为正数：第一个参数位于第二个参数之后
+- 若为0：两个参数相等
+- 若为负数：第一个参数位于第二个参数之前
+
+所以上面举例的比较函数是升序排列的比较函数
+
+简化的比较函数
+
+升序排列的比较函数 function compare(a,b){return a-b}
+
+降序排列的比较函数 function compare(a,b){return b-a}
+</code></pre></li>
+</ul>
+<p><strong>reverse()</strong>方法，反转数组项的顺序</p>
+<p><strong>b. 数组的迭代方法</strong></p>
+<p>这里只记录用到<strong>filter()方法</strong>和<strong>map()方法</strong></p>
+<ul>
+<li>filter是满足条件的留下，是对原数组的过滤；</li>
+<li>map则是对原数组的加工，映射成一一映射的新数组</li>
+</ul>
+<p><strong>filter()</strong> 顾名思义，可以理解成用某种条件来过滤数组的方法，用某种条件来选出符合该条件的项，并组成一个新的数组。</p>
+<p>eg:</p>
+<pre><code>var numbers = [1,2,3,4,5,6,7];
+
+var filterResult = numbers.filter(function(item,index,array){
+    return (item &gt; 2);//返回数组中大于2的项
+
+});
+</code></pre><p><strong>map()</strong> 映射，新数组中的每一项都是由原数组的对应项经过某种操作得来的</p>
+<p>eg:</p>
+<pre><code>var numbers = [1,2,3,4,5];
+
+var mapResult = numbers.map(function(item,index,array){
+    return item * 2;
+});
+</code></pre>
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/BaiduIFE/" rel="tag"># BaiduIFE</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/04/04/2016-04-04-Baidu-IFE-task1-7-12/" rel="next" title="Baidu IFE 第一阶段任务7~12">
+                <i class="fa fa-chevron-left"></i> Baidu IFE 第一阶段任务7~12
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/04/05/2016-04-05-清除浮动的几种方法/" rel="prev" title="清除浮动的几种方法">
+                清除浮动的几种方法 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/04/05/2016-04-05-Baidu-IFE-task2-13-18/"
+           data-title="Baidu IFE 第二阶段任务13~18" data-url="http://panpanfish.com/2016/04/05/2016-04-05-Baidu-IFE-task2-13-18/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/icon.jpg"
+               alt="Yu Pan" />
+          <p class="site-author-name" itemprop="name">Yu Pan</p>
+          <p class="site-description motion-element" itemprop="description">在学习中不断进步</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">142</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">38</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/panpan040828" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一-第二阶段任务"><span class="nav-number">1.</span> <span class="nav-text">一.  第二阶段任务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二-我的任务"><span class="nav-number">2.</span> <span class="nav-text">二.  我的任务</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-任务十三"><span class="nav-number">2.1.</span> <span class="nav-text">1. 任务十三</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-任务十三需要完成的功能"><span class="nav-number">2.2.</span> <span class="nav-text">(1). 任务十三需要完成的功能</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-任务十三demo"><span class="nav-number">2.3.</span> <span class="nav-text">(2). 任务十三demo</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-任务十三代码"><span class="nav-number">2.4.</span> <span class="nav-text">(3). 任务十三代码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-任务十三笔记"><span class="nav-number">2.5.</span> <span class="nav-text">(4). 任务十三笔记</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-任务十四"><span class="nav-number">2.6.</span> <span class="nav-text">2. 任务十四</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-任务十四需要完成的功能"><span class="nav-number">2.7.</span> <span class="nav-text">(1). 任务十四需要完成的功能</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-任务十四demo"><span class="nav-number">2.8.</span> <span class="nav-text">(2). 任务十四demo</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-任务十四代码"><span class="nav-number">2.9.</span> <span class="nav-text">(3). 任务十四代码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-任务十四笔记"><span class="nav-number">2.10.</span> <span class="nav-text">(4). 任务十四笔记</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yu Pan</span>
+</div>
+
+<!--
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+-->
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"panpanfish"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  
+
+
+</body>
+</html>

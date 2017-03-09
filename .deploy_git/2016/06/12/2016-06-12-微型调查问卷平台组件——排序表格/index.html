@@ -1,0 +1,748 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="javaScript," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+
+
+
+
+
+
+<meta name="description" content="一. 排序表格任务要求
+实现一个支持列排序的表格组件
+提供生成表格的接口，表格中的数据，表格样式尽量低耦合
+可以配置对哪些列支持排序功能，并在表头进行排序按钮的显示，图中的样式为示意参考，可自行设定样式及交互方式
+提供点击排序按钮后的响应接口，并提供默认的排序方法，当提供的接口没有具体实现时，按默认的排序方法进行排序操作，并更新表格中的数据显示
+
+demo地址：http://panpanfish.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="微型调查问卷平台组件——排序表格">
+<meta property="og:url" content="http://panpanfish.com/2016/06/12/2016-06-12-微型调查问卷平台组件——排序表格/index.html">
+<meta property="og:site_name" content="筱鱼兒">
+<meta property="og:description" content="一. 排序表格任务要求
+实现一个支持列排序的表格组件
+提供生成表格的接口，表格中的数据，表格样式尽量低耦合
+可以配置对哪些列支持排序功能，并在表头进行排序按钮的显示，图中的样式为示意参考，可自行设定样式及交互方式
+提供点击排序按钮后的响应接口，并提供默认的排序方法，当提供的接口没有具体实现时，按默认的排序方法进行排序操作，并更新表格中的数据显示
+
+demo地址：http://panpanfish.">
+<meta property="og:updated_time" content="2016-06-13T06:39:24.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="微型调查问卷平台组件——排序表格">
+<meta name="twitter:description" content="一. 排序表格任务要求
+实现一个支持列排序的表格组件
+提供生成表格的接口，表格中的数据，表格样式尽量低耦合
+可以配置对哪些列支持排序功能，并在表头进行排序按钮的显示，图中的样式为示意参考，可自行设定样式及交互方式
+提供点击排序按钮后的响应接口，并提供默认的排序方法，当提供的接口没有具体实现时，按默认的排序方法进行排序操作，并更新表格中的数据显示
+
+demo地址：http://panpanfish.">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+
+  <title> 微型调查问卷平台组件——排序表格 | 筱鱼兒 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?e18d9ee1b355055e9a39ffec741beb44";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="my-headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="my-site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">筱鱼兒</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">温柔于己，温柔于人</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+          
+            <li class="menu-item menu-item-home">
+              <a href="/" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+                
+                首页
+              </a>
+            </li>
+          
+      
+        
+          
+            <li class="menu-item menu-item-categories">
+              <a href="/categories" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+                
+                分类
+              </a>
+            </li>
+          
+      
+        
+          
+            <li class="menu-item menu-item-archives">
+              <a href="/archives" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+                
+                归档
+              </a>
+            </li>
+          
+      
+        
+          
+            <li class="menu-item menu-item-tags">
+              <a href="/tags" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+                
+                标签
+              </a>
+            </li>
+          
+      
+        
+          
+            <li class="menu-item menu-item-demo">
+              <a href="/categories/Demo/" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-code"></i> <br />
+                
+                demo
+              </a>
+            </li>
+          
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                微型调查问卷平台组件——排序表格
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-06-12T00:00:00+08:00" content="2016-06-12">
+              2016-06-12
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Demo/" itemprop="url" rel="index">
+                    <span itemprop="name">Demo</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/06/12/2016-06-12-微型调查问卷平台组件——排序表格/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/12/2016-06-12-微型调查问卷平台组件——排序表格/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="一-排序表格任务要求"><a href="#一-排序表格任务要求" class="headerlink" title="一. 排序表格任务要求"></a>一. 排序表格任务要求</h3><ul>
+<li>实现一个支持列排序的表格组件</li>
+<li>提供生成表格的接口，表格中的数据，表格样式尽量低耦合</li>
+<li>可以配置对哪些列支持排序功能，并在表头进行排序按钮的显示，图中的样式为示意参考，可自行设定样式及交互方式</li>
+<li>提供点击排序按钮后的响应接口，并提供默认的排序方法，当提供的接口没有具体实现时，按默认的排序方法进行排序操作，并更新表格中的数据显示</li>
+</ul>
+<p><strong>demo地址：</strong><a href="http://panpanfish.com/myDemo/research/sortTable.html" title="排序表格">http://panpanfish.com/myDemo/research/sortTable.html</a></p>
+<p><strong>代码地址：</strong><a href="https://github.com/panpan040828/myDemo/blob/gh-pages/research/sortTable.html" title="排序表格" target="_blank" rel="external">https://github.com/panpan040828/myDemo/blob/gh-pages/research/sortTable.html</a></p>
+<p><strong>代码描述：</strong></p>
+<p>RankTable的原型添加了3个方法：<strong>init()</strong>、<strong>addThead()</strong>、<strong>addTbody()</strong></p>
+<p><strong>init()</strong>初始化了表格</p>
+<p><strong>addThead()</strong>根据提供的配置信息中的可以排序的列号，对可以排序的列进行设定，并绑定相应的事件监听函数,排序时，会调用addTbody()更新表格中的数据显示。</p>
+<p><strong>addTbody()</strong>显示表格中的内容</p>
+<p><strong>表格头部和表格内容显示时，都涉及到两个问题：</strong></p>
+<ul>
+<li>dom节点的添加</li>
+<li>dom节点内容的添加</li>
+</ul>
+<h3 id="二-实现过程中遇到的问题"><a href="#二-实现过程中遇到的问题" class="headerlink" title="二. 实现过程中遇到的问题"></a>二. 实现过程中遇到的问题</h3><h4 id="1-往页面中插入dom节点的问题"><a href="#1-往页面中插入dom节点的问题" class="headerlink" title="1. 往页面中插入dom节点的问题"></a>1. 往页面中插入dom节点的问题</h4><p>之前涉及到向页面中添加dom节点时，我都是通过<code>document.createElement()</code>;然后再通过<code>appendChild()</code>来实现。</p>
+<p>在这个demo中，使用的是<strong>拼接字符串</strong>的形式：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> item = <span class="string">"&lt;tr&gt;"</span> + <span class="string">"&lt;/tr&gt;"</span>;</span><br><span class="line"><span class="keyword">var</span> mydiv = <span class="built_in">document</span>.getElementById(<span class="string">"mydiv"</span>);</span><br><span class="line">mydiv.innerHTML = item;</span><br></pre></td></tr></table></figure></p>
+<p>感觉这样会简单一些。</p>
+<h4 id="2-巧妙地使用map-函数和join"><a href="#2-巧妙地使用map-函数和join" class="headerlink" title="2. 巧妙地使用map()函数和join()"></a>2. 巧妙地使用map()函数和join()</h4><p>使用拼接字符串的形式添加dom节点时，可以配合使用<strong>map()</strong>函数和<strong>join()</strong></p>
+<p><strong>map()函数</strong>的作用是将数组的每一项都执行map()里面的函数，并返回一个新的数组。</p>
+<p><strong>join()函数</strong>的作用是将数组以某种特殊的符号连接起来，变成字符串（这里使用的是空字符串连接）</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params">con</span>) </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="string">"&lt;td&gt;"</span> + con + <span class="string">"&lt;/td&gt;"</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> th = <span class="keyword">this</span>.th.map(fn).join(<span class="string">""</span>);</span><br></pre></td></tr></table></figure>
+<h4 id="3-children和childNodes的区别"><a href="#3-children和childNodes的区别" class="headerlink" title="3. children和childNodes的区别"></a>3. children和childNodes的区别</h4><p><strong>childNodes：</strong>是标准属性。返回指定元素的所有子节点的集合（包括HTML节点、属性节点、文本节点）</p>
+<p>可通过判断nodeType==1来判断是否为元素节点：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getFirst</span>(<span class="params">elem</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>,e;e=elem.childNodes[i++];)&#123;</span><br><span class="line">        <span class="keyword">if</span>(e.nodeType==<span class="number">1</span>)</span><br><span class="line">            <span class="keyword">return</span> e;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>children：</strong>非标准属性。返回指定元素的所有元素节点的集合。（几乎得到了所有浏览器的支持）</p>
+<p>注意：children在IE中包含注释节点。</p>
+<h4 id="4-表格中的border-spacing和border-collapse属性"><a href="#4-表格中的border-spacing和border-collapse属性" class="headerlink" title="4. 表格中的border-spacing和border-collapse属性"></a>4. 表格中的border-spacing和border-collapse属性</h4><p><strong>border-spacing：</strong>设置相邻单元格的边框间的距离。</p>
+<p>一般如果需要去掉表格默认的边框，可以设置<code>border-spacing:0;</code></p>
+<p><strong>border-collapse：</strong>设置表格的边框是否被合并为一个单一的边框。</p>
+<p><code>border-collapse:collapse;</code>边框合并为一个单一的边框。</p>
+<h4 id="5-二维数组按照某一列进行排序"><a href="#5-二维数组按照某一列进行排序" class="headerlink" title="5. 二维数组按照某一列进行排序"></a>5. 二维数组按照某一列进行排序</h4><p>见博客</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/javaScript/" rel="tag"># javaScript</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/06/12/2016-06-12-微型调查问卷平台组件——冻结行列表格/" rel="next" title="微型调查问卷平台组件——冻结行列表格">
+                <i class="fa fa-chevron-left"></i> 微型调查问卷平台组件——冻结行列表格
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/06/14/2016-06-14-元素视图属性/" rel="prev" title="元素视图属性">
+                元素视图属性 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/06/12/2016-06-12-微型调查问卷平台组件——排序表格/"
+           data-title="微型调查问卷平台组件——排序表格" data-url="http://panpanfish.com/2016/06/12/2016-06-12-微型调查问卷平台组件——排序表格/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/icon.jpg"
+               alt="Yu Pan" />
+          <p class="site-author-name" itemprop="name">Yu Pan</p>
+          <p class="site-description motion-element" itemprop="description">在学习中不断进步</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">142</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">38</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/panpan040828" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一-排序表格任务要求"><span class="nav-number">1.</span> <span class="nav-text">一. 排序表格任务要求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二-实现过程中遇到的问题"><span class="nav-number">2.</span> <span class="nav-text">二. 实现过程中遇到的问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-往页面中插入dom节点的问题"><span class="nav-number">2.1.</span> <span class="nav-text">1. 往页面中插入dom节点的问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-巧妙地使用map-函数和join"><span class="nav-number">2.2.</span> <span class="nav-text">2. 巧妙地使用map()函数和join()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-children和childNodes的区别"><span class="nav-number">2.3.</span> <span class="nav-text">3. children和childNodes的区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-表格中的border-spacing和border-collapse属性"><span class="nav-number">2.4.</span> <span class="nav-text">4. 表格中的border-spacing和border-collapse属性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-二维数组按照某一列进行排序"><span class="nav-number">2.5.</span> <span class="nav-text">5. 二维数组按照某一列进行排序</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yu Pan</span>
+</div>
+
+<!--
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+-->
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"panpanfish"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  
+
+
+</body>
+</html>

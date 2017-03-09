@@ -1,0 +1,771 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="浏览器," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+
+
+
+
+
+
+<meta name="description" content="一. 根据url请求页面的过程1. 浏览器查找域名对应的IP地址
+IP 地址：用来标识每个主机，类似于门牌号码
+域名（ DN —— domain name ）:容易记住的与ip对应的地址， 一个域名对应一个或多个提供相同服务服务器的 IP 地址
+DNS（domain name system）：，只有知道服务器 IP 地址才能建立连接，所以需要通过 DNS 把域名解析成一个 IP 地址。
+
+注意：I">
+<meta property="og:type" content="article">
+<meta property="og:title" content="输入url浏览器所做的工作">
+<meta property="og:url" content="http://panpanfish.com/2016/05/25/2016-05-25-浏览器输入url之后/index.html">
+<meta property="og:site_name" content="筱鱼兒">
+<meta property="og:description" content="一. 根据url请求页面的过程1. 浏览器查找域名对应的IP地址
+IP 地址：用来标识每个主机，类似于门牌号码
+域名（ DN —— domain name ）:容易记住的与ip对应的地址， 一个域名对应一个或多个提供相同服务服务器的 IP 地址
+DNS（domain name system）：，只有知道服务器 IP 地址才能建立连接，所以需要通过 DNS 把域名解析成一个 IP 地址。
+
+注意：I">
+<meta property="og:updated_time" content="2016-05-27T03:02:43.007Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="输入url浏览器所做的工作">
+<meta name="twitter:description" content="一. 根据url请求页面的过程1. 浏览器查找域名对应的IP地址
+IP 地址：用来标识每个主机，类似于门牌号码
+域名（ DN —— domain name ）:容易记住的与ip对应的地址， 一个域名对应一个或多个提供相同服务服务器的 IP 地址
+DNS（domain name system）：，只有知道服务器 IP 地址才能建立连接，所以需要通过 DNS 把域名解析成一个 IP 地址。
+
+注意：I">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+
+  <title> 输入url浏览器所做的工作 | 筱鱼兒 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?e18d9ee1b355055e9a39ffec741beb44";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="my-headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="my-site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">筱鱼兒</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">温柔于己，温柔于人</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+          
+            <li class="menu-item menu-item-home">
+              <a href="/" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+                
+                首页
+              </a>
+            </li>
+          
+      
+        
+          
+            <li class="menu-item menu-item-categories">
+              <a href="/categories" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+                
+                分类
+              </a>
+            </li>
+          
+      
+        
+          
+            <li class="menu-item menu-item-archives">
+              <a href="/archives" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+                
+                归档
+              </a>
+            </li>
+          
+      
+        
+          
+            <li class="menu-item menu-item-tags">
+              <a href="/tags" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+                
+                标签
+              </a>
+            </li>
+          
+      
+        
+          
+            <li class="menu-item menu-item-demo">
+              <a href="/categories/Demo/" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-code"></i> <br />
+                
+                demo
+              </a>
+            </li>
+          
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                输入url浏览器所做的工作
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-05-25T00:00:00+08:00" content="2016-05-25">
+              2016-05-25
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/前端笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">前端笔记</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/05/25/2016-05-25-浏览器输入url之后/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/25/2016-05-25-浏览器输入url之后/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="一-根据url请求页面的过程"><a href="#一-根据url请求页面的过程" class="headerlink" title="一. 根据url请求页面的过程"></a>一. 根据url请求页面的过程</h3><h4 id="1-浏览器查找域名对应的IP地址"><a href="#1-浏览器查找域名对应的IP地址" class="headerlink" title="1. 浏览器查找域名对应的IP地址"></a>1. 浏览器查找域名对应的IP地址</h4><ul>
+<li><strong>IP 地址</strong>：用来标识每个主机，类似于门牌号码</li>
+<li><strong>域名（ DN —— domain name ）</strong>:容易记住的与ip对应的地址， 一个域名对应一个或多个提供相同服务服务器的 IP 地址</li>
+<li><strong>DNS（domain name system）</strong>：，只有知道服务器 IP 地址才能建立连接，所以需要通过 DNS 把域名解析成一个 IP 地址。</li>
+</ul>
+<font color="red">注意：IP 地址与域名不是一一对应的关系：可以把多个提供相同服务的服务器 IP 设置为同一个域名，但在同一时刻一个域名只能解析出一个 IP地址；同时，一个 IP 地址可以绑定多个域名，数量不限</font>
+
+<p><strong>根据域名查找ip地址的过程：</strong></p>
+<pre><code>（1）浏览器搜索自己的 DNS 缓存（维护一张域名与 IP 地址的对应表）；
+（2）搜索操作系统中的 DNS 缓存（维护一张域名与 IP 地址的对应表）；
+（3）搜索操作系统的 hosts 文件（ Windows 环境下，维护一张域名与 IP 地址的对应表）；
+（4）操作系统将域名发送至 LDNS（本地区域名服务器，如果你在学校接入互联网，则 LDNS 服务器就在学校，如果通过电信接入互联网，则 LDNS 服务器就在你当地的电信那里。）LDNS 查询 自己的 DNS 缓存（一般查找成功率在 80% 左右），查找成功则返回结果，失败则发起一个迭代 DNS 解析请求；
+    LDNS 向 Root Name Server （根域名服务器，其虽然没有每个域名的的具体信息，但存储了负责每个域，如 com、net、org等的解析的顶级域名服务器的地址）发起请求，此处，Root Name Server 返回 com 域的顶级域名服务器的地址；
+    LDNS 向 com 域的顶级域名服务器发起请求，返回 baidu.com 域名服务器地址；
+    LDNS 向 baidu.com 域名服务器发起请求，得到 www.baidu.com 的 IP 地址；
+（5）LDNS 将得到的 IP 地址返回给操作系统，同时自己也将 IP 地址缓存起来；
+（6）操作系统将 IP 地址返回给浏览器，同时自己也将 IP 地址缓存起来；
+（7）至此，浏览器已经得到了域名对应的 IP 地址。
+</code></pre><h4 id="2-建立连接"><a href="#2-建立连接" class="headerlink" title="2. 建立连接"></a>2. 建立连接</h4><p>由1中知道了域名所对应的ip地址，便开始与服务器建立连接</p>
+<p><strong>建立连接的过程如下（TCP协议-三次握手）：</strong></p>
+<pre><code>（1）主机向服务器发送一个建立连接的请求（您好，我想认识您）
+（2）服务器接到请求后发送同意连接的信号（好的，我同意认识您）
+（3）主机接收到同意连接的信号之后，再次向服务器发送确认信号（我也很高兴认识您），自此，主机和服务器建立了连接。
+</code></pre><h4 id="3-网页请求与显示"><a href="#3-网页请求与显示" class="headerlink" title="3. 网页请求与显示"></a>3. 网页请求与显示</h4><p>在2中，主机与服务器建立了连接之后，便是主机与服务器进行通信。</p>
+<pre><code>（1）浏览器根据 URL 内容生成 HTTP 请求，请求中包含请求文件的位置、请求文件的方式等等；
+（2）服务器接到请求后，会根据 HTTP 请求中的内容来决定如何获取相应的 HTML 文件；
+（3）服务器将得到的 HTML 文件发送给浏览器；
+（4）在浏览器还没有完全接收 HTML 文件时便开始渲染、显示网页；
+（5）在执行 HTML 中代码时，根据需要，浏览器会继续请求图片、CSS、JavsScript等文件，过程同请求 HTML ；
+</code></pre><p><strong>HTML页面加载和解析流程</strong></p>
+<pre><code>（1）用户输入网址（假设是个html页面，并且是第一次访问），浏览器向服务器发出请求，服务器返回html文件。 
+
+（2）浏览器开始载入html代码，发现&lt;head&gt;标签内有一个&lt;link&gt;标签引用外部CSS文件。 
+
+（3）浏览器又发出CSS文件的请求，服务器返回这个CSS文件。 
+
+（4）浏览器继续载入html中&lt;body&gt;部分的代码，并且CSS文件已经拿到手了，可以开始渲染页面了。 
+
+（5）浏览器在代码中发现一个&lt;img&gt;标签引用了一张图片，向服务器发出请求。此时浏览器不会等到图片下载完，而是继续渲染后面的代码。 
+
+（6）服务器返回图片文件，由于图片占用了一定面积，影响了后面段落的排布，因此浏览器需要回过头来重新渲染这部分代码。 
+
+（7）浏览器发现了一个包含一行Javascript代码的&lt;script&gt;标签，赶快运行它。 
+
+（8）Javascript脚本执行了这条语句，它命令浏览器隐藏掉代码中的某个&lt;style&gt;（style.display=”none”）。杯具啊，突然就少了这么一个元素，浏览器不得不重新渲染这部分代码。 
+
+（9）终于等到了&lt;/html&gt;的到来，浏览器泪流满面…… 
+
+（10） 等等，还没完，用户点了一下界面中的“换肤”按钮，Javascript让浏览器换了一下＜link＞标签的CSS路径。 
+
+（11）浏览器召集了在座的各位&lt;div&gt;&lt;span&gt;&lt;ul&gt;&lt;li&gt;们，“大伙儿收拾收拾行李，咱得重新来过……”，浏览器向服务器请求了新的CSS文件，重新渲染页面。
+</code></pre><h4 id="4-断开连接（TCP-四次挥手）"><a href="#4-断开连接（TCP-四次挥手）" class="headerlink" title="4.断开连接（TCP-四次挥手）"></a>4.断开连接（TCP-四次挥手）</h4><pre><code>（1）主机向服务器发送一个断开连接的请求（不早了，我该走了）；
+（2）服务器接到请求后发送确认收到请求的信号（知道了）；
+（3）服务器向主机发送断开通知（我也该走了）；
+（4）主机接到断开通知后断开连接并反馈一个确认信号（嗯，好的），服务器收到确认信号后断开连接；
+</code></pre><p>为什么服务器在接到断开请求时不立即同意断开：当服务器收到断开连接的请求时，可能仍然有数据未发送完毕，所有服务器先发送确认信号，等所有数据发送完毕后再同意断开。</p>
+<h3 id="二-从浏览器中输入url到页面展示用到了哪些协议"><a href="#二-从浏览器中输入url到页面展示用到了哪些协议" class="headerlink" title="二. 从浏览器中输入url到页面展示用到了哪些协议"></a>二. 从浏览器中输入url到页面展示用到了哪些协议</h3><ul>
+<li>Ip协议（网络层）</li>
+<li>TCP协议（传输层）</li>
+<li>HTTP协议（应用层）</li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/浏览器/" rel="tag"># 浏览器</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/05/24/2016-05-24-js中的DOM操作/" rel="next" title="js中的DOM操作">
+                <i class="fa fa-chevron-left"></i> js中的DOM操作
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/05/27/2016-05-27-post和get的区别/" rel="prev" title="Http请求中的post和get的区别">
+                Http请求中的post和get的区别 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/05/25/2016-05-25-浏览器输入url之后/"
+           data-title="输入url浏览器所做的工作" data-url="http://panpanfish.com/2016/05/25/2016-05-25-浏览器输入url之后/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/icon.jpg"
+               alt="Yu Pan" />
+          <p class="site-author-name" itemprop="name">Yu Pan</p>
+          <p class="site-description motion-element" itemprop="description">在学习中不断进步</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">81</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/panpan040828" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一-根据url请求页面的过程"><span class="nav-number">1.</span> <span class="nav-text">一. 根据url请求页面的过程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-浏览器查找域名对应的IP地址"><span class="nav-number">1.1.</span> <span class="nav-text">1. 浏览器查找域名对应的IP地址</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-建立连接"><span class="nav-number">1.2.</span> <span class="nav-text">2. 建立连接</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-网页请求与显示"><span class="nav-number">1.3.</span> <span class="nav-text">3. 网页请求与显示</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-断开连接（TCP-四次挥手）"><span class="nav-number">1.4.</span> <span class="nav-text">4.断开连接（TCP-四次挥手）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二-从浏览器中输入url到页面展示用到了哪些协议"><span class="nav-number">2.</span> <span class="nav-text">二. 从浏览器中输入url到页面展示用到了哪些协议</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yu Pan</span>
+</div>
+
+<!--
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+-->
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"panpanfish"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  
+
+
+</body>
+</html>

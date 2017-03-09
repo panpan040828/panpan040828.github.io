@@ -1,0 +1,833 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="HTML5," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+
+
+
+
+
+
+<meta name="description" content="&amp;lt;canvas&amp;gt;是HYML5中新增的标签，利用canvas，可以在js内部完成图像的绘制，canvas可以理解成一张画布。
+一. 使用canvas画图的准备工作HTML中
+&amp;lt;canvas id=&amp;quot;myCanvas&amp;quot;&amp;gt;&amp;lt;/canvas&amp;gt;
+JS中
+var canvas1 = document.getElementById(&amp;apos;myCanv">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HTML5中的canvas">
+<meta property="og:url" content="http://panpanfish.com/2016/04/25/2016-04-25-HTML5中的canvas/index.html">
+<meta property="og:site_name" content="筱鱼兒">
+<meta property="og:description" content="&amp;lt;canvas&amp;gt;是HYML5中新增的标签，利用canvas，可以在js内部完成图像的绘制，canvas可以理解成一张画布。
+一. 使用canvas画图的准备工作HTML中
+&amp;lt;canvas id=&amp;quot;myCanvas&amp;quot;&amp;gt;&amp;lt;/canvas&amp;gt;
+JS中
+var canvas1 = document.getElementById(&amp;apos;myCanv">
+<meta property="og:updated_time" content="2016-05-04T12:47:20.762Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="HTML5中的canvas">
+<meta name="twitter:description" content="&amp;lt;canvas&amp;gt;是HYML5中新增的标签，利用canvas，可以在js内部完成图像的绘制，canvas可以理解成一张画布。
+一. 使用canvas画图的准备工作HTML中
+&amp;lt;canvas id=&amp;quot;myCanvas&amp;quot;&amp;gt;&amp;lt;/canvas&amp;gt;
+JS中
+var canvas1 = document.getElementById(&amp;apos;myCanv">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+
+  <title> HTML5中的canvas | 筱鱼兒 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?e18d9ee1b355055e9a39ffec741beb44";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="my-headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="my-site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">筱鱼兒</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">温柔于己，温柔于人</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+          
+            <li class="menu-item menu-item-home">
+              <a href="/" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+                
+                首页
+              </a>
+            </li>
+          
+      
+        
+          
+            <li class="menu-item menu-item-categories">
+              <a href="/categories" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+                
+                分类
+              </a>
+            </li>
+          
+      
+        
+          
+            <li class="menu-item menu-item-archives">
+              <a href="/archives" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+                
+                归档
+              </a>
+            </li>
+          
+      
+        
+          
+            <li class="menu-item menu-item-tags">
+              <a href="/tags" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+                
+                标签
+              </a>
+            </li>
+          
+      
+        
+          
+            <li class="menu-item menu-item-demo">
+              <a href="/categories/Demo/" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-code"></i> <br />
+                
+                demo
+              </a>
+            </li>
+          
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                HTML5中的canvas
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-04-25T00:00:00+08:00" content="2016-04-25">
+              2016-04-25
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/前端笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">前端笔记</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/04/25/2016-04-25-HTML5中的canvas/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/25/2016-04-25-HTML5中的canvas/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><code>&lt;canvas&gt;</code>是HYML5中新增的标签，利用canvas，可以在js内部完成图像的绘制，canvas可以理解成一张画布。</p>
+<h3 id="一-使用canvas画图的准备工作"><a href="#一-使用canvas画图的准备工作" class="headerlink" title="一. 使用canvas画图的准备工作"></a>一. 使用canvas画图的准备工作</h3><p><strong>HTML中</strong></p>
+<pre><code>&lt;canvas id=&quot;myCanvas&quot;&gt;&lt;/canvas&gt;
+</code></pre><p><strong>JS中</strong></p>
+<pre><code>var canvas1 = document.getElementById(&apos;myCanvas&apos;);//获取canvasDOM节点
+
+var ctx1 = canvas1.getContext(&apos;2d&apos;);//获取此canvas1的上下文，可以理解成获得画布
+</code></pre><p>完成这两步之后，便可在画布上进行绘制</p>
+<h3 id="二-使用canvas进行绘制"><a href="#二-使用canvas进行绘制" class="headerlink" title="二. 使用canvas进行绘制"></a>二. 使用canvas进行绘制</h3><h4 id="1-绘制图形-矩形、线型、三角形等"><a href="#1-绘制图形-矩形、线型、三角形等" class="headerlink" title="1. 绘制图形  矩形、线型、三角形等"></a>1. 绘制图形  矩形、线型、三角形等</h4><p>(1) 矩形</p>
+<p>canvas只支持一种原生图形的绘制:矩形</p>
+<p>与矩形有关的三个方法：</p>
+<ul>
+<li>fillRect(startX,startY,width,height)  绘制一个填充的矩形</li>
+<li>fillStroke(startX,startY,width,height) 绘制一个矩形的边框</li>
+<li>clearRect(startX,startY,width,height)  清除指定矩形区域</li>
+</ul>
+<p>(2) 线型</p>
+<p>通过设置路径来画各种线</p>
+<pre><code>第一步：beginPath();//开始设置路径
+第二步：moveTo(x,y);//设置路径的起点（将笔触移动到某个坐标）
+第三步：lineTo(x,y);//设置线的终点，从起点到终点画一条直线
+       arc(x,y,半径,开始的弧度,结束的弧度,旋转的方向)//画圆弧
+第四步:fill();//根据画的线型，生成实心图形
+      stroke();//根据画的线型，生成轮廓
+</code></pre><p>(3) 三角形</p>
+<p>三角形可以通过(2)中的线型生成，其余的几何形状也可以按照同样的方式生成。</p>
+<p>eg:<br>    var canvas = document.getElementById(‘canvas’);<br>    var ctx = canvas.getContext(‘2d’);</p>
+<pre><code>// 填充三角形
+ctx.beginPath();
+ctx.moveTo(25,25);
+ctx.lineTo(105,25);
+ctx.lineTo(25,105);
+ctx.fill();
+</code></pre><h4 id="2-绘制文本"><a href="#2-绘制文本" class="headerlink" title="2. 绘制文本"></a>2. 绘制文本</h4><p>(1) 文本</p>
+<p>文本有三个属性：font、textAlign、textBaseline</p>
+<p>font = “bold 14px Arial”</p>
+<p>textAlign = “start/end/left/right/center”</p>
+<p>textBaseline = “top/hanging/middle/alphabetic/ideographic/bottom/middle”</p>
+<p>fillText(“文本”,x,y)</p>
+<p>strokeText(“文本”,x,y)</p>
+<p>measureText(“文本”).width 返回指定文本的大小</p>
+<h4 id="3-绘制图像"><a href="#3-绘制图像" class="headerlink" title="3. 绘制图像"></a>3. 绘制图像</h4><p>(1) 获得图像</p>
+<p>这里的图像来源可以是一张图片、一个视频帧、另外一个canvas</p>
+<pre><code>var img = new Image();   // 创建一个&lt;img&gt;元素
+img.onload = function(){ //用load时间来保证不会在加载完毕之前使用这个图片：
+  ctx.drawImage(img,0,0);
+  ctx.beginPath();
+  ctx.moveTo(30,96);
+  ctx.lineTo(70,66);
+  ctx.lineTo(103,76);
+  ctx.lineTo(170,15);
+  ctx.stroke();
+}
+img.src = &apos;myImage.png&apos;; // 设置图片源地址
+</code></pre><p>(2) 将图像画在画布中 drawImage(传入的image元素，x，y，width，height)</p>
+<h4 id="4-设置阴影"><a href="#4-设置阴影" class="headerlink" title="4. 设置阴影"></a>4. 设置阴影</h4><p>shadowColor:阴影颜色<br>shadowOffsetX:沿x轴的阴影偏移量<br>shadowOffsetY:沿y轴的阴影偏移量<br>shadowBlur:阴影模糊的像素数</p>
+<p>上述四种属性均为上下文的属性。</p>
+<h4 id="5-设置颜色"><a href="#5-设置颜色" class="headerlink" title="5. 设置颜色"></a>5. 设置颜色</h4><p>(1) 直接设置颜色</p>
+<ul>
+<li>fillStyle = “color”  设置填充颜色</li>
+<li>strokeStyle = “color”  设置边框颜色</li>
+<li>globalAlpha = 透明度    设置canvas里所有图形的透明度（使用较少）</li>
+</ul>
+<p>(2) 使用渐变设置颜色</p>
+<p>渐变分为两种：线性渐变、径向渐变</p>
+<p>第一步：为图形创建一个渐变对象</p>
+<pre><code>createLinearGradient(startX,startY,endX,endY);//创建线性渐变对象
+createRadialGradient(x1,y1,r1,x2,y2,r2);//创建径向渐变对象
+</code></pre><p>第二步：给渐变对象添加颜色 addColorStop(position,color)</p>
+<pre><code>var LG1 = ctx.createLinearGradient(0,0,150,150);
+LG1.addColorStop(0,&apos;white&apos;);
+LG1.addColorStop(1,&apos;black&apos;);
+</code></pre><p>第三步：将渐变对象赋给图形的fillStyle、strokeStyle属性</p>
+<pre><code>ctx.fillStyle = LG1;
+</code></pre><h4 id="6-设置线型样式"><a href="#6-设置线型样式" class="headerlink" title="6. 设置线型样式"></a>6. 设置线型样式</h4><p>lineWidth  设置线条宽度</p>
+<p>lineCap   设置线条末端样式 butt，round 和 square</p>
+<p>lineJoin  设定线条与线条间接合处的样式 round, bevel 和 miter</p>
+<p>miterLimit 限制当两条线相交时交接处最大长度</p>
+<p>getLineDash() 返回一个包含当前虚线样式，长度为非负偶数的数组</p>
+<p>setLineDash() 设置当前虚线样式</p>
+<p>lineDashOffset 设置虚线样式的起始偏移量</p>
+<font color="red">暂时只总结了最最基本的用法，后面的用法以后有时间再整理一下。</font>
+
+<h3 id="三-canvas中的width、height与一般style中的width、height的区别"><a href="#三-canvas中的width、height与一般style中的width、height的区别" class="headerlink" title="三. canvas中的width、height与一般style中的width、height的区别"></a>三. canvas中的width、height与一般style中的width、height的区别</h3><ol>
+<li><strong>canvas标签的width、height</strong></li>
+</ol>
+<p>canvas标签的width和height是画布实际宽度和高度，绘制的图形都是在这个上面，绘制图形的坐标也是以canvas的左上角为起点。</p>
+<p>canvas的width、height只能设置数字宽度和高度，不能设置百分比。</p>
+<p>canvas的默认宽度为300px,默认高度为150px</p>
+<ol>
+<li><strong>canvas作为html的标签，所以也有style属性中的width、height，style的width和height是canvas在浏览器中被渲染的高度和宽度，也就是在浏览器中看起来的高度</strong></li>
+</ol>
+<p>可以通过设置canvas的style.width、style.height来对canvas画布进行缩放。</p>
+<p>例如：</p>
+<pre><code>&lt;canvas id=&quot;diagonal1&quot; style=&quot;border:1px solid;&quot; width=&quot;100px&quot; height=&quot;100px&quot;&gt;&lt;/canvas&gt;
+&lt;canvas id=&quot;diagonal2&quot; style=&quot;border:1px solid;width:200px;height:200px;&quot; width=&quot;100px&quot; height=&quot;100px&quot;&gt;&lt;/canvas&gt;
+&lt;canvas id=&quot;diagonal3&quot; style=&quot;border:1px solid;width:200px;height:200px;&quot; &gt;&lt;/canvas&gt;
+
+&lt;script type=&quot;text/javascript&quot;&gt;
+        function drawDiagonal(id){
+            var canvas=document.getElementById(id);
+            var context=canvas.getContext(&quot;2d&quot;);
+            context.beginPath();
+            context.moveTo(0,0);
+            context.lineTo(100,100);
+            context.stroke();
+        }
+
+        window.onload=function(){                
+            drawDiagonal(&quot;diagonal1&quot;);
+            drawDiagonal(&quot;diagonal2&quot;);
+            drawDiagonal(&quot;diagonal3&quot;);              
+        }
+&lt;/script&gt;
+</code></pre><p>最终在浏览器中显示的情况如下所示：<br><a href="http://panpanfish.com/myDemo/canvas-width.html">http://panpanfish.com/myDemo/canvas-width.html</a></p>
+<p>diagonal1的style.width、style.height比例与画布相等，因此没有什么影响</p>
+<p>diagonal2的style.width、style.height比例与画布比例一致，因此将画布等比例放大了</p>
+<p>diagonal3的style.width、style.height比例与画布比例不一致，因此上面的线的位置发生了变化。遵循的一个原则是，保持相对为置不变：(100,100)在(300,150)的画布上占的位置是x轴1/3，y轴2/3的那个点，当canvas的渲染高度宽度变成了(200,200)时，线的终点变成了(200 <em> 1/3,200 </em> 2/3)</p>
+<h3 id="四-canvas移动端屏幕适配问题"><a href="#四-canvas移动端屏幕适配问题" class="headerlink" title="四. canvas移动端屏幕适配问题"></a>四. canvas移动端屏幕适配问题</h3><p>在移动端，可以根据百分比布局来适配canvas画布。</p>
+<p>可以根据<code>document.documentElement.clientWidth</code>来获取屏幕的宽度，将宽度赋给<code>canvas.width</code>（如果画布要满屏的话，其他情况也同理），根据定好的长宽比，算出高度，将高度值赋给<code>canvas.height</code></p>
+<p>例如：</p>
+<pre><code>var clientWidth = document.documentElement.clientWidth;//获得设备可见区域宽度
+canvas.width = clientWidth;
+canvas.height = clientWidth*800/600;
+
+然后在画布相应的位置上画上相应的图形即可
+</code></pre>
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/HTML5/" rel="tag"># HTML5</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/04/24/2016-04-23-js中的string类型/" rel="next" title="js中的string类型">
+                <i class="fa fa-chevron-left"></i> js中的string类型
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/04/26/2016-04-26-HTML5游戏开发/" rel="prev" title="HTML5游戏开发">
+                HTML5游戏开发 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/04/25/2016-04-25-HTML5中的canvas/"
+           data-title="HTML5中的canvas" data-url="http://panpanfish.com/2016/04/25/2016-04-25-HTML5中的canvas/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/icon.jpg"
+               alt="Yu Pan" />
+          <p class="site-author-name" itemprop="name">Yu Pan</p>
+          <p class="site-description motion-element" itemprop="description">在学习中不断进步</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">81</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/panpan040828" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一-使用canvas画图的准备工作"><span class="nav-number">1.</span> <span class="nav-text">一. 使用canvas画图的准备工作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二-使用canvas进行绘制"><span class="nav-number">2.</span> <span class="nav-text">二. 使用canvas进行绘制</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-绘制图形-矩形、线型、三角形等"><span class="nav-number">2.1.</span> <span class="nav-text">1. 绘制图形  矩形、线型、三角形等</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-绘制文本"><span class="nav-number">2.2.</span> <span class="nav-text">2. 绘制文本</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-绘制图像"><span class="nav-number">2.3.</span> <span class="nav-text">3. 绘制图像</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-设置阴影"><span class="nav-number">2.4.</span> <span class="nav-text">4. 设置阴影</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-设置颜色"><span class="nav-number">2.5.</span> <span class="nav-text">5. 设置颜色</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-设置线型样式"><span class="nav-number">2.6.</span> <span class="nav-text">6. 设置线型样式</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三-canvas中的width、height与一般style中的width、height的区别"><span class="nav-number">3.</span> <span class="nav-text">三. canvas中的width、height与一般style中的width、height的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四-canvas移动端屏幕适配问题"><span class="nav-number">4.</span> <span class="nav-text">四. canvas移动端屏幕适配问题</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yu Pan</span>
+</div>
+
+<!--
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+-->
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"panpanfish"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  
+
+
+</body>
+</html>

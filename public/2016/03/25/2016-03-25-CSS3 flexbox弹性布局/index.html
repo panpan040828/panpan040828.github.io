@@ -1,0 +1,808 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="css," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+
+
+
+
+
+
+<meta name="description" content="使用过bootstrap框架之后，觉得它最大的一个优点就是它的栅格布局，使用栅格布局使得布局变得简单了很多，不用去考虑一些float、position属性。
+flexbox是一种与栅格布局类似的方式。
+是2009年w3c提出的一种布局方式，也叫做弹性布局，弹性布局的出现给盒模型提供了很大的便利性。
+一. 如何让容器变成flexbox布局1. 父元素的设置.parent{
+  display: -w">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CSS3 flexbox弹性布局">
+<meta property="og:url" content="http://panpanfish.com/2016/03/25/2016-03-25-CSS3 flexbox弹性布局/index.html">
+<meta property="og:site_name" content="筱鱼兒">
+<meta property="og:description" content="使用过bootstrap框架之后，觉得它最大的一个优点就是它的栅格布局，使用栅格布局使得布局变得简单了很多，不用去考虑一些float、position属性。
+flexbox是一种与栅格布局类似的方式。
+是2009年w3c提出的一种布局方式，也叫做弹性布局，弹性布局的出现给盒模型提供了很大的便利性。
+一. 如何让容器变成flexbox布局1. 父元素的设置.parent{
+  display: -w">
+<meta property="og:image" content="http://panpanfish.com/img/post/demo/flex-wrap-reverse.jpg">
+<meta property="og:updated_time" content="2016-08-11T03:19:12.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CSS3 flexbox弹性布局">
+<meta name="twitter:description" content="使用过bootstrap框架之后，觉得它最大的一个优点就是它的栅格布局，使用栅格布局使得布局变得简单了很多，不用去考虑一些float、position属性。
+flexbox是一种与栅格布局类似的方式。
+是2009年w3c提出的一种布局方式，也叫做弹性布局，弹性布局的出现给盒模型提供了很大的便利性。
+一. 如何让容器变成flexbox布局1. 父元素的设置.parent{
+  display: -w">
+<meta name="twitter:image" content="http://panpanfish.com/img/post/demo/flex-wrap-reverse.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+
+  <title> CSS3 flexbox弹性布局 | 筱鱼兒 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?e18d9ee1b355055e9a39ffec741beb44";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="my-headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="my-site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">筱鱼兒</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">温柔于己，温柔于人</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+          
+            <li class="menu-item menu-item-home">
+              <a href="/" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+                
+                首页
+              </a>
+            </li>
+          
+      
+        
+          
+            <li class="menu-item menu-item-categories">
+              <a href="/categories" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+                
+                分类
+              </a>
+            </li>
+          
+      
+        
+          
+            <li class="menu-item menu-item-archives">
+              <a href="/archives" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+                
+                归档
+              </a>
+            </li>
+          
+      
+        
+          
+            <li class="menu-item menu-item-tags">
+              <a href="/tags" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+                
+                标签
+              </a>
+            </li>
+          
+      
+        
+          
+            <li class="menu-item menu-item-demo">
+              <a href="/categories/Demo/" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-code"></i> <br />
+                
+                demo
+              </a>
+            </li>
+          
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                CSS3 flexbox弹性布局
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-03-25T00:00:00+08:00" content="2016-03-25">
+              2016-03-25
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/前端笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">前端笔记</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/03/25/2016-03-25-CSS3 flexbox弹性布局/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/25/2016-03-25-CSS3 flexbox弹性布局/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>使用过bootstrap框架之后，觉得它最大的一个优点就是它的栅格布局，使用栅格布局使得布局变得简单了很多，不用去考虑一些float、position属性。</p>
+<p>flexbox是一种与栅格布局类似的方式。</p>
+<p>是2009年w3c提出的一种布局方式，也叫做弹性布局，弹性布局的出现给盒模型提供了很大的便利性。</p>
+<h3 id="一-如何让容器变成flexbox布局"><a href="#一-如何让容器变成flexbox布局" class="headerlink" title="一. 如何让容器变成flexbox布局"></a>一. 如何让容器变成flexbox布局</h3><h4 id="1-父元素的设置"><a href="#1-父元素的设置" class="headerlink" title="1. 父元素的设置"></a>1. 父元素的设置</h4><pre><code>.parent{
+  display: -webkit-flex; /* Safari */
+  display: flex;
+}
+
+或者成为行内flex布局
+
+.parent{
+  display: inline-flex;
+}
+</code></pre><font color="red">注意：设为flexbox布局之后，子元素的<strong>float</strong>、<strong>clear</strong>、<strong>vertical-align</strong>属性都会失效。</font>
+
+<h4 id="2-子元素的设置"><a href="#2-子元素的设置" class="headerlink" title="2. 子元素的设置"></a>2. 子元素的设置</h4><pre><code>.child{
+    flex:[number];
+}
+</code></pre><p>给其中的每一个孩子设置 <code>flex: [number]</code> 来让他们按比例分配容器的宽度。</p>
+<p>比如三个child分别设置了 <code>flex: 1</code> <code>flex: 2</code> <code>flex: 1</code> 则他们是按照 1-2-1 的比例来分配宽度的。</p>
+<p>如果有child没有设置 <code>flex</code> 而是设置了固定的宽度，比如 <code>width: 100px</code> 那么它的宽度就不受flex容器的影响，但是其他的设置了 <code>flex: [number]</code> 的容器会按比例平分剩下的部分。</p>
+<h3 id="二-flex布局的属性"><a href="#二-flex布局的属性" class="headerlink" title="二. flex布局的属性"></a>二. flex布局的属性</h3><h4 id="1-针对父元素的属性"><a href="#1-针对父元素的属性" class="headerlink" title="1 . 针对父元素的属性"></a>1 . 针对父元素的属性</h4><ul>
+<li>flex-direction</li>
+<li>flex-wrap</li>
+<li>flex-flow</li>
+<li>justify-content</li>
+<li>align-items</li>
+<li>align-content</li>
+</ul>
+<h4 id="1-flex-direction"><a href="#1-flex-direction" class="headerlink" title="(1). flex-direction"></a>(1). flex-direction</h4><p>决定项目的排列方向（主轴的方向）</p>
+<pre><code>flex-direction: row | row-reverse | column | column-reverse;
+</code></pre><p>按照字面意思也挺好理解的。</p>
+<h4 id="2-flex-wrap"><a href="#2-flex-wrap" class="headerlink" title="(2). flex-wrap"></a>(2). flex-wrap</h4><p>决定项目的换行方向</p>
+<pre><code>flex-wrap: nowrap | wrap | wrap-reverse;
+</code></pre><ul>
+<li>nowrap:不换行</li>
+<li></li>
+<li>wrap:正常换行</li>
+<li></li>
+<li>wrap-reverse:换行，但是第一行在下方，如下图所示：</li>
+</ul>
+<p><img src="/img/post/demo/flex-wrap-reverse.jpg" alt="flexbox反方向换行"></p>
+<h4 id="3-flex-flow"><a href="#3-flex-flow" class="headerlink" title="(3). flex-flow"></a>(3). flex-flow</h4><p>是 flex-direction 和 flex-wrap 组合形式</p>
+<h4 id="4-justify-content"><a href="#4-justify-content" class="headerlink" title="(4). justify-content"></a>(4). justify-content</h4><p>定义项目在<strong>主轴</strong>的对齐方式</p>
+<p> <code>justify-content: flex-start | flex-end | center | space-between | space-around;</code></p>
+<ul>
+<li>flex-start（默认值）：在项目开始的地方对齐</li>
+<li>flex-end：在项目结束的地方对齐</li>
+<li>center： 居中</li>
+<li>space-between：两端对齐，项目之间的间隔都相等。</li>
+<li>space-around：每个项目两侧的间隔相等。所以，项目之间的间隔比项目与边框的间隔大一倍。</li>
+</ul>
+<h4 id="5-align-items"><a href="#5-align-items" class="headerlink" title="(5). align-items"></a>(5). align-items</h4><p>定义项目在<strong>交叉轴</strong>的对齐方式</p>
+<pre><code>align-items: flex-start | flex-end | center | baseline | stretch;
+</code></pre><ul>
+<li>flex-start：交叉轴的起点对齐。</li>
+<li>flex-end：交叉轴的终点对齐。</li>
+<li>center：交叉轴的中点对齐。</li>
+<li>baseline: 项目的第一行文字的基线对齐。</li>
+<li>stretch（默认值）：如果项目未设置高度或设为auto，将占满整个容器的高度。</li>
+</ul>
+<h4 id="6-align-content"><a href="#6-align-content" class="headerlink" title="(6). align-content"></a>(6). align-content</h4><p>同时定义项目在<strong>主轴</strong>和<strong>交叉轴</strong>（水平线上）的对齐方式</p>
+<pre><code>align-content: flex-start | flex-end | center | space-between | space-around | stretch;
+</code></pre><ul>
+<li>flex-start：主轴方向与起点对齐，交叉轴方向也与起点对齐。</li>
+<li>flex-end：主轴方向与终点对齐，交叉轴方向也与终点对齐。</li>
+<li>center：主轴和交叉轴方向均为居中。</li>
+<li><font color="red">space-between：主轴和交叉轴方向均两端对齐，轴线之间的间隔平均分布。</font>这个有待考证</li>
+<li>space-around：每根轴线两侧的间隔都相等。所以，轴线之间的间隔比轴线与边框的间隔大一倍。</li>
+<li><font color="red">stretch（默认值）：轴线占满整个交叉轴</font>这个有待考证</li>
+</ul>
+<h4 id="2-针对子元素的属性"><a href="#2-针对子元素的属性" class="headerlink" title="2 . 针对子元素的属性"></a>2 . 针对子元素的属性</h4><ul>
+<li>order</li>
+<li>flex-grow</li>
+<li>flex-shrink</li>
+<li>flex-basis</li>
+<li>flex</li>
+<li>align-self</li>
+</ul>
+<h4 id="1-order"><a href="#1-order" class="headerlink" title="(1). order"></a>(1). order</h4><p>定义项目的排列顺序，数值越小，排列越靠前。</p>
+<pre><code>order:&lt;number&gt;; /* default:0 */
+</code></pre><h4 id="2-flex-grow"><a href="#2-flex-grow" class="headerlink" title="(2). flex-grow"></a>(2). flex-grow</h4><p>定义项目的放大比例。</p>
+<pre><code>flex-grow:&lt;number&gt;; /* default:0 */
+</code></pre><h4 id="3-flex-shrink"><a href="#3-flex-shrink" class="headerlink" title="(3). flex-shrink"></a>(3). flex-shrink</h4><p>定义项目的缩小比例。</p>
+<pre><code>flex-shrink:&lt;number&gt;; /* default:0 */
+</code></pre><h4 id="4-flex-basis"><a href="#4-flex-basis" class="headerlink" title="(4). flex-basis"></a>(4). flex-basis</h4><p>定义项目占据主轴的空间。</p>
+<pre><code>flex-basis:&lt;length&gt;; /* default:auto */
+</code></pre><h4 id="5-flex"><a href="#5-flex" class="headerlink" title="(5). flex"></a>(5). flex</h4><p>flex是flex-grow、flex-shrink、flex-basis的缩写形式</p>
+<pre><code>flex:flex-grow flex-shrink flex-basis; /* default: 0 0 auto */
+</code></pre><h4 id="5-align-self"><a href="#5-align-self" class="headerlink" title="(5). align-self"></a>(5). align-self</h4><p>允许单个子元素与其他子元素在交叉轴上的对齐方式不一样</p>
+<pre><code>align-self:
+</code></pre><ul>
+<li>auto:保持元素本身的对齐方式</li>
+<li>flex-start：交叉轴的起点对齐。</li>
+<li>flex-end：交叉轴的终点对齐。</li>
+<li>center：交叉轴的中点对齐。</li>
+<li>baseline: 项目的第一行文字的基线对齐。</li>
+<li>stretch（默认值）：如果项目未设置高度或设为auto，将占满整个容器的高度。</li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/css/" rel="tag"># css</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/03/25/2016-03-27-异步加载脚本的几种方式/" rel="next" title="异步加载脚本的几种方式">
+                <i class="fa fa-chevron-left"></i> 异步加载脚本的几种方式
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/03/29/2016-03-29-浏览器本地存储/" rel="prev" title="浏览器本地存储">
+                浏览器本地存储 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/03/25/2016-03-25-CSS3 flexbox弹性布局/"
+           data-title="CSS3 flexbox弹性布局" data-url="http://panpanfish.com/2016/03/25/2016-03-25-CSS3 flexbox弹性布局/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/icon.jpg"
+               alt="Yu Pan" />
+          <p class="site-author-name" itemprop="name">Yu Pan</p>
+          <p class="site-description motion-element" itemprop="description">在学习中不断进步</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">142</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">38</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/panpan040828" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一-如何让容器变成flexbox布局"><span class="nav-number">1.</span> <span class="nav-text">一. 如何让容器变成flexbox布局</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-父元素的设置"><span class="nav-number">1.1.</span> <span class="nav-text">1. 父元素的设置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-子元素的设置"><span class="nav-number">1.2.</span> <span class="nav-text">2. 子元素的设置</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二-flex布局的属性"><span class="nav-number">2.</span> <span class="nav-text">二. flex布局的属性</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-针对父元素的属性"><span class="nav-number">2.1.</span> <span class="nav-text">1 . 针对父元素的属性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-flex-direction"><span class="nav-number">2.2.</span> <span class="nav-text">(1). flex-direction</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-flex-wrap"><span class="nav-number">2.3.</span> <span class="nav-text">(2). flex-wrap</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-flex-flow"><span class="nav-number">2.4.</span> <span class="nav-text">(3). flex-flow</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-justify-content"><span class="nav-number">2.5.</span> <span class="nav-text">(4). justify-content</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-align-items"><span class="nav-number">2.6.</span> <span class="nav-text">(5). align-items</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-align-content"><span class="nav-number">2.7.</span> <span class="nav-text">(6). align-content</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-针对子元素的属性"><span class="nav-number">2.8.</span> <span class="nav-text">2 . 针对子元素的属性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-order"><span class="nav-number">2.9.</span> <span class="nav-text">(1). order</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-flex-grow"><span class="nav-number">2.10.</span> <span class="nav-text">(2). flex-grow</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-flex-shrink"><span class="nav-number">2.11.</span> <span class="nav-text">(3). flex-shrink</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-flex-basis"><span class="nav-number">2.12.</span> <span class="nav-text">(4). flex-basis</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-flex"><span class="nav-number">2.13.</span> <span class="nav-text">(5). flex</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-align-self"><span class="nav-number">2.14.</span> <span class="nav-text">(5). align-self</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yu Pan</span>
+</div>
+
+<!--
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+-->
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"panpanfish"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  
+
+
+</body>
+</html>

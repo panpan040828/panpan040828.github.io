@@ -1,0 +1,803 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="javaScript," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+
+
+
+
+
+
+<meta name="description" content="一直都分不清下面的属性分别指的是什么，网上的那张图太乱了，现在总结一下。
+
+clientLeft/clientTop、clientWidth/clientHeight
+
+offsetLeft/offsetTop、offsetWidth/offsetHeight
+
+offsetParent
+
+scrollLeft/scrollTop、scrollWidth/scrollHeight
+
+
+上面几种属性">
+<meta property="og:type" content="article">
+<meta property="og:title" content="元素视图属性">
+<meta property="og:url" content="http://panpanfish.com/2016/06/14/2016-06-14-元素视图属性/index.html">
+<meta property="og:site_name" content="筱鱼兒">
+<meta property="og:description" content="一直都分不清下面的属性分别指的是什么，网上的那张图太乱了，现在总结一下。
+
+clientLeft/clientTop、clientWidth/clientHeight
+
+offsetLeft/offsetTop、offsetWidth/offsetHeight
+
+offsetParent
+
+scrollLeft/scrollTop、scrollWidth/scrollHeight
+
+
+上面几种属性">
+<meta property="og:updated_time" content="2016-10-15T07:39:28.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="元素视图属性">
+<meta name="twitter:description" content="一直都分不清下面的属性分别指的是什么，网上的那张图太乱了，现在总结一下。
+
+clientLeft/clientTop、clientWidth/clientHeight
+
+offsetLeft/offsetTop、offsetWidth/offsetHeight
+
+offsetParent
+
+scrollLeft/scrollTop、scrollWidth/scrollHeight
+
+
+上面几种属性">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+
+  <title> 元素视图属性 | 筱鱼兒 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?e18d9ee1b355055e9a39ffec741beb44";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="my-headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="my-site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">筱鱼兒</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">温柔于己，温柔于人</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+          
+            <li class="menu-item menu-item-home">
+              <a href="/" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+                
+                首页
+              </a>
+            </li>
+          
+      
+        
+          
+            <li class="menu-item menu-item-categories">
+              <a href="/categories" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+                
+                分类
+              </a>
+            </li>
+          
+      
+        
+          
+            <li class="menu-item menu-item-archives">
+              <a href="/archives" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+                
+                归档
+              </a>
+            </li>
+          
+      
+        
+          
+            <li class="menu-item menu-item-tags">
+              <a href="/tags" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+                
+                标签
+              </a>
+            </li>
+          
+      
+        
+          
+            <li class="menu-item menu-item-demo">
+              <a href="/categories/Demo/" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-code"></i> <br />
+                
+                demo
+              </a>
+            </li>
+          
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                元素视图属性
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-06-14T00:00:00+08:00" content="2016-06-14">
+              2016-06-14
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/前端笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">前端笔记</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/06/14/2016-06-14-元素视图属性/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/14/2016-06-14-元素视图属性/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>一直都分不清下面的属性分别指的是什么，网上的那张图太乱了，现在总结一下。</p>
+<ul>
+<li><p>clientLeft/clientTop、clientWidth/clientHeight</p>
+</li>
+<li><p>offsetLeft/offsetTop、offsetWidth/offsetHeight</p>
+</li>
+<li><p>offsetParent</p>
+</li>
+<li><p>scrollLeft/scrollTop、scrollWidth/scrollHeight</p>
+</li>
+</ul>
+<p><strong>上面几种属性，又分两种情况：</strong></p>
+<ul>
+<li>一种是对于document.body</li>
+<li>一种是对于某个元素</li>
+</ul>
+<p>其实，document.body也是页面中的一个元素</p>
+<h3 id="一-对于document-body而言"><a href="#一-对于document-body而言" class="headerlink" title="一. 对于document.body而言"></a>一. 对于document.body而言</h3><p><strong>clientWidth/clientHeight</strong></p>
+<p>指的是可视区的宽和高，不包括浏览器的边框的白色部分。</p>
+<p><strong>offsetHeight/offsetWidth</strong></p>
+<p>用的较少<br><code>document.body.offsetWidth = body的width + padding + border;</code></p>
+<p><strong>scrollWidth/scrollHeight</strong></p>
+<p>包括滚动隐藏的部分，可以看成是整个页面的宽和高（区别于浏览器可视区的宽和高）</p>
+<p><strong>scrollTop/scrollLeft</strong></p>
+<p>documen.body.scrollTop指的是页面上部被隐藏的部分，也就是滚动条向下滚动的距离</p>
+<p>如果将滚动条滚动到底部，那么<code>scrollTop + clientHeight = scrollHeight</code></p>
+<p>关于获取<strong>浏览器的滚动条距离顶端的距离</strong>，有下面两种方法，存在兼容性问题：</p>
+<ul>
+<li>document.body.scrollTop</li>
+<li>document.documentElement.scrollTop</li>
+</ul>
+<p><strong>（1）文档处于混杂模式下：</strong></p>
+<p>所有浏览器使用<code>document.body.scrollTop</code>获取，但一般文档都是会有文档类型声明的，因此这种情况几乎不存在。</p>
+<p><strong>（2）文档处于标准模式下：</strong></p>
+<ul>
+<li>chrome和safari：使用<code>document.body.scrollTop</code>获取</li>
+<li>IE：使用<code>document.documentElement.scrollTop</code>获取</li>
+</ul>
+<p>考虑浏览器的兼容性：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> scrollTop = <span class="built_in">document</span>.documentElement.scrollTop || <span class="built_in">document</span>.body.scrollTop;</span><br></pre></td></tr></table></figure></p>
+<h3 id="二-对于页面中的某个元素"><a href="#二-对于页面中的某个元素" class="headerlink" title="二. 对于页面中的某个元素"></a>二. 对于页面中的某个元素</h3><h4 id="1-clientLeft-clientTop"><a href="#1-clientLeft-clientTop" class="headerlink" title="1. clientLeft/clientTop"></a>1. clientLeft/clientTop</h4><p><strong>元素的clientLeft和clientTop：</strong></p>
+<ul>
+<li>clientLeft：表示的是元素内容距离元素左上角的水平距离。</li>
+<li>clientTop：表示的是元素内容距离元素左上角的垂直距离。</li>
+</ul>
+<p><strong>参照点是：</strong>元素盒模型左上角的那个点，这里的元素内容包括内部的padding</p>
+<pre><code>clientLeft相当于元素的border-left大小
+clientTop相当于元素的border-top大小
+</code></pre><h4 id="2-clientWidth-clientHeight"><a href="#2-clientWidth-clientHeight" class="headerlink" title="2. clientWidth/clientHeight"></a>2. clientWidth/clientHeight</h4><p><strong>元素的clientWidth和clientHeight：</strong></p>
+<ul>
+<li>clientWidth：表示的是元素内容的宽度（包括padding的大小，不包括border和滚动条）</li>
+<li><p>clientHeight：表示的是元素内容的高度（包括padding的大小，不包括border和滚动条）</p>
+<p>  clientWidth相当于box-sizing取值为padding-box时的width<br>  clientHeight相当于box-sizing取值为padding-box时的height</p>
+</li>
+</ul>
+<h3 id="二-offset相关"><a href="#二-offset相关" class="headerlink" title="二. offset相关"></a>二. offset相关</h3><h4 id="1-offsetLeft-offsetTop"><a href="#1-offsetLeft-offsetTop" class="headerlink" title="1. offsetLeft/offsetTop"></a>1. offsetLeft/offsetTop</h4><ul>
+<li>offsetLeft：表示距离最近的祖先定位元素（CSS position 属性被设置为 relative、absolute 或 fixed 的元素）左上角的水平偏移值</li>
+<li>offsetTop：表示距离最近的祖先定位元素（css position属性设置为relative、absolute、fixed的元素）左上角的垂直距离</li>
+</ul>
+<p>如果父元素没有定位元素，那么就是相对于<strong>document.body</strong></p>
+<p><strong>参照点：</strong></p>
+<p>如果元素有最近的祖先定位元素，那么参照点是最近的祖先定位元素的左上角。</p>
+<p>如果元素没有最近的祖先定位元素，那么参照点是网页最上方的左边的那个点（<strong>document.body</strong>）。</p>
+<h4 id="2-offsetWidth-offsetHeight"><a href="#2-offsetWidth-offsetHeight" class="headerlink" title="2. offsetWidth/offsetHeight"></a>2. offsetWidth/offsetHeight</h4><ul>
+<li>offsetWidth：表示元素的宽度（包括内部元素、padding、border）</li>
+<li>offsetHeight：表示元素的高度（包括内部元素、padding、border）</li>
+</ul>
+<h4 id="3-offsetParent"><a href="#3-offsetParent" class="headerlink" title="3. offsetParent"></a>3. offsetParent</h4><p>元素的offsetParent返回的是一个对象，第一个祖先定位元素。</p>
+<p>offsetParent返回值可能取值：</p>
+<ul>
+<li>body</li>
+<li>最近的祖先定位元素</li>
+<li>td</li>
+</ul>
+<h3 id="三-scroll相关"><a href="#三-scroll相关" class="headerlink" title="三. scroll相关"></a>三. scroll相关</h3><p>元素的sroll相关的属性只有在元素有滚动的部分时才有效。</p>
+<h4 id="1-scrollLeft-scrollTop"><a href="#1-scrollLeft-scrollTop" class="headerlink" title="1. scrollLeft/scrollTop"></a>1. scrollLeft/scrollTop</h4><p>Element.scrollTop不是标准属性，但是已被大多数浏览器支持，当元素自己本身含有滚动条时才有这个属性。（也就是元素的内容滚动到元素的上边界）</p>
+<h4 id="2-scrollHeight-scrollWidth"><a href="#2-scrollHeight-scrollWidth" class="headerlink" title="2. scrollHeight/scrollWidth"></a>2. scrollHeight/scrollWidth</h4>
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/javaScript/" rel="tag"># javaScript</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/06/12/2016-06-12-微型调查问卷平台组件——排序表格/" rel="next" title="微型调查问卷平台组件——排序表格">
+                <i class="fa fa-chevron-left"></i> 微型调查问卷平台组件——排序表格
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/06/14/2016-06-14-文档类型声明/" rel="prev" title="文档类型声明">
+                文档类型声明 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/06/14/2016-06-14-元素视图属性/"
+           data-title="元素视图属性" data-url="http://panpanfish.com/2016/06/14/2016-06-14-元素视图属性/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/icon.jpg"
+               alt="Yu Pan" />
+          <p class="site-author-name" itemprop="name">Yu Pan</p>
+          <p class="site-description motion-element" itemprop="description">在学习中不断进步</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">142</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">38</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/panpan040828" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一-对于document-body而言"><span class="nav-number">1.</span> <span class="nav-text">一. 对于document.body而言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二-对于页面中的某个元素"><span class="nav-number">2.</span> <span class="nav-text">二. 对于页面中的某个元素</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-clientLeft-clientTop"><span class="nav-number">2.1.</span> <span class="nav-text">1. clientLeft/clientTop</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-clientWidth-clientHeight"><span class="nav-number">2.2.</span> <span class="nav-text">2. clientWidth/clientHeight</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二-offset相关"><span class="nav-number">3.</span> <span class="nav-text">二. offset相关</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-offsetLeft-offsetTop"><span class="nav-number">3.1.</span> <span class="nav-text">1. offsetLeft/offsetTop</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-offsetWidth-offsetHeight"><span class="nav-number">3.2.</span> <span class="nav-text">2. offsetWidth/offsetHeight</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-offsetParent"><span class="nav-number">3.3.</span> <span class="nav-text">3. offsetParent</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三-scroll相关"><span class="nav-number">4.</span> <span class="nav-text">三. scroll相关</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-scrollLeft-scrollTop"><span class="nav-number">4.1.</span> <span class="nav-text">1. scrollLeft/scrollTop</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-scrollHeight-scrollWidth"><span class="nav-number">4.2.</span> <span class="nav-text">2. scrollHeight/scrollWidth</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yu Pan</span>
+</div>
+
+<!--
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+-->
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"panpanfish"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  
+
+
+</body>
+</html>

@@ -1,0 +1,888 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="优化," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+
+
+
+
+
+
+<meta name="description" content="前端性能优化可以从以下几个方面着手：
+
+网页内容
+服务器
+cookie
+CSS
+JavaScript
+图片
+移动客户端
+
+一. 网页内容
+减少http请求的次数
+
+(1)捆绑文件，减少文件请求的次数
+
+将多个js文件捆绑成一个文件
+将多个CSS文件捆绑成一个文件
+
+需要规划静态资源文件，把相对不变的合并在一起，把频繁变易的分隔开。
+(2) CSS Sprites:将多幅图片拼成一副图片，然后通过控">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前端性能优化的经验">
+<meta property="og:url" content="http://panpanfish.com/2016/05/09/2016-05-08-前端性能优化的经验/index.html">
+<meta property="og:site_name" content="筱鱼兒">
+<meta property="og:description" content="前端性能优化可以从以下几个方面着手：
+
+网页内容
+服务器
+cookie
+CSS
+JavaScript
+图片
+移动客户端
+
+一. 网页内容
+减少http请求的次数
+
+(1)捆绑文件，减少文件请求的次数
+
+将多个js文件捆绑成一个文件
+将多个CSS文件捆绑成一个文件
+
+需要规划静态资源文件，把相对不变的合并在一起，把频繁变易的分隔开。
+(2) CSS Sprites:将多幅图片拼成一副图片，然后通过控">
+<meta property="og:updated_time" content="2016-05-27T03:14:20.675Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="前端性能优化的经验">
+<meta name="twitter:description" content="前端性能优化可以从以下几个方面着手：
+
+网页内容
+服务器
+cookie
+CSS
+JavaScript
+图片
+移动客户端
+
+一. 网页内容
+减少http请求的次数
+
+(1)捆绑文件，减少文件请求的次数
+
+将多个js文件捆绑成一个文件
+将多个CSS文件捆绑成一个文件
+
+需要规划静态资源文件，把相对不变的合并在一起，把频繁变易的分隔开。
+(2) CSS Sprites:将多幅图片拼成一副图片，然后通过控">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+
+  <title> 前端性能优化的经验 | 筱鱼兒 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?e18d9ee1b355055e9a39ffec741beb44";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="my-headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="my-site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">筱鱼兒</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">温柔于己，温柔于人</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+          
+            <li class="menu-item menu-item-home">
+              <a href="/" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+                
+                首页
+              </a>
+            </li>
+          
+      
+        
+          
+            <li class="menu-item menu-item-categories">
+              <a href="/categories" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+                
+                分类
+              </a>
+            </li>
+          
+      
+        
+          
+            <li class="menu-item menu-item-archives">
+              <a href="/archives" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+                
+                归档
+              </a>
+            </li>
+          
+      
+        
+          
+            <li class="menu-item menu-item-tags">
+              <a href="/tags" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+                
+                标签
+              </a>
+            </li>
+          
+      
+        
+          
+            <li class="menu-item menu-item-demo">
+              <a href="/categories/Demo/" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-code"></i> <br />
+                
+                demo
+              </a>
+            </li>
+          
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                前端性能优化的经验
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-05-09T00:00:00+08:00" content="2016-05-09">
+              2016-05-09
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/前端笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">前端笔记</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/05/09/2016-05-08-前端性能优化的经验/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/09/2016-05-08-前端性能优化的经验/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>前端性能优化可以从以下几个方面着手：</p>
+<ul>
+<li>网页内容</li>
+<li>服务器</li>
+<li>cookie</li>
+<li>CSS</li>
+<li>JavaScript</li>
+<li>图片</li>
+<li>移动客户端</li>
+</ul>
+<h3 id="一-网页内容"><a href="#一-网页内容" class="headerlink" title="一. 网页内容"></a>一. 网页内容</h3><ol>
+<li>减少http请求的次数</li>
+</ol>
+<p>(1)捆绑文件，减少文件请求的次数</p>
+<ul>
+<li>将多个js文件捆绑成一个文件</li>
+<li>将多个CSS文件捆绑成一个文件</li>
+</ul>
+<p><strong>需要规划静态资源文件，把相对不变的合并在一起，把频繁变易的分隔开。</strong></p>
+<p>(2) CSS Sprites:将多幅图片拼成一副图片，然后通过控制在什么地方具体显示这整张图片的什么位置</p>
+<ol>
+<li>缓存Ajax</li>
+</ol>
+<p><strong>浏览器缓存：使用Expire和Cache-Control</strong></p>
+<p>Expire和Cache-Control的介绍见这里：<a href="http://www.path8.net/tn/archives/2745" target="_blank" rel="external">http://www.path8.net/tn/archives/2745</a></p>
+<p>这是设置浏览器缓存用的。注意，如果你设置了较长时间的缓存，那么每次修改组件内容时，也需要一并修改组件名字，否则浏览器不会重新发起请求。这就是为什么我们看到的许多js和css文件都带着hash戳或者时间戳。</p>
+<p><strong>服务器缓存：配置ETag</strong></p>
+<p>后端可以在响应报文中添加Etag这一项，那么当浏览器下次请求同样的资源时，会携带If-None-Match条目。假如Etag没有发生变化，服务器可以返回304 Not Modified状态码，无须重新下载资源。</p>
+<p>例如：</p>
+<pre><code>响应报文：
+
+  HTTP/1.1 200 OK   
+  Last-Modified: Tue, 12 Dec 2006 03:03:59 GMT   
+  ETag: &quot;10c24bc-4ab-457e1c1f&quot;   
+  Content-Length: 12195
+
+下一次的请求报文 ：
+
+  GET /i/yahoo.gif HTTP/1.1   
+  Host: us.yimg.com   
+  If-Modified-Since: Tue, 12 Dec 2006 03:03:59 GMT   
+  If-None-Match: &quot;10c24bc-4ab-457e1c1f&quot;   
+  HTTP/1.1 304 Not Modified
+</code></pre><p>这件事一般交由你用的服务器（比如Nginx）去做</p>
+<ol>
+<li>减少DOM元素的数量</li>
+</ol>
+<p>过多的DOM元素会拖慢js执行的速度</p>
+<h3 id="二-服务器"><a href="#二-服务器" class="headerlink" title="二. 服务器"></a>二. 服务器</h3><ol>
+<li>使用CDN（Content Delivery Network）内容分发网络（加速静态资源的访问）</li>
+</ol>
+<p>简单说，就是通过用户就近性（IP地址）和服务器负载的判断，CDN会让用户从<strong>离他们最近的内容服务器中</strong>下载所需的静态资源。</p>
+<ol>
+<li>尽量使用GET请求</li>
+</ol>
+<p>GET方法耗时较短</p>
+<p>浏览器在实现XMLHttpRequest POST的时候分成两步，先发header，然后发送数据。而GET却可以用一个TCP报文完成请求。</p>
+<ol>
+<li>服务器启用Gzip压缩</li>
+</ol>
+<p>从HTTP/1.1开始，如果客户端支持压缩，会在在HTTP请求中添加Accept-Encoding: gzip, deflate，服务器就能够据此返回压缩后的数据。（并在响应报文中设定Content-Encoding: gzip）压缩后的数据可以减少多达70%现在就打开你的浏览器的开发者工具，查看响应报文，你会看到你所浏览的网页是经过gzip压缩的。而且毫无解压上的延迟，对吧？你可以gzip一切，除了图片和pdf，因为这些文件一般都是压缩过了的，使用gzip甚至可能会增大文件大小。</p>
+<h3 id="三-Cookie"><a href="#三-Cookie" class="headerlink" title="三. Cookie"></a>三. Cookie</h3><ol>
+<li>减小Cookie的大小</li>
+</ol>
+<p>由于Cookie是用来标识服务器的特有信息，一般通过http请求中的头部一起发送到服务器端。在客户端和服务器端之间来回传递</p>
+<h3 id="四-CSS"><a href="#四-CSS" class="headerlink" title="四. CSS"></a>四. CSS</h3><ol>
+<li>将CSS样式表置顶</li>
+</ol>
+<p>将css文件放在head中</p>
+<p>原因：浏览器解析代码是从上到下的。如果把css放在底部，当网速慢时，html代码加载完成后而css没加载完的话，会导致页面没有样式而难以阅读，所以先加载css样式能让页面正常显示。</p>
+<p>加载和解析css不会阻塞页面。</p>
+<ol>
+<li>合并多个css文件</li>
+</ol>
+<p>减少http请求次数</p>
+<ol>
+<li>压缩css文件</li>
+</ol>
+<ul>
+<li>去掉不必要的空格、回车</li>
+<li>给一些样式添加前缀（解决兼容性）</li>
+<li>抽取出共同的样式？</li>
+</ul>
+<h3 id="五-JavaScript的相关性能优化"><a href="#五-JavaScript的相关性能优化" class="headerlink" title="五. JavaScript的相关性能优化"></a>五. JavaScript的相关性能优化</h3><ol>
+<li>将脚本置底</li>
+</ol>
+<p><strong>JavaScript代码的加载和执行</strong>会阻塞页面的解析渲染以及其他资源的下载。</p>
+<p>如果<strong>放在head里面</strong>，当加载多个js时，就会阻塞页面渲染而出现白屏，用户体验会很差。</p>
+<p>所以将脚本放在之前，等其他部分加载好了，再加载脚本。</p>
+<ol>
+<li>合并多个script标签</li>
+</ol>
+<p>合并多个js文件来减少HTTP请求的次数,减少三次握手的次数和多余的HTTP头传输,降低响应时间提高用户体验。</p>
+<ol>
+<li>尽量减少回流（reflow）和重绘（repaint）</li>
+</ol>
+<p>减少对dom的操作</p>
+<ol>
+<li>使用无阻塞加载js的方法</li>
+</ol>
+<ul>
+<li>使用script标签的defer和async属性</li>
+<li>使用动态创建的script标签来加载执行js代码</li>
+<li>使用XHR对象加载js代码并注入页面</li>
+</ul>
+<ol>
+<li>压缩js</li>
+</ol>
+<ul>
+<li>保证每句话的结尾用”;”</li>
+<li>去掉注释、空格</li>
+<li>if else用{}包好</li>
+<li>变量命名的优化</li>
+</ul>
+<h3 id="六-图片的相关性能优化"><a href="#六-图片的相关性能优化" class="headerlink" title="六. 图片的相关性能优化"></a>六. 图片的相关性能优化</h3><ol>
+<li><p>压缩图片</p>
+</li>
+<li><p>使用css sprite技术</p>
+</li>
+</ol>
+<p>将多个小图标放在一张图片上，减少http请求，将多幅图片拼成一副图片，然后通过控制在什么地方具体显示这整张图片的什么位置</p>
+<p><strong>优点：</strong></p>
+<ul>
+<li>减少网页的http请求</li>
+<li>减少图片的字节：3张图片合并成1张图片的字节总是小于这3张图片的字节总和</li>
+<li>不需要对每一个小元素进行命名</li>
+</ul>
+<ol>
+<li>iconfont矢量图标库</li>
+</ol>
+<p>icon图片过多的情况下，考虑使用iconfont技术</p>
+<pre><code>多个CSS样式表是不会同时加载的，但是所有的样式表都加载完了之后，再一起解析，加载css不会阻塞页面。
+
+多个js也是不会同时加载的，如果没有设定一些特殊的属性的情形下，一般是加载完了直接执行。
+
+多个图片是可以同时加载的，加载图片也不会阻塞页面
+</code></pre>
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/优化/" rel="tag"># 优化</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/05/09/2016-05-09-js的消息机制/" rel="next" title="js的消息机制">
+                <i class="fa fa-chevron-left"></i> js的消息机制
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/05/09/2016-05-09-js中的函数参数的传递/" rel="prev" title="js中的函数参数传递">
+                js中的函数参数传递 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/05/09/2016-05-08-前端性能优化的经验/"
+           data-title="前端性能优化的经验" data-url="http://panpanfish.com/2016/05/09/2016-05-08-前端性能优化的经验/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/icon.jpg"
+               alt="Yu Pan" />
+          <p class="site-author-name" itemprop="name">Yu Pan</p>
+          <p class="site-description motion-element" itemprop="description">在学习中不断进步</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">81</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/panpan040828" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一-网页内容"><span class="nav-number">1.</span> <span class="nav-text">一. 网页内容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二-服务器"><span class="nav-number">2.</span> <span class="nav-text">二. 服务器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三-Cookie"><span class="nav-number">3.</span> <span class="nav-text">三. Cookie</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四-CSS"><span class="nav-number">4.</span> <span class="nav-text">四. CSS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#五-JavaScript的相关性能优化"><span class="nav-number">5.</span> <span class="nav-text">五. JavaScript的相关性能优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#六-图片的相关性能优化"><span class="nav-number">6.</span> <span class="nav-text">六. 图片的相关性能优化</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yu Pan</span>
+</div>
+
+<!--
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+-->
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"panpanfish"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  
+
+
+</body>
+</html>

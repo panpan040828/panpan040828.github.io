@@ -1,0 +1,835 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="算法," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+
+
+
+
+
+
+<meta name="description" content="一. 排序算法1. 排序算法的稳定性稳定：如果 a=b，a原本在b的前面，排序之后，a仍然在b的前面，那么这个排序算法就是稳定的。
+反之，就是不稳定的排序算法。
+稳定的排序算法有：
+二. 快速排序思想：
+选取中间的数为基准值，然后将比它小的放在左边，比它大的放在右边，然后将左右两边的数组进行同样的操作，使用递归的思想。
+注意三点：
+
+要判断递归的边界条件，当数组的长度&amp;lt;=1时，跳出递归
+最后">
+<meta property="og:type" content="article">
+<meta property="og:title" content="js实现快速排序和冒泡排序">
+<meta property="og:url" content="http://panpanfish.com/2016/03/31/2016-03-31-js实现快速排序和冒泡排序/index.html">
+<meta property="og:site_name" content="筱鱼兒">
+<meta property="og:description" content="一. 排序算法1. 排序算法的稳定性稳定：如果 a=b，a原本在b的前面，排序之后，a仍然在b的前面，那么这个排序算法就是稳定的。
+反之，就是不稳定的排序算法。
+稳定的排序算法有：
+二. 快速排序思想：
+选取中间的数为基准值，然后将比它小的放在左边，比它大的放在右边，然后将左右两边的数组进行同样的操作，使用递归的思想。
+注意三点：
+
+要判断递归的边界条件，当数组的长度&amp;lt;=1时，跳出递归
+最后">
+<meta property="og:updated_time" content="2016-10-15T14:09:04.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="js实现快速排序和冒泡排序">
+<meta name="twitter:description" content="一. 排序算法1. 排序算法的稳定性稳定：如果 a=b，a原本在b的前面，排序之后，a仍然在b的前面，那么这个排序算法就是稳定的。
+反之，就是不稳定的排序算法。
+稳定的排序算法有：
+二. 快速排序思想：
+选取中间的数为基准值，然后将比它小的放在左边，比它大的放在右边，然后将左右两边的数组进行同样的操作，使用递归的思想。
+注意三点：
+
+要判断递归的边界条件，当数组的长度&amp;lt;=1时，跳出递归
+最后">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+
+  <title> js实现快速排序和冒泡排序 | 筱鱼兒 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?e18d9ee1b355055e9a39ffec741beb44";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="my-headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="my-site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">筱鱼兒</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">温柔于己，温柔于人</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+          
+            <li class="menu-item menu-item-home">
+              <a href="/" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+                
+                首页
+              </a>
+            </li>
+          
+      
+        
+          
+            <li class="menu-item menu-item-categories">
+              <a href="/categories" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+                
+                分类
+              </a>
+            </li>
+          
+      
+        
+          
+            <li class="menu-item menu-item-archives">
+              <a href="/archives" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+                
+                归档
+              </a>
+            </li>
+          
+      
+        
+          
+            <li class="menu-item menu-item-tags">
+              <a href="/tags" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+                
+                标签
+              </a>
+            </li>
+          
+      
+        
+          
+            <li class="menu-item menu-item-demo">
+              <a href="/categories/Demo/" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-code"></i> <br />
+                
+                demo
+              </a>
+            </li>
+          
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                js实现快速排序和冒泡排序
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-03-31T00:00:00+08:00" content="2016-03-31">
+              2016-03-31
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/算法学习/" itemprop="url" rel="index">
+                    <span itemprop="name">算法学习</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/03/31/2016-03-31-js实现快速排序和冒泡排序/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/31/2016-03-31-js实现快速排序和冒泡排序/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="一-排序算法"><a href="#一-排序算法" class="headerlink" title="一. 排序算法"></a>一. 排序算法</h3><h4 id="1-排序算法的稳定性"><a href="#1-排序算法的稳定性" class="headerlink" title="1. 排序算法的稳定性"></a>1. 排序算法的稳定性</h4><p><strong>稳定：</strong>如果 a=b，a原本在b的前面，排序之后，a仍然在b的前面，那么这个排序算法就是稳定的。</p>
+<p>反之，就是不稳定的排序算法。</p>
+<p>稳定的排序算法有：</p>
+<h3 id="二-快速排序"><a href="#二-快速排序" class="headerlink" title="二. 快速排序"></a>二. 快速排序</h3><p><strong>思想：</strong></p>
+<p>选取中间的数为基准值，然后将比它小的放在左边，比它大的放在右边，然后将左右两边的数组进行同样的操作，使用递归的思想。</p>
+<p><strong>注意三点：</strong></p>
+<ul>
+<li>要判断递归的边界条件，当数组的长度&lt;=1时，跳出递归</li>
+<li>最后进行数组合并时，需要将基准值也合并进去</li>
+<li>splice是对原数组进行操作，返回的是要删除的数组</li>
+</ul>
+<figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">var</span> QuickSort = function(arr) &#123;</span><br><span class="line">	<span class="keyword">if</span> (arr.<span class="built_in">length</span> &lt;= <span class="number">1</span>) &#123;</span><br><span class="line">		<span class="built_in">return</span> arr;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="built_in">var</span> pivotIndex = Math.<span class="built_in">floor</span>(arr.<span class="built_in">length</span>/<span class="number">2</span>);</span><br><span class="line">	<span class="built_in">var</span> pivot = arr.<span class="built_in">splice</span>(pivotIndex,<span class="number">1</span>)[<span class="number">0</span>];</span><br><span class="line">	<span class="built_in">var</span> left = [], right = [];</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">for</span>(<span class="built_in">var</span> i = <span class="number">0</span>; i &lt; arr.<span class="built_in">length</span>; i++) &#123;</span><br><span class="line">		<span class="keyword">if</span>(arr[i] &lt; pivot) &#123;</span><br><span class="line">			left.<span class="built_in">push</span>(arr[i]);</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			right.<span class="built_in">push</span>(arr[i]);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="built_in">return</span> QuickSort(left).<span class="built_in">concat</span>(pivot,QuickSort(right));</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	quickSort([<span class="number">1</span>,<span class="number">4</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">3</span>,<span class="number">12</span>,<span class="number">35</span>]);</span><br><span class="line">	console.<span class="built_in">log</span>(quickSort([<span class="number">1</span>,<span class="number">4</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">3</span>,<span class="number">12</span>,<span class="number">35</span>]));</span><br><span class="line"></span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line">### 三. 冒泡排序</span><br><span class="line"></span><br><span class="line">**冒泡排序的原理：**</span><br><span class="line"></span><br><span class="line">比方说有五个数字<span class="number">54321</span>，要按从小到大排列；</span><br><span class="line"></span><br><span class="line">首先比较前两个，就是<span class="number">5</span>和<span class="number">4</span>，如果第一个小于第二个，不做操作，如果第一个大于第二个，那么交换二者的位置，即变成<span class="number">45321</span>，然后比较第二个和第三个，交换位置，变成<span class="number">43521</span>，然后第三个和第四个，第四个和第五个，这样一次循环下来，变成<span class="number">43215</span></span><br><span class="line"></span><br><span class="line">所以，一层循环的效果就是挑出最大的一个数字<span class="number">5</span>，冒泡到最后面。</span><br><span class="line"></span><br><span class="line">但是还要挑出第二大，第三大的数字，等等。</span><br><span class="line"></span><br><span class="line">所以一层循环根本就不够用，必须再套一层才行。</span><br><span class="line"></span><br><span class="line">像这个例子，五个数字，起码要进行四轮循环才行。至于为什么要this.<span class="built_in">length</span>-i，是因为第一次比较五个数字，第二个只要比较前四个就行了，第五个肯定是最大的了。。</span><br></pre></td></tr></table></figure>
+<p>var bubbleSort = function(arr) {<br>    var temp;<br>    for(var i = 0; i &lt; arr.length; i++) {<br>        for(var j = 0; j &lt; arr.length - 1 - i; j++) {<br>            if(arr[j] &gt; arr[j+1]) {<br>                temp = arr[j];<br>                arr[j]= arr[j+1];<br>                arr[j+1] = temp;<br>            }<br>        }<br>    }</p>
+<pre><code>return arr;
+</code></pre><p>}<br><figure class="highlight hsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">**改进后的冒泡排序：**</span><br><span class="line"></span><br><span class="line">改进的思路：将每趟排序中最后一次进行交换的位置<span class="keyword">pos</span>记录下来，下次排序只要扫描到<span class="keyword">pos</span>即可。</span><br></pre></td></tr></table></figure></p>
+<pre><code>function bubbleSort2() {
+
+    //初始时，最后的位置保持不变
+    var i = arr.length - 1;
+    while(i &gt; 0) {
+
+        //每趟开始时，没有记录交换的最后位置
+        var pos = 0;
+
+        for(var j = 0; j &lt; i; j++) {
+            if(arr[j] &gt; arr[j+1]) {
+
+                //记录交换位置
+                pos = j;
+                var tmp = arr[j];
+                arr[j] = arr[j+1];
+                arr[j+1] = tmp;
+            }
+        }
+
+        //为下一趟排序做准备
+        i = pos;
+    }
+    return arr;
+}
+</code></pre><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">### 四. 选择排序</span></span><br><span class="line"></span><br><span class="line">最直观的排序算法</span><br><span class="line"></span><br><span class="line">依次找出第一大、第二大、第三大<span class="keyword">...</span>依次放在数组中</span><br></pre></td></tr></table></figure>
+<pre><code>function selectSort(arr) {
+    var len = arr.length;
+    var minIndex, temp;
+
+    for(var i = 0; i &lt; len - 1; i++) {
+        minIndex = i;
+        for(var j = i + 1; j &lt; len; j++) {
+            if(arr[minIndex] &gt; arr[j]) {
+                minIndex = j;
+            }
+        }
+
+        temp = arr[i];
+        arr[i] = arr[minIndex];
+        arr[minIndex] = temp;
+    }
+
+    return arr;
+}
+</code></pre><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="section">### 五. 堆排序</span></span><br><span class="line"></span><br><span class="line"><span class="section">#### 1. 什么是堆？</span></span><br><span class="line"></span><br><span class="line">在一个完全二叉树中，所有的<span class="strong">**非终端结点的值**</span>均不大于（或不小于）其左、右孩子结点的值。</span><br><span class="line"></span><br><span class="line">例如：</span><br><span class="line"></span><br><span class="line"><span class="code">	最大化堆：</span></span><br><span class="line"></span><br><span class="line"><span class="code">			 96</span></span><br><span class="line"><span class="code">		83        27</span></span><br><span class="line"><span class="code">    11      9  </span></span><br><span class="line"></span><br><span class="line"><span class="code">	最小化堆：</span></span><br><span class="line"><span class="code">	 		 12</span></span><br><span class="line"><span class="code">		36        24</span></span><br><span class="line"><span class="code">    85      47  </span></span><br><span class="line"></span><br><span class="line">利用堆的概念来排序，若在输出堆顶的最小值之后，使得剩余n-1个元素的序列重又建成一个堆，则得到n个元素的次小值。如此反复执行，便能得到一个有序序列，这个过程称之为堆排序。</span><br><span class="line"></span><br><span class="line">i结点的左子节点为<span class="code">`2*i+1`</span>，i结点的右子节点为<span class="code">`2*i+2`</span></span><br></pre></td></tr></table></figure>
+<pre><code>function heapSort(arr) {
+    var type = Object.prototype.toString().call(arr).slice(8,-1);
+
+    if(type == &apos;Array&apos;) {
+        var heapSize = arr.length, temp;
+
+        //将无序数组变成大顶堆
+        //Math.floor(heapSize/2)-1指的是除去叶子结点外的最右边的一个结点，也就是二叉树中倒数第二行最右边的一个节点。
+        for(var i = Math.floor(heapSize/2)-1; i &gt;= 0; i--) {
+
+            //heapify是为了让每个节点都满足大顶堆的特性
+            heapify(arr, i, heapSize);
+        }
+
+        //从最后一个开始循环
+        for(var j = heapSize - 1; j &gt;= 1; j--) {
+
+            //将数组第一个数和最后一个数交换位置，因为现在数组时大顶堆，因此arr[0]最大
+            //交换后，将除了最后一个元素的数组也变成大顶堆
+            temp = arr[0];
+            arr[0] = arr[j];
+            arr[j] = temp;
+            heapify(arr, 0, --heapSize);
+        }
+        return arr;
+    }
+}
+
+function heapify(arr, x, len) {
+    var arrType = Object.prototype.toString().call(arr).slice(8,-1);
+    var len = arr.length;
+
+    if(arrType == &apos;Array&apos; &amp;&amp; typeof x == &apos;number&apos;) {
+        var left = 2*x+1;
+        var right = 2*x+2;
+        var large = x;
+
+        if(left &lt; len &amp;&amp; arr[left] &gt; arr[large]) {
+            large = left;
+        }
+
+        if(right &lt; len &amp;&amp; arr[right] &gt; arr[large]) {
+            large = right;
+        }
+
+        if(large != x) {
+            var temp = arr[x];
+            arr[x] = arr[large];
+            arr[large] = arr[x];
+            heapify(arr, large, len);
+        }
+
+    }
+}
+</code></pre><p>```</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/算法/" rel="tag"># 算法</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/03/31/2016-03-31-CSS选择器总结/" rel="next" title="CSS选择器总结">
+                <i class="fa fa-chevron-left"></i> CSS选择器总结
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/03/31/2016-03-31-js数组去重/" rel="prev" title="js数组去重">
+                js数组去重 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/03/31/2016-03-31-js实现快速排序和冒泡排序/"
+           data-title="js实现快速排序和冒泡排序" data-url="http://panpanfish.com/2016/03/31/2016-03-31-js实现快速排序和冒泡排序/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/icon.jpg"
+               alt="Yu Pan" />
+          <p class="site-author-name" itemprop="name">Yu Pan</p>
+          <p class="site-description motion-element" itemprop="description">在学习中不断进步</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">142</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">38</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/panpan040828" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一-排序算法"><span class="nav-number">1.</span> <span class="nav-text">一. 排序算法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-排序算法的稳定性"><span class="nav-number">1.1.</span> <span class="nav-text">1. 排序算法的稳定性</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二-快速排序"><span class="nav-number">2.</span> <span class="nav-text">二. 快速排序</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yu Pan</span>
+</div>
+
+<!--
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+-->
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"panpanfish"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  
+
+
+</body>
+</html>

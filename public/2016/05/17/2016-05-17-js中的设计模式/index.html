@@ -1,0 +1,801 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="javaScript," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+
+
+
+
+
+
+<meta name="description" content="《js设计模式》
+随着js能做的事情越来越多，在js编程中也会考虑设计模式。
+考虑设计模式的优点：
+
+可维护性：设计模式有助于降低模块之间的耦合程度。
+沟通：提供了一种通用的术语。
+性能：有的设计模式能够提高程序的运行速度。
+
+考虑设计模式带来的问题：
+
+复杂性：程序可能会变得复杂一些。
+性能：有的设计模式可能会使代码的性能变差。
+
+设计模式的类别：
+创建型设计模式：用于处理对象创建机制。
+eg：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="js中的设计模式">
+<meta property="og:url" content="http://panpanfish.com/2016/05/17/2016-05-17-js中的设计模式/index.html">
+<meta property="og:site_name" content="筱鱼兒">
+<meta property="og:description" content="《js设计模式》
+随着js能做的事情越来越多，在js编程中也会考虑设计模式。
+考虑设计模式的优点：
+
+可维护性：设计模式有助于降低模块之间的耦合程度。
+沟通：提供了一种通用的术语。
+性能：有的设计模式能够提高程序的运行速度。
+
+考虑设计模式带来的问题：
+
+复杂性：程序可能会变得复杂一些。
+性能：有的设计模式可能会使代码的性能变差。
+
+设计模式的类别：
+创建型设计模式：用于处理对象创建机制。
+eg：">
+<meta property="og:updated_time" content="2016-07-04T14:11:24.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="js中的设计模式">
+<meta name="twitter:description" content="《js设计模式》
+随着js能做的事情越来越多，在js编程中也会考虑设计模式。
+考虑设计模式的优点：
+
+可维护性：设计模式有助于降低模块之间的耦合程度。
+沟通：提供了一种通用的术语。
+性能：有的设计模式能够提高程序的运行速度。
+
+考虑设计模式带来的问题：
+
+复杂性：程序可能会变得复杂一些。
+性能：有的设计模式可能会使代码的性能变差。
+
+设计模式的类别：
+创建型设计模式：用于处理对象创建机制。
+eg：">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+
+  <title> js中的设计模式 | 筱鱼兒 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?e18d9ee1b355055e9a39ffec741beb44";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="my-headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="my-site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">筱鱼兒</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">温柔于己，温柔于人</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+          
+            <li class="menu-item menu-item-home">
+              <a href="/" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+                
+                首页
+              </a>
+            </li>
+          
+      
+        
+          
+            <li class="menu-item menu-item-categories">
+              <a href="/categories" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+                
+                分类
+              </a>
+            </li>
+          
+      
+        
+          
+            <li class="menu-item menu-item-archives">
+              <a href="/archives" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+                
+                归档
+              </a>
+            </li>
+          
+      
+        
+          
+            <li class="menu-item menu-item-tags">
+              <a href="/tags" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+                
+                标签
+              </a>
+            </li>
+          
+      
+        
+          
+            <li class="menu-item menu-item-demo">
+              <a href="/categories/Demo/" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-code"></i> <br />
+                
+                demo
+              </a>
+            </li>
+          
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                js中的设计模式
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-05-17T00:00:00+08:00" content="2016-05-17">
+              2016-05-17
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/javaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">javaScript</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/05/17/2016-05-17-js中的设计模式/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/17/2016-05-17-js中的设计模式/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>《js设计模式》</p>
+<p>随着js能做的事情越来越多，在js编程中也会考虑设计模式。</p>
+<p><strong><font color="red">考虑设计模式的优点：</font></strong></p>
+<ul>
+<li>可维护性：设计模式有助于降低模块之间的耦合程度。</li>
+<li>沟通：提供了一种通用的术语。</li>
+<li>性能：有的设计模式能够提高程序的运行速度。</li>
+</ul>
+<p><strong><font color="red">考虑设计模式带来的问题：</font></strong></p>
+<ul>
+<li>复杂性：程序可能会变得复杂一些。</li>
+<li>性能：有的设计模式可能会使代码的性能变差。</li>
+</ul>
+<p><strong><font color="red">设计模式的类别：</font></strong></p>
+<p><strong>创建型设计模式：</strong>用于处理对象创建机制。</p>
+<pre><code>eg：
+Constructor（构造器）—— 构造函数
+Factory（工厂）
+Abstract（抽象）
+prototype（原型）
+Singleton（单例）
+Builder（生成器）
+</code></pre><p><strong>结构型设计模式：</strong>找出在不同对象之间建立关系的简单方法。</p>
+<pre><code>eg:
+Decorator（装饰者）
+Facade（外观）
+Flyweight（享元）
+Adapter（适配器）
+Proxy（代理）
+</code></pre><p><strong>行为设计模式：</strong>改善或者简化系统中不同对象之间的通信。</p>
+<pre><code>eg:
+Iterator（迭代器）
+Mediator（中介者）
+Observer（观察者）
+Vistor（访问者）
+</code></pre><h3 id="一-接口"><a href="#一-接口" class="headerlink" title="一. 接口"></a>一. 接口</h3><h4 id="1-什么是接口"><a href="#1-什么是接口" class="headerlink" title="1. 什么是接口"></a>1. 什么是接口</h4><p>接口中定义了一个类实现了哪些方法，这些方法有哪些参数。</p>
+<h4 id="2-接口的作用"><a href="#2-接口的作用" class="headerlink" title="2. 接口的作用"></a>2. 接口的作用</h4><p>促进代码的重用。</p>
+<h4 id="3-在js中模仿接口"><a href="#3-在js中模仿接口" class="headerlink" title="3. 在js中模仿接口"></a>3. 在js中模仿接口</h4><ul>
+<li>注释法</li>
+<li>属性法</li>
+<li>鸭式辨法</li>
+</ul>
+<p>将注释法和鸭式辨法结合起来：</p>
+<p>//Interfaces<br>var Composite = new Interface(“Composite”,[“add”,”remove”]);<br>var FormItem = new Interface(“FormItem”,[“save”]);</p>
+<h3 id="二-封装"><a href="#二-封装" class="headerlink" title="二. 封装"></a>二. 封装</h3><p>封装就是把一个对象保护起来，使其只提供定义的接口方法，而保护私有的变量。打个比方，游戏中的一个人物对象，它的经验只有通过打死怪兽这个接口方法来增加。如果可以直接修改经验就会直接影响到整个游戏的设定。所以这个时候经验这个属性就是一个需要保护的变量。</p>
+<p>闭包实现封装类</p>
+<h3 id="三-继承"><a href="#三-继承" class="headerlink" title="三. 继承"></a>三. 继承</h3><p>继承是一种减少重复性代码的一种设计模式，尽量弱化对象间耦合，开闭原则的一种很好的实现。</p>
+<h3 id="四-单例"><a href="#四-单例" class="headerlink" title="四. 单例"></a>四. 单例</h3><p>单例是一个全局变量，使用单例可以更好的控制全局变量，还可以利用分支技术来封装浏览器之间的差异。网页中使用全局变量由于可以被重写风险很大。所以使用单例会更好的控制全局变量。</p>
+<h3 id="五-链式调用"><a href="#五-链式调用" class="headerlink" title="五. 链式调用"></a>五. 链式调用</h3><p>这个解释起来比较难，我觉得直接看代码比较直接，这个链式调用的主要用处，就是使代码更加简化，增加代码易读性。使用回调技术可以使取值器方法也只是链式调用。</p>
+<h3 id="六-工厂模式"><a href="#六-工厂模式" class="headerlink" title="六. 工厂模式"></a>六. 工厂模式</h3><p>1.工厂接口是工厂方法模式的核心，与调用者直接交互用来提供产品。</p>
+<p>2.工厂实现决定如何实例化产品，是实现扩展的途径，需要有多少种产品，就需要有多少个具体的工厂实现。</p>
+<h3 id="七-抽象工厂模式"><a href="#七-抽象工厂模式" class="headerlink" title="七. 抽象工厂模式"></a>七. 抽象工厂模式</h3><p>抽象工厂是工厂模式的升级版，他用来创建一组相关或者相互依赖的对象。上节学习了工厂模式，类的创建依赖工厂类，程序需要扩展时，我们必须创建新的工厂类。工厂类是用来生产产品的，那我们也可以把“工厂类当成我们要生产的产品”，所以抽象工厂就是“工厂的工厂”，即生产工厂的工厂。下面通过一个例子来深入理解。</p>
+<h3 id="八-发布-订阅模式（观察者模式）"><a href="#八-发布-订阅模式（观察者模式）" class="headerlink" title="八. 发布/订阅模式（观察者模式）"></a>八. 发布/订阅模式（观察者模式）</h3><p>广播电台，人们会把频道调到他们最喜欢的节目。广播站不知道观众听得是什么或者他们正在听什么。他只需要发布他们的节目就可以啦。观众也不知道广播站制作节目的过程。他们只要在他们最喜欢的节目运行的时候把台调到对应的频道或者告知朋友就行。</p>
+<p><strong>广播站是发布者，听众是订阅者。</strong></p>
+<p><strong>订阅者和发布者之间是相互独立地运行。</strong></p>
+<p>这个模式中，包含三个部分：订阅、发布、事件。</p>
+<p>看一下jquery里面的trigger<br>    <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">".ele"</span>).on(<span class="string">"click"</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"clicking"</span>);<span class="comment">//监听事件（订阅）</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">$(<span class="string">".ele"</span>).trigger(<span class="string">"click"</span>);<span class="comment">//触发事件（发布）</span></span><br></pre></td></tr></table></figure></p>
+<p>登录框和header的部分是完全不同的两个部分。这个场景就很适合发布订阅模式了。<br>看一下</p>
+<p>如果你的登录状态改变了的话，会有一系列的订阅程序发生.而且每个订阅之间互不干扰，你可以随便添加或者删除订阅，这都不会影响你的登录的执行逻辑. </p>
+<p>订阅发布模式如果按数学翻译其实就是.一对多的映射关系.怎么解释呢？ 就是一个开关，同时并联几个灯泡(在不同房间),触发的时候，几个灯泡都会得到指令，然后执行发光的行为。</p>
+<p>一个订阅(监听程序),一个发布(触发事件).而他们中间的链接枢纽就是事件。<br>    <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> makePubSub = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"></span><br><span class="line">       <span class="keyword">var</span> callbacks=&#123;&#125;;<span class="comment">//callbacks是一个hash表，将监听的事件作为属性，将相应的订阅函数作为值，例如：订阅了一个callbacks=&#123;"click":func&#125;</span></span><br><span class="line"></span><br><span class="line">       <span class="keyword">var</span> subscribe = <span class="function"><span class="keyword">function</span>(<span class="params">ev,func</span>)</span>&#123;</span><br><span class="line">           <span class="comment">//检验该事件是否被监听了</span></span><br><span class="line">           </span><br><span class="line">           <span class="keyword">if</span>(!callbacks[ev])&#123;</span><br><span class="line">               callbacks[ev]=[];</span><br><span class="line">           &#125;</span><br><span class="line">           callbacks[ev].push(func);</span><br><span class="line">           <span class="built_in">console</span>.log(<span class="keyword">this</span>);<span class="comment">//这里的this指向调用这个方法的对象</span></span><br><span class="line">           <span class="keyword">return</span> <span class="keyword">this</span>;            </span><br><span class="line">       &#125;;</span><br><span class="line"></span><br><span class="line">       <span class="keyword">var</span> publish = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">           <span class="comment">//将输入的实参变成数组（将类数组对象变成数组）</span></span><br><span class="line">           <span class="keyword">var</span> args=<span class="built_in">Array</span>.prototype.slice.call(<span class="built_in">arguments</span>,<span class="number">0</span>);</span><br><span class="line">   </span><br><span class="line">           <span class="comment">//函数的第一个实参是要触发的事件</span></span><br><span class="line">           <span class="keyword">var</span> ev=args.shift();</span><br><span class="line">   </span><br><span class="line">           <span class="comment">//Return if callbacks object doesn't contain</span></span><br><span class="line">           <span class="comment">//any entry for event</span></span><br><span class="line">           <span class="keyword">var</span> list,i;</span><br><span class="line">           <span class="keyword">if</span>(!callbacks[ev])&#123;<span class="comment">//如果hash表中不存在这个事件</span></span><br><span class="line">               <span class="built_in">console</span>.log(<span class="keyword">this</span>);</span><br><span class="line">               <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">               </span><br><span class="line">           &#125;</span><br><span class="line"></span><br><span class="line">           list=callbacks[ev];</span><br><span class="line">           <span class="built_in">console</span>.log(list[i]);</span><br><span class="line"></span><br><span class="line">           <span class="comment">//触发事件，list里面装的是事件触发时需要执行的函数，list里面可以有多个函数</span></span><br><span class="line">           <span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;list.length;i++)&#123;</span><br><span class="line">               list[i].apply(<span class="keyword">this</span>,args);</span><br><span class="line">               <span class="built_in">console</span>.log(args);</span><br><span class="line">               <span class="built_in">console</span>.log(<span class="keyword">this</span>);</span><br><span class="line">           &#125;</span><br><span class="line">           <span class="built_in">console</span>.log(<span class="keyword">this</span>);</span><br><span class="line">           <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">           </span><br><span class="line">       &#125;;</span><br><span class="line">   </span><br><span class="line">       <span class="keyword">return</span> &#123;pub:publish,sub:subscribe&#125;;</span><br><span class="line">   &#125;</span><br><span class="line">   </span><br><span class="line">   <span class="keyword">var</span> test=makePubSub();<span class="comment">//由于函数返回的是一个对象，因此test是一个对象，有sub,pub两个方法</span></span><br><span class="line"></span><br><span class="line">   test.sub(<span class="string">"click"</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;alert(<span class="string">"hell0"</span>);&#125;);<span class="comment">//订阅一个click事件，执行的回调是alert("hell0")</span></span><br><span class="line"></span><br><span class="line">   test.pub(<span class="string">"click"</span>);<span class="comment">//触发一个click事件</span></span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/javaScript/" rel="tag"># javaScript</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/05/16/2016-05-16-纯函数/" rel="next" title="纯函数">
+                <i class="fa fa-chevron-left"></i> 纯函数
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/05/17/2016-05-17-GET和POST的区别/" rel="prev" title="GET和POST的区别">
+                GET和POST的区别 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/05/17/2016-05-17-js中的设计模式/"
+           data-title="js中的设计模式" data-url="http://panpanfish.com/2016/05/17/2016-05-17-js中的设计模式/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/icon.jpg"
+               alt="Yu Pan" />
+          <p class="site-author-name" itemprop="name">Yu Pan</p>
+          <p class="site-description motion-element" itemprop="description">在学习中不断进步</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">142</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">38</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/panpan040828" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一-接口"><span class="nav-number">1.</span> <span class="nav-text">一. 接口</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-什么是接口"><span class="nav-number">1.1.</span> <span class="nav-text">1. 什么是接口</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-接口的作用"><span class="nav-number">1.2.</span> <span class="nav-text">2. 接口的作用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-在js中模仿接口"><span class="nav-number">1.3.</span> <span class="nav-text">3. 在js中模仿接口</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二-封装"><span class="nav-number">2.</span> <span class="nav-text">二. 封装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三-继承"><span class="nav-number">3.</span> <span class="nav-text">三. 继承</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四-单例"><span class="nav-number">4.</span> <span class="nav-text">四. 单例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#五-链式调用"><span class="nav-number">5.</span> <span class="nav-text">五. 链式调用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#六-工厂模式"><span class="nav-number">6.</span> <span class="nav-text">六. 工厂模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#七-抽象工厂模式"><span class="nav-number">7.</span> <span class="nav-text">七. 抽象工厂模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#八-发布-订阅模式（观察者模式）"><span class="nav-number">8.</span> <span class="nav-text">八. 发布/订阅模式（观察者模式）</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yu Pan</span>
+</div>
+
+<!--
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+-->
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"panpanfish"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  
+
+
+</body>
+</html>

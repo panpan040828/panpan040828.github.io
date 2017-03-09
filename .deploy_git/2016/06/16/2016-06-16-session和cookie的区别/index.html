@@ -1,0 +1,796 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="http," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+
+
+
+
+
+
+<meta name="description" content="一. 理解session和cookieHTTP协议本身是无状态的（每一次请求之间是独立的）
+cookie的作用就是为了解决HTTP协议无状态的缺陷所作出的努力。
+session机制则是又一种在客户端与服务器之间保持状态的解决方案。
+
+让我们用几个例子来描述一下cookie和session机制之间的区别与联系。笔者曾经常去的一家咖啡店有喝5杯咖啡免费赠一杯咖啡的优惠，然而一次性消费5杯咖啡的机会微乎">
+<meta property="og:type" content="article">
+<meta property="og:title" content="session和cookie的区别和联系">
+<meta property="og:url" content="http://panpanfish.com/2016/06/16/2016-06-16-session和cookie的区别/index.html">
+<meta property="og:site_name" content="筱鱼兒">
+<meta property="og:description" content="一. 理解session和cookieHTTP协议本身是无状态的（每一次请求之间是独立的）
+cookie的作用就是为了解决HTTP协议无状态的缺陷所作出的努力。
+session机制则是又一种在客户端与服务器之间保持状态的解决方案。
+
+让我们用几个例子来描述一下cookie和session机制之间的区别与联系。笔者曾经常去的一家咖啡店有喝5杯咖啡免费赠一杯咖啡的优惠，然而一次性消费5杯咖啡的机会微乎">
+<meta property="og:updated_time" content="2016-08-20T08:41:38.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="session和cookie的区别和联系">
+<meta name="twitter:description" content="一. 理解session和cookieHTTP协议本身是无状态的（每一次请求之间是独立的）
+cookie的作用就是为了解决HTTP协议无状态的缺陷所作出的努力。
+session机制则是又一种在客户端与服务器之间保持状态的解决方案。
+
+让我们用几个例子来描述一下cookie和session机制之间的区别与联系。笔者曾经常去的一家咖啡店有喝5杯咖啡免费赠一杯咖啡的优惠，然而一次性消费5杯咖啡的机会微乎">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+
+  <title> session和cookie的区别和联系 | 筱鱼兒 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?e18d9ee1b355055e9a39ffec741beb44";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="my-headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="my-site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">筱鱼兒</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">温柔于己，温柔于人</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+          
+            <li class="menu-item menu-item-home">
+              <a href="/" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+                
+                首页
+              </a>
+            </li>
+          
+      
+        
+          
+            <li class="menu-item menu-item-categories">
+              <a href="/categories" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+                
+                分类
+              </a>
+            </li>
+          
+      
+        
+          
+            <li class="menu-item menu-item-archives">
+              <a href="/archives" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+                
+                归档
+              </a>
+            </li>
+          
+      
+        
+          
+            <li class="menu-item menu-item-tags">
+              <a href="/tags" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+                
+                标签
+              </a>
+            </li>
+          
+      
+        
+          
+            <li class="menu-item menu-item-demo">
+              <a href="/categories/Demo/" rel="section">
+                
+                  <i class="menu-item-icon fa fa-fw fa-code"></i> <br />
+                
+                demo
+              </a>
+            </li>
+          
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                session和cookie的区别和联系
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-06-16T00:00:00+08:00" content="2016-06-16">
+              2016-06-16
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/http协议/" itemprop="url" rel="index">
+                    <span itemprop="name">http协议</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/06/16/2016-06-16-session和cookie的区别/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/16/2016-06-16-session和cookie的区别/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="一-理解session和cookie"><a href="#一-理解session和cookie" class="headerlink" title="一. 理解session和cookie"></a>一. 理解session和cookie</h3><p>HTTP协议本身是无状态的（每一次请求之间是独立的）</p>
+<p>cookie的作用就是为了解决HTTP协议无状态的缺陷所作出的努力。</p>
+<p>session机制则是又一种在客户端与服务器之间保持状态的解决方案。</p>
+<blockquote>
+<p>让我们用几个例子来描述一下cookie和session机制之间的区别与联系。笔者曾经常去的一家咖啡店有喝5杯咖啡免费赠一杯咖啡的优惠，然而一次性消费5杯咖啡的机会微乎其微，这时就需要某种方式来纪录某位顾客的消费数量。想象一下其实也无外乎下面的几种方案： </p>
+<p>1、该店的店员很厉害，能记住每位顾客的消费数量，只要顾客一走进咖啡店，店员就知道该怎么对待了。这种做法就是协议本身支持状态。 </p>
+<p>2、发给顾客一张卡片，上面记录着消费的数量，一般还有个有效期限。每次消费时，如果顾客出示这张卡片，则此次消费就会与以前或以后的消费相联系起来。这种做法就是在客户端保持状态。 </p>
+<p>3、发给顾客一张会员卡，除了卡号之外什么信息也不纪录，每次消费时，如果顾客出示该卡片，则店员在店里的纪录本上找到这个卡号对应的纪录添加一些消费信息。这种做法就是在服务器端保持状态。</p>
+<p>由于HTTP协议是无状态的，而出于种种考虑也不希望使之成为有状态的，因此，后面两种方案就成为现实的选择。具体来说cookie机制采用的是在客户端保持状态的方案，而session机制采用的是在服务器端保持状态的方案。同时我们也看到，由于采用服务器端保持状态的方案在客户端也需要保存一个标识，所以session机制可能需要借助于cookie机制来达到保存标识的目的，但实际上它还有其他选择。 </p>
+</blockquote>
+<h3 id="二-理解cookie机制"><a href="#二-理解cookie机制" class="headerlink" title="二. 理解cookie机制"></a>二. 理解cookie机制</h3><p>cookies是服务器用来标识web用户的一小块数据。</p>
+<p>cookies的基本思想就是让浏览器积累一组服务器特有的信息，并在客户端和服务器端来回传递。</p>
+<ul>
+<li>cookie如何分发</li>
+<li>cookie的内容</li>
+<li>客户端如何使用cookie</li>
+</ul>
+<h4 id="1-cookie如何分发"><a href="#1-cookie如何分发" class="headerlink" title="1. cookie如何分发"></a>1. cookie如何分发</h4><p><strong>a. 服务器在返回的响应报文中，通过Set-Cookie头部来设置cookie</strong></p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 <span class="number">200</span> OK</span><br><span class="line"><span class="attribute">Content-type</span>: text/html</span><br><span class="line"><span class="attribute">Set-Cookie</span>: name=value; domain="www.baidu.com";</span><br></pre></td></tr></table></figure>
+<p><strong>b. 客户端将set-cookie首部中的内容保存下来，在下次发送请求时携带</strong></p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">GET</span> <span class="string">/index.html</span> HTTP/1.1</span><br><span class="line"><span class="attribute">Cookie</span>: name=value;</span><br></pre></td></tr></table></figure>
+<p>cookie的数据始终在同源的http请求中携带，并且会来回传递。</p>
+<h4 id="2-cookie的内容"><a href="#2-cookie的内容" class="headerlink" title="2. cookie的内容"></a>2. cookie的内容</h4><ul>
+<li>名称name: cookie的名称</li>
+<li>值value: cookie中存放的内容</li>
+<li>过期时间end: 表示cookie何时会被删除</li>
+<li>域domain: cookie对于哪个域是有效的</li>
+<li>路径path: 指定域中的某个路径</li>
+<li>安全标志secure</li>
+</ul>
+<p>只有名称和值会被浏览器传回服务器端，其它内容都是服务器给浏览器的指示，不会做为浏览器发送到服务器cookie的一部分</p>
+<p>根据<strong>过期时间</strong>不同，将cookie分为<strong>会话cookie</strong>和<strong>持久cookie</strong>。</p>
+<font color="red">会话cookie和持久cookie的区别：</font>
+
+<p><strong>过期时间：</strong></p>
+<pre><code>会话cookie：没有设定过期时间的cookie都会被当成会话cookie
+
+持久cookie：设置了过期时间的cookie是
+</code></pre><p><strong>存储地点：</strong></p>
+<pre><code>cookie都是存在客户端的。但是不同类型的cookie存在客户端的位置不一样。
+
+会话cookie：存储在内存里
+
+持久cookie：存储在硬盘上
+</code></pre><p><strong>消失时间：</strong></p>
+<pre><code>会话cookie：由于会话cookie是存在内存中的，内存又是相对于进程分配的，因此进程关闭，会话cookie就会消失。
+
+           对于多进程浏览器（chrome、IE 10），浏览器的一个标签页就是一个进程，在浏览器窗口(标签页)关闭之后就会消失；
+
+           对于多线程浏览器（firefox），浏览器的一个标签页是一个线程，只有当浏览器窗口关闭才会消失（所有浏览器窗口都是一个进程）。
+
+持久cookie：是在过期时间之后消失。
+</code></pre><p><strong>是否被浏览器不同页面共享：</strong></p>
+<pre><code>会话cookie：不同浏览器的处理方式不同。
+
+           对于多进程浏览器（chrome、IE 10），是不能被浏览器的不同标签页共享
+
+           对于多线程浏览器（firefox）,是可以被浏览器的不同标签页共享
+
+           一般来说是用javascript的window.open()打开的窗口会与原窗口共享内存cookie。
+
+持久cookie：是存在电脑硬盘里，是可以被同一个浏览器的所有页面共享的（无论是多进程还是多线程浏览器）；
+</code></pre><p><strong>补充一点点：</strong></p>
+<p>不同浏览器之间不能共享cookie，因为每个浏览器存cookie路径不是一样的。</p>
+<h3 id="三-理解session机制"><a href="#三-理解session机制" class="headerlink" title="三. 理解session机制"></a>三. 理解session机制</h3><ul>
+<li><p>session指的是会话，会话：指一个浏览器窗口打开到关闭的这个期间。</p>
+</li>
+<li><p>session机制：是指的一种服务器端的机制。用来在客户端与服务器之间保持状态的解决方案。</p>
+</li>
+</ul>
+<p><strong>session的作用：</strong>session是服务器用来识别不同用户的。</p>
+<p>session是一种保存上下文信息的机制，它是针对每一个用户的，变量的值保存在服务器端，通过SessionID来区分不同的客户,session是以cookie或URL重写为基础的，默认使用cookie来实现。</p>
+<p><strong>session</strong>是保存在<strong>服务器端</strong>的；每个session会有一个唯一的session id，session id的值应该是一个既不会重复，又不容易被找到规律以仿造的字符串。</p>
+<p><strong>session id</strong>是被保存在<strong>客户端</strong>的,可以在cookie中保存这个session id。</p>
+<p>session（服务器端） &lt;===============&gt; session id（客户端）</p>
+<blockquote>
+<p>当程序需要为某个客户端的请求创建一个session的时候，</p>
+<p>服务器首先检查这个客户端的请求里是否已包含了一个session标识（称为session id），</p>
+<p>如果已包含一个session id则说明以前已经为此客户端创建过session，服务器就按照session id把这个session检索出来使用（如果检索不到，可能会新建一个）</p>
+<p>如果客户端请求不包含session id，则为此客户端创建一个session并且生成一个与此session相关联的session id，这个session id将被在本次响应中返回给客户端保存。 </p>
+</blockquote>
+<p>关闭浏览器不会导致session被删除，服务器会为seesion设置了一个失效时间，当距离客户端上一次使用session的时间超过这个失效时间时，服务器就可以认为客户端已经停止了活动，才会把session删除以节省存储空间。</p>
+<h3 id="四-session和cookie的区别"><a href="#四-session和cookie的区别" class="headerlink" title="四. session和cookie的区别"></a>四. session和cookie的区别</h3><ul>
+<li>cookie数据存放在客户的浏览器上，session数据放在服务器上。</li>
+<li>cookie不是很安全，别人可以分析存放在本地的cookie并进行cookie欺骗（例如：如果你在机器上面保存了某个论坛 cookie，有效期是一年，如果有人入侵你的机器，将你的  cookie拷走，然后放在他的浏览器的目录下面，那么他登录该网站的时候就是用你的的身份登录的。所以 cookie是可以伪造的。）；考虑到安全应当使用session。</li>
+<li>session会在一定时间内保存在服务器上。当访问增多，会比较占用你服务器的性能；考虑到减轻服务器性能方面，应当使用cookie。</li>
+<li>单个cookie保存的数据不能超过4K，很多浏览器都限制一个站点最多保存20个cookie。</li>
+<li>所以个人建议：将登陆信息等重要信息存放为session，其他信息如果需要保留，可以放在cookie中。</li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/http/" rel="tag"># http</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/06/15/2016-06-15-表单脚本/" rel="next" title="表单脚本">
+                <i class="fa fa-chevron-left"></i> 表单脚本
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/06/16/2016-06-16-如何避免表单的重复提交/" rel="prev" title="如何避免表单的重复提交">
+                如何避免表单的重复提交 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/06/16/2016-06-16-session和cookie的区别/"
+           data-title="session和cookie的区别和联系" data-url="http://panpanfish.com/2016/06/16/2016-06-16-session和cookie的区别/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/icon.jpg"
+               alt="Yu Pan" />
+          <p class="site-author-name" itemprop="name">Yu Pan</p>
+          <p class="site-description motion-element" itemprop="description">在学习中不断进步</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">142</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">38</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/panpan040828" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一-理解session和cookie"><span class="nav-number">1.</span> <span class="nav-text">一. 理解session和cookie</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二-理解cookie机制"><span class="nav-number">2.</span> <span class="nav-text">二. 理解cookie机制</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-cookie如何分发"><span class="nav-number">2.1.</span> <span class="nav-text">1. cookie如何分发</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-cookie的内容"><span class="nav-number">2.2.</span> <span class="nav-text">2. cookie的内容</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三-理解session机制"><span class="nav-number">3.</span> <span class="nav-text">三. 理解session机制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四-session和cookie的区别"><span class="nav-number">4.</span> <span class="nav-text">四. session和cookie的区别</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yu Pan</span>
+</div>
+
+<!--
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+-->
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"panpanfish"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  
+
+
+</body>
+</html>
