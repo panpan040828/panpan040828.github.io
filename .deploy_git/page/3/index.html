@@ -283,8 +283,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/08/16/2016-08-16- webpack/" itemprop="url">
-                  webpack
+                <a class="post-title-link" href="/2016/08/16/2016-03-12-js中的垃圾回收/" itemprop="url">
+                  js中的垃圾回收
                 </a>
               
             
@@ -311,8 +311,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/工具/" itemprop="url" rel="index">
-                    <span itemprop="name">工具</span>
+                  <a href="/categories/javaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">javaScript</span>
                   </a>
                 </span>
 
@@ -327,8 +327,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/08/16/2016-08-16- webpack/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/16/2016-08-16- webpack/" itemprop="commentsCount"></span>
+                <a href="/2016/08/16/2016-03-12-js中的垃圾回收/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/16/2016-03-12-js中的垃圾回收/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -353,14 +353,16 @@
       
         
           
-          一. 什么是webpackwebpack是一个前端构建工具，其主要思想是将项目中用到的一切静态资源都看成是模块，webpack可以对其进行统一的管理和发布。
-webpack中支持使用AMD和CommonJS规范。
-
-webpack可以看成模块打包机，它所做的功能：分析项目结构，找到js模块，和其他一
+          一. js中的垃圾回收机制js具有自动垃圾收集机制
+其原理如下：找出不再适用的变量，然后释放其中的内存
+垃圾收集器会周期性地执行这个操作。
+二. 手动解除引用，释放内存var globalVar = [];
+//手动解除引用，释放内存globalVar = null;
+三. 闭包中的变量局部变量只在
           ...
 
           <div class="post-more-link text-center">
-            <a class="my-btn" href="/2016/08/16/2016-08-16- webpack/#more" rel="contents">
+            <a class="my-btn" href="/2016/08/16/2016-03-12-js中的垃圾回收/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -684,6 +686,134 @@ controller：控制层
             
               
                 
+                <a class="post-title-link" href="/2016/08/04/2016-08-04-学习koa.js/" itemprop="url">
+                  学习koa.js
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-08-04T00:00:00+08:00" content="2016-08-04">
+              2016-08-04
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/前端笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">前端笔记</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/08/04/2016-08-04-学习koa.js/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/04/2016-08-04-学习koa.js/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          一. 什么是koa.js?koa.js是一个基于nodejs的web框架，主要利用了ES6里面的generator的新特性。
+koa的作用：
+利用一个个中间件对HTTP请求进行处理。例如：生成缓存／指定代理／请求重定向等。
+总之，一个koa应用是一个对象，这个对象中包含一个中间件的数组，数组是由一系
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="my-btn" href="/2016/08/04/2016-08-04-学习koa.js/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/08/04/2016-08-04-charles的使用/" itemprop="url">
                   charles的使用
                 </a>
@@ -764,134 +894,6 @@ Sequenc
 
           <div class="post-more-link text-center">
             <a class="my-btn" href="/2016/08/04/2016-08-04-charles的使用/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/08/04/2016-08-04-学习koa.js/" itemprop="url">
-                  学习koa.js
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-08-04T00:00:00+08:00" content="2016-08-04">
-              2016-08-04
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/前端笔记/" itemprop="url" rel="index">
-                    <span itemprop="name">前端笔记</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/08/04/2016-08-04-学习koa.js/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/04/2016-08-04-学习koa.js/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          一. 什么是koa.js?koa.js是一个基于nodejs的web框架，主要利用了ES6里面的generator的新特性。
-koa的作用：
-利用一个个中间件对HTTP请求进行处理。例如：生成缓存／指定代理／请求重定向等。
-总之，一个koa应用是一个对象，这个对象中包含一个中间件的数组，数组是由一系
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="my-btn" href="/2016/08/04/2016-08-04-学习koa.js/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1465,8 +1467,8 @@ ECMAScript是javaScript的规格，javaScript是ECMAScript的实现。
             
               
                 
-                <a class="post-title-link" href="/2016/07/06/2016-07-06-js中运算符的优先级/" itemprop="url">
-                  js中运算符的优先级
+                <a class="post-title-link" href="/2016/07/06/2016-07-06-微型调查问卷平台组件——弹出层/" itemprop="url">
+                  微型调查问卷平台组件——弹出层
                 </a>
               
             
@@ -1493,8 +1495,8 @@ ECMAScript是javaScript的规格，javaScript是ECMAScript的实现。
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/javaScript/" itemprop="url" rel="index">
-                    <span itemprop="name">javaScript</span>
+                  <a href="/categories/Demo/" itemprop="url" rel="index">
+                    <span itemprop="name">Demo</span>
                   </a>
                 </span>
 
@@ -1509,8 +1511,8 @@ ECMAScript是javaScript的规格，javaScript是ECMAScript的实现。
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/07/06/2016-07-06-js中运算符的优先级/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/06/2016-07-06-js中运算符的优先级/" itemprop="commentsCount"></span>
+                <a href="/2016/07/06/2016-07-06-微型调查问卷平台组件——弹出层/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/06/2016-07-06-微型调查问卷平台组件——弹出层/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -1535,14 +1537,12 @@ ECMAScript是javaScript的规格，javaScript是ECMAScript的实现。
       
         
           
-          运算符的优先级用于计算表达式时不同运算符执行的顺序。
-下表是由运算符的优先级是由 高 ————&gt; 低，相同优先级的运算符按从左至右的顺序求值。
-运算符                                描述
-. [] ()                              
+          一. 弹出层Demo地址：http://panpanfish.com/myDemo/research/floatdiv.html
+代码地址：https://github.com/panpan040828/myDemo/blob/gh-pages/research/js/floatDiv/common
           ...
 
           <div class="post-more-link text-center">
-            <a class="my-btn" href="/2016/07/06/2016-07-06-js中运算符的优先级/#more" rel="contents">
+            <a class="my-btn" href="/2016/07/06/2016-07-06-微型调查问卷平台组件——弹出层/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
