@@ -371,7 +371,7 @@ IE和Netscape提出了两种相反的事件流：事件冒泡流、事件捕获�
 <p>DOM2级事件明确要求捕获阶段不会涉及到事件目标，但是很多高版本的浏览器都会在捕获阶段触发事件对象上的事件。</p>
 <h3 id="二-W3C和IE绑定事件"><a href="#二-W3C和IE绑定事件" class="headerlink" title="二. W3C和IE绑定事件"></a>二. W3C和IE绑定事件</h3><p>一般绑定事件可以用</p>
 <pre><code>obj.onclick = function(){}；
-</code></pre><p>但如果要给同一个元素绑定多个事件，上面那种方法就行不通了<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">   obj.onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">   			alert(<span class="string">"1"</span>);</span><br><span class="line">   		&#125;</span><br><span class="line">   </span><br><span class="line">   obj.onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">   			alert(<span class="string">"2"</span>);</span><br><span class="line">   		&#125;</span><br><span class="line">   </span><br><span class="line">   obj.onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">   			alert(<span class="string">"3"</span>);</span><br><span class="line">   		&#125;</span><br><span class="line">   </span><br><span class="line">只会alert(<span class="string">"3"</span>)</span><br></pre></td></tr></table></figure></p>
+</code></pre><p>但如果要给同一个元素绑定多个事件，上面那种方法就行不通了<br><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">   obj.onclick = <span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;</span><br><span class="line">   			alert(<span class="string">"1"</span>);</span><br><span class="line">   		&#125;</span><br><span class="line">   </span><br><span class="line">   obj.onclick = <span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;</span><br><span class="line">   			alert(<span class="string">"2"</span>);</span><br><span class="line">   		&#125;</span><br><span class="line">   </span><br><span class="line">   obj.onclick = <span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;</span><br><span class="line">   			alert(<span class="string">"3"</span>);</span><br><span class="line">   		&#125;</span><br><span class="line">   </span><br><span class="line">只会alert(<span class="string">"3"</span>)</span><br></pre></td></tr></table></figure></p>
 <p>可以采用下面的绑定事件的方式：</p>
 <h4 id="1-W3C"><a href="#1-W3C" class="headerlink" title="1. W3C"></a>1. W3C</h4><pre><code>W3C绑定事件 
 
@@ -517,8 +517,8 @@ obj = event.srcElement ? event.srcElement : event.target;
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/04/05/2016-04-05-清除浮动的几种方法/" rel="next" title="清除浮动的几种方法">
-                <i class="fa fa-chevron-left"></i> 清除浮动的几种方法
+              <a href="/2016/04/04/2016-04-04-用CSS实现tab页的切换/" rel="next" title="用css实现tab页的切换">
+                <i class="fa fa-chevron-left"></i> 用css实现tab页的切换
               </a>
             
           </div>
@@ -527,8 +527,8 @@ obj = event.srcElement ? event.srcElement : event.target;
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/04/06/2016-04-06-实现轮播特效/" rel="prev" title="实现轮播">
-                实现轮播 <i class="fa fa-chevron-right"></i>
+              <a href="/2016/04/05/2016-04-05-清除浮动的几种方法/" rel="prev" title="清除浮动的几种方法">
+                清除浮动的几种方法 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
