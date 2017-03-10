@@ -415,7 +415,7 @@ null、undefined的区别
 <p>实例 instanceof 构造函数</p>
 <p>只要后面的构造函数是原型链中出现过的构造函数就会返回true，并不仅仅是判断实例的constructor的指向</p>
 <p>举个栗子：</p>
-<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Bar</span><span class="params">()</span> </span>&#123;&#125;;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Foo</span><span class="params">()</span> </span>&#123;&#125;;</span><br><span class="line"></span><br><span class="line">Bar.prototype = <span class="keyword">new</span> Foo();<span class="comment">//Bar继承了Foo</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">new</span> Bar() <span class="keyword">instanceof</span> Bar;<span class="comment">//true</span></span><br><span class="line"><span class="keyword">new</span> Bar() <span class="keyword">instanceof</span> Foo;<span class="comment">//true</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Bar</span>(<span class="params"></span>) </span>&#123;&#125;;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Foo</span>(<span class="params"></span>) </span>&#123;&#125;;</span><br><span class="line"></span><br><span class="line">Bar.prototype = <span class="keyword">new</span> Foo();<span class="comment">//Bar继承了Foo</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">new</span> Bar() <span class="keyword">instanceof</span> Bar;<span class="comment">//true</span></span><br><span class="line"><span class="keyword">new</span> Bar() <span class="keyword">instanceof</span> Foo;<span class="comment">//true</span></span><br></pre></td></tr></table></figure>
 <h4 id="3-Object-prototype-toString-call"><a href="#3-Object-prototype-toString-call" class="headerlink" title="3. Object.prototype.toString.call()"></a>3. Object.prototype.toString.call()</h4><p>用于检测内置对象</p>
 <p>Object.prototype.toString.call([])</p>
 <p>会输出’[object Array]’</p>
@@ -452,8 +452,8 @@ null、undefined的区别
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/05/16/2016-03-31-洗牌算法/" rel="next" title="洗牌算法">
-                <i class="fa fa-chevron-left"></i> 洗牌算法
+              <a href="/2016/05/15/2016-05-15-js中的call和apply和bind/" rel="next" title="js中的call和apply和bind">
+                <i class="fa fa-chevron-left"></i> js中的call和apply和bind
               </a>
             
           </div>
@@ -462,8 +462,8 @@ null、undefined的区别
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/05/16/2016-05-16-JSON/" rel="prev" title="JSON">
-                JSON <i class="fa fa-chevron-right"></i>
+              <a href="/2016/05/16/2016-05-16-函数节流/" rel="prev" title="函数节流和函数去抖">
+                函数节流和函数去抖 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>

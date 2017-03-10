@@ -79,8 +79,8 @@ duoshuo_shortname: panpanfish
 baidu_analytics: e18d9ee1b355055e9a39ffec741beb44
 
 # 文章次数访问统计
-leancloud_visitors:
-  enable: true
-  app_id: xua7cgDiaBf8sGUJxpvqF9Gl-gzGzoHsz
-  app_key: DDAXVnW12kvrayhABUeUykFW
+# leancloud_visitors:
+#   enable: true
+#   app_id: xua7cgDiaBf8sGUJxpvqF9Gl-gzGzoHsz
+#   app_key: DDAXVnW12kvrayhABUeUykFW
 

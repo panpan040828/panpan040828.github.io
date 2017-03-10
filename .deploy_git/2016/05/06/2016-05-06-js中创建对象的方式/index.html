@@ -393,7 +393,7 @@
 <p>与之相对应的有一种设计模式叫做<strong>工厂模式</strong>，可以理解为：</p>
 <p>将person看成一个工厂函数，每次调用这个函数都会返回一个3个属性的一个对象。</p>
 <p><strong>工厂模式的缺点：</strong>没有解决对象识别的问题，如何知道某个对象属于哪一个类型。</p>
-<h4 id="3-构造函数模式"><a href="#3-构造函数模式" class="headerlink" title="3. 构造函数模式"></a>3. 构造函数模式</h4><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span><span class="params">(name,age,job)</span></span>&#123;</span><br><span class="line">	<span class="keyword">this</span>.name = name;</span><br><span class="line">	<span class="keyword">this</span>.age = age;</span><br><span class="line">	<span class="keyword">this</span>.job = job;</span><br><span class="line">	<span class="keyword">this</span>.sayName = <span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;alert(<span class="keyword">this</span>.name)&#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> myperson1 = <span class="keyword">new</span> Person(<span class="string">"xiaoming"</span>,<span class="number">11</span>,<span class="string">"student"</span>);</span><br><span class="line"><span class="keyword">var</span> myperson2 = <span class="keyword">new</span> Person(<span class="string">"xiaohong"</span>,<span class="number">12</span>,<span class="string">"student"</span>);</span><br></pre></td></tr></table></figure>
+<h4 id="3-构造函数模式"><a href="#3-构造函数模式" class="headerlink" title="3. 构造函数模式"></a>3. 构造函数模式</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name,age,job</span>)</span>&#123;</span><br><span class="line">	<span class="keyword">this</span>.name = name;</span><br><span class="line">	<span class="keyword">this</span>.age = age;</span><br><span class="line">	<span class="keyword">this</span>.job = job;</span><br><span class="line">	<span class="keyword">this</span>.sayName = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;alert(<span class="keyword">this</span>.name)&#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> myperson1 = <span class="keyword">new</span> Person(<span class="string">"xiaoming"</span>,<span class="number">11</span>,<span class="string">"student"</span>);</span><br><span class="line"><span class="keyword">var</span> myperson2 = <span class="keyword">new</span> Person(<span class="string">"xiaohong"</span>,<span class="number">12</span>,<span class="string">"student"</span>);</span><br></pre></td></tr></table></figure>
 <p>使用构造函数，可以创建某个特定类型的对象，例如： <code>var myObj = new Object();</code></p>
 <p>注意：构造函数首字母始终以大写字母开头。</p>
 <p>构造函数模式的缺点：通过构造函数创建的两个对象myperson1和myperson2各自都有一个sayName方法（<strong>不同实例上的同名函数是不相等的</strong>），完成同一个任务，创建2个函数实在是太浪费了。</p>
@@ -447,8 +447,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/05/06/2016-05-06-自适应两栏布局/" rel="next" title="自适应两栏布局">
-                <i class="fa fa-chevron-left"></i> 自适应两栏布局
+              <a href="/2016/05/06/2016-05-06-CSS中的display和position/" rel="next" title="css中的display和position">
+                <i class="fa fa-chevron-left"></i> css中的display和position
               </a>
             
           </div>
@@ -457,8 +457,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/05/06/2016-05-06-BFC/" rel="prev" title="BFC">
-                BFC <i class="fa fa-chevron-right"></i>
+              <a href="/2016/05/08/2016-05-08-变量声明提升/" rel="prev" title="js中的变量和函数声明提升">
+                js中的变量和函数声明提升 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
